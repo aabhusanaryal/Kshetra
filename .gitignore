@@ -1,0 +1,6 @@
+*.dll
+/src
+/.vscode
+a.exe
+main.exe
+main.o

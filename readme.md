@@ -1,3 +1,3 @@
 # Kshetra
 
-### The Vector Field Plotter
+### A Vector Field Plotter
