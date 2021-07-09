@@ -1,5 +1,5 @@
 #include "SFML/Graphics.hpp"
-#include "components.h"
+#include "button.h"
 
 int main(){
     int windowWidth = 1080;
@@ -7,35 +7,37 @@ int main(){
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
 
-    Button btn1("./assets/Button.png", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2);
-    sf::RectangleShape rect = btn1.getElement();
-    sf::Texture texture;
-    texture.loadFromFile(btn1.path);
-    rect.setTexture(&texture);
-
-
-    sf::Texture texture2;
-    texture2.loadFromFile("./assets/Button2.png");
-    sf::RectangleShape rect2(sf::Vector2f(298, 70));
-    rect2.setTexture(&texture2);
-    rect2.setPosition((windowWidth-298)/2, (windowHeight-70)/2+110);
-    
-    
-    
-    rect.setTexture(&texture2);
-
+    Button btn1("./assets/main_Std_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2);
+    Button btn2("./assets/main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+100);
+  
     while(window.isOpen()){
         
         sf::Event event;
         while(window.pollEvent(event)){
             if(event.type==sf::Event::Closed)
                 window.close();
+            if(event.type==sf::Event::MouseMoved){ // If mouse is moved
+            // On hover
+                if(btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+                    btn1.hovered();
+            // On not hovering
+                if(!btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+                    btn1.unhovered();
+            }
+            if(event.type==sf::Event::MouseMoved){ // If mouse is moved
+            // On hover
+                if(btn2.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+                    btn2.hovered();
+            // On not hovering
+                if(!btn2.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+                    btn2.unhovered();
+            }
         }
         
         window.clear(sf::Color(251, 245, 243));
         // Draw stuff here
-        window.draw(rect);
-        window.draw(rect2);
+        window.draw(btn1.rectangle);
+        window.draw(btn2.rectangle);
         window.display();
     }
 }
