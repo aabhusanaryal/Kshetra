@@ -4,11 +4,10 @@
 
 class Button{
 public:
-    std::string path; // Where the image is located
+    std::string path; // Where the texture image is located
     int height, width, posX, posY; // Basic props of the Button
     // Texture [image] to be rendered as the button
-    // Check out button.cpp to know why we have 3 textures
-    sf::Texture textureRendered, textureUnhovered, textureHover; 
+    sf::Texture textureUnhovered, textureHover; 
     sf::RectangleShape rectangle; // Rectangle that can be rendered using window.display()
     sf::IntRect rect; // Used to check if mouse is over the button
     bool hoverTex = 0; // Stores if the currently active texture is textureHover

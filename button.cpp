@@ -1,14 +1,24 @@
 // ===========================================================================
-// So, why exactly do we have 3 textures?
-// textureRendered[initially equal to textureUnhovered] is the texture
-// that's being rendered as the button's bg
+// Usage: Button btnName(path, width, height, posX, posY);
 // ===========================================================================
 // textureHovered is the texture that's to be rendered when the user hovers
-// over the button. We set textureRendered = textureHovered on hovering.
+// over the button. We set rect's texxture as textureHovered on hovering.
 // ===========================================================================
 // textureUnhovered exists because we need to set textureRendered back to the 
 // original state when the user un-hovers.
-// We set textureRendered = textureUnovered on un-hovering.
+// We set rect's texxture as textureUnovered on un-hovering.
+// ===========================================================================
+
+
+// ===================== POLLING FOR EVENTS IN MAIN.CPP =======================
+// if(event.type==sf::Event::MouseMoved){ // If mouse is moved
+//             // On hover
+//                 if(btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+//                     btn1.hovered();
+//             // On not hovering
+//                 if(!btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+//                     btn1.unhovered();
+//             }
 // ===========================================================================
 
 #include "./button.h"
@@ -26,6 +36,7 @@ Button::Button(std::string path,int width,int height,int posX, int posY){ // Con
     rectangle = sf::RectangleShape (sf::Vector2f(width, height));
     rectangle.setPosition(posX, posY);
     // =========================================================================
+    // WARNING:
     // Rect is NOT the rectange that's being rendered, but rather a rectangular
     // space in screen. We need this to check if the button is being hovered on.
     // This basically "invisibly wraps" our rectangle
@@ -35,8 +46,7 @@ Button::Button(std::string path,int width,int height,int posX, int posY){ // Con
     textureHover.loadFromFile(std::string(path+"_Hovered.png"));
     textureUnhovered.loadFromFile(std::string(path+".png"));
     // Setting the initial textureRendered to be the unhovered one
-    textureRendered = textureUnhovered;
-    rectangle.setTexture(&textureRendered);
+    rectangle.setTexture(&textureUnhovered);
 }
 
 void Button::setPosition(int x, int y){  // Sets the position of button on screen
