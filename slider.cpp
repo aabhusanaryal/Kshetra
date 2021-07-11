@@ -36,17 +36,34 @@ Slider::Slider(int posX, int posY){
 
 void Slider::draw(sf::RenderWindow &window){
     window.draw(rectangle);
-    window.draw(testRectangle);
+    // window.draw(testRectangle);
     window.draw(circle);
 }
 
 void Slider::clicked(){
     std::cout<<"clicked"<<std::endl;
+    sliding = true;
     circle.setTexture(&textureCircleClicked);
 }
 void Slider::unclicked(){
     std::cout<<"no"<<std::endl;
+    sliding = false;
     circle.setTexture(&textureCircle);
+}
+
+void Slider::slide(float x){
+    if(x>posX & x<posX+width){
+        circleX = x;
+        circle.setPosition(circleX, posY);
+        rect = sf::IntRect(circleX-radius, posY-radius, radius*2, radius*2);
+        calculateProgress();
+    }
+}
+
+void Slider::calculateProgress(){
+    // std::cout<<circleX<<"\t"<<posX<<"\t"<<width<<std::endl;
+    progress = ((circleX-posX)/(float)width)*100;
+    std::cout<<"Progress:"<<progress<<std::endl;
 }
 
 

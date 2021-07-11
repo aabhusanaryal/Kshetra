@@ -6,6 +6,8 @@ int main(){
     int windowWidth = 1080;
     int windowHeight = 720;
 
+    int mouseX, mouseY;
+
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
 
 
@@ -20,6 +22,8 @@ int main(){
             if(event.type==sf::Event::Closed)
                 window.close();
             if(event.type==sf::Event::MouseMoved){ // If mouse is moved
+                mouseX = event.mouseMove.x;
+                mouseY = event.mouseMove.y;
 // =========================== FOR BUTTONS ===========================
         // Button 1:
             // On hover
@@ -38,23 +42,29 @@ int main(){
                     btn2.unhovered();
             }
 // =========================== FOR Sliders ===========================
-// FIX:
+// FIXME:
 // Event handling not working as expected. The code under MouseButtonPressed
 // also runs when the mouse button is released.
-            if(event.type=sf::Event::MouseButtonPressed){ // <-----------
+            if(event.type==sf::Event::MouseButtonPressed){ // <-----------
                 if(event.mouseButton.button == sf::Mouse::Left){
                     // std::cout<<"mouse button pressed"<<event.mouseButton.x;
-                    if(slider.rect.contains(event.mouseButton.x, event.mouseButton.y))
+                    if(slider.rect.contains(event.mouseButton.x, event.mouseButton.y)){
                         slider.clicked();
+                    }
+                        
                 }
             }
-            if(event.type=sf::Event::MouseButtonReleased){ // <-----------
+            if(event.type==sf::Event::MouseButtonReleased){ // <-----------
                 if(event.mouseButton.button == sf::Mouse::Left){
                     // std::cout<<"mouse button pressed"<<event.mouseButton.x;
-                    if(slider.rect.contains(event.mouseButton.x, event.mouseButton.y))
+                    // if(slider.rect.contains(event.mouseButton.x, event.mouseButton.y))
                         slider.unclicked();
                 }
             }
+            
+        }
+        if(slider.sliding){
+            slider.slide(mouseX);
         }
         
         window.clear(sf::Color(251, 245, 243));
