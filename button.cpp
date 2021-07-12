@@ -25,13 +25,17 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-Button::Button(std::string path,int width,int height,int posX, int posY){ // Constructor
+std::vector<Button*> Button::list;
+
+Button::Button(std::string path,int width,int height,int posX, int posY, int state){ // Constructor
     // Setting up member datas
     this->path = path;
     this->width = width;
     this->height = height;
     this->posX = posX;
     this->posY = posY;
+    this->state = state;
+    list.push_back(this);
     // Creating a rectangle, that'll later be rendered using window.display()
     rectangle = sf::RectangleShape (sf::Vector2f(width, height));
     rectangle.setPosition(posX, posY);

@@ -5,9 +5,14 @@
 int width = 244;
 int height = 4;
 int radius = 27/2;
-Slider::Slider(int posX, int posY){
+
+std::vector<Slider*> Slider::list;
+
+Slider::Slider(int posX, int posY, int state){
     this->posX = posX;
     this->posY = posY;
+    this->state = state;
+    list.push_back(this);
     // Init rectangle and circle
     rectangle = sf::RectangleShape (sf::Vector2f(width, height));
     rectangle.setOrigin(0, height/2); // Setting up origin to align rect with circle
