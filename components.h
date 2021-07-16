@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "Grid.hpp"
 
 class Button{
 public:
