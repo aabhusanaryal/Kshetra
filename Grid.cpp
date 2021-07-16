@@ -56,6 +56,11 @@ void Grid::make_cells(sf::RenderWindow& window)
                 leftPaddingcell + left() + cellWidth*i, 
                 topPaddingcell + top() + cellHeight*j
             );
+
+
+            /* We can do grid by setting thickness of the rectangle 
+            without decreasing its size*/
+            
             cell.setFillColor(color);
             //cell.setOutlineThickness(1.5);
             //cell.setOutlineColor(sf::Color::Green);
