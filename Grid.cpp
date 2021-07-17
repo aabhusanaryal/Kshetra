@@ -31,11 +31,20 @@ void Grid::make_cells(sf::RenderWindow& window)
 {
 //the size if each cell
 //16 is the golden number
-    float cellWidth= width/11; 
-    float cellHeight = width/11;
+    float cellWidth= width/12.f; 
+    float cellHeight = width/12.f;
 //number of column and rows
-    int cellCol = (width)/cellWidth;
-    int cellRow = (height)/cellHeight;
+    int cellCol = 0;
+    int cellRow = 0;
+
+//number if column and rows that will fit in the required area
+    for(int i =0; (i+1)*cellWidth+left() < (right()); i++)
+        cellCol +=1;
+    for(int j=0; (j+1)*cellHeight+top() < bottom(); j++)
+        cellRow +=1;
+
+    //int cellCol = (width)/cellWidth;
+    //int cellRow = (height)/cellHeight;
 
 //gap on the edges of the cells  
     float topPaddingcell = (height - cellHeight*cellRow)/2; 
