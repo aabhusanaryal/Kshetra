@@ -20,7 +20,6 @@ public:
     // Methods
     Slider(int posX, int posY, int state);
     void calculateProgress();
-    void draw(sf::RenderWindow &window);
     void clicked();
     void unclicked();
     void slide(float x);

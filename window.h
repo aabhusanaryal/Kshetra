@@ -9,4 +9,8 @@ public:
     void draw(Button* btn){
         sf::RenderWindow::draw(btn->rectangle);
     }
+    void draw(Slider* slider){
+        sf::RenderWindow::draw(slider->rectangle);
+        sf::RenderWindow::draw(slider->circle);
+    }
 };

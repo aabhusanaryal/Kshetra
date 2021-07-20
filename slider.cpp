@@ -39,12 +39,6 @@ Slider::Slider(int posX, int posY, int state){
     circle.setTexture(&textureCircle);
 };
 
-void Slider::draw(sf::RenderWindow &window){
-    window.draw(rectangle);
-    // window.draw(testRectangle);
-    window.draw(circle);
-}
-
 void Slider::clicked(){
     std::cout<<"clicked"<<std::endl;
     sliding = true;
