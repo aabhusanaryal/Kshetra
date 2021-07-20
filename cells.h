@@ -1,33 +1,41 @@
+#pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-
 class Cells
 {
-    float posX, posY, originX, originY;
-
+    float posX, posY, width, height;
+    sf::RectangleShape cell;
     //trying to make a key value pair of pairs of coordinates
-    //so that the coordinate (0,0) will store the actual float position of the 
-    //point on the screen i.e.(0,0) = (100.5, 200.5)
-
+    //so that the coordinate 0,0 will store the actual float position of the 
+    //point on the screen
     static std::map<int, float> positionX;
     static std::map<int, float> positionY;
 
 
 public:
+
+    Cells();
     static int countX, countY;
     //constructor should store the position and the actual value
-    Cells(float x, float y, float Ox, float Oy)
+    Cells(float x, float y, float w, float h)
     {
         posX = x;
-        posY = y; 
-        originX = Ox;
-        originY = Oy;
+        posY = y;
+        width = w;
+        height = h;
+        cell.setPosition(x, y);
+        cell.setSize(sf::Vector2f(width, height));
+        cell.setOrigin(0, height);
+
+        positionX.insert(std::pair<int, float> (countX, posX));
+        positionY.insert(std::pair<int, float> (countY, posY));
     }
 
     void setPosition();
+    void display(sf::RenderWindow &window);
 
-    std::pair<float, float> getPosition(int x, int y);
-    float getPositionX(int x);
-    float getPositionY(int y);
+    static std::pair<float, float> getPosition(int x, int y);
+    static float getPositionX(int x);
+    static float getPositionY(int y);
 };

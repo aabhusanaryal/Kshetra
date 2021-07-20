@@ -1,13 +1,14 @@
 #include "cells.h"
 
+std::map<int, float> Cells::positionX;
+std::map<int, float> Cells::positionY;
+
 int Cells::countX = 0;
 int Cells::countY = 0;
 
-//sets the key value pair in the map
-void Cells::setPosition()
+void Cells::display(sf::RenderWindow &window)
 {
-    positionX.insert(std::pair<int, float> (countX, posX));
-    positionY.insert(std::pair<int, float> (countY, posY));
+    window.draw(cell);
 }
 
 //returns a std::pair of the actual position of the coordinate on the screen
