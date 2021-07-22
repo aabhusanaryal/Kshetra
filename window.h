@@ -13,4 +13,7 @@ public:
         sf::RenderWindow::draw(slider->rectangle);
         sf::RenderWindow::draw(slider->circle);
     }
+    void draw(sf::RectangleShape rectangle){
+        sf::RenderWindow::draw(rectangle);
+    }
 };

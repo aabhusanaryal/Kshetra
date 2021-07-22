@@ -47,8 +47,8 @@ Button::Button(std::string path,int width,int height,int posX, int posY, int sta
     // =========================================================================
     rect = sf::IntRect(posX, posY, width, height);
     // Loading different images in texture
-    textureHover.loadFromFile(std::string(path+"_Hovered.png"));
-    textureUnhovered.loadFromFile(std::string(path+".png"));
+    textureHover.loadFromFile(std::string("./assets/"+path+"_Hovered.png"));
+    textureUnhovered.loadFromFile(std::string("./assets/"+path+".png"));
     // Setting the initial textureRendered to be the unhovered one
     rectangle.setTexture(&textureUnhovered);
 }
@@ -69,6 +69,10 @@ void Button::unhovered(){ // Sets the right texture when the button is not hover
         rectangle.setTexture(&textureUnhovered);
         hoverTex = !hoverTex;
     }
+}
+
+void Button::setAction(pointerFn action){
+    this->action = action;
 }
 
 

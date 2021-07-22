@@ -5,27 +5,42 @@
 
 
 int state = 0;
+int windowWidth = 1080;
+int windowHeight = 720;
+
+Window window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
+
+void changeStateTo1(){
+    state = 1;
+};
+void changeStateTo0(){
+    state = 0;
+};
+void exitProgram(){
+    window.close();
+};
 
 int main(){
-    int windowWidth = 1080;
-    int windowHeight = 720;
-
     int mouseX, mouseY;
-
-
-    Window window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
-
-
-    Button btn1("./assets/main_Std_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2, 0);
-    Button btn2("./assets/main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+100, 1);
-    Button btn3("./assets/main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+200, 1);
-    Button btn4("./assets/main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+300, 1);
     
+    sf::RectangleShape title(sf::Vector2f(493, 186));
+    sf::Texture titleText;
+    titleText.loadFromFile("./assets/main_Title.png");
+    title.setTexture(&titleText);
+    title.setPosition((windowWidth - 493)/2, 150); 
 
-    Slider slider1(300, 100, 0);
-    Slider slider2(300, 200, 0);
-    Slider slider3(300, 200, 1);
-    Slider slider4(300, 500, 1);
+    Button btn_Standard_Functions("main_Std_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+50, 0);
+    Button btn_Custom_Functions("main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+150, 0);
+    Button btn_Exit("main_Exit", 62, 62, 20, windowHeight-62-20, 0);
+    Button btn_Back("one_Back", 33, 37, 20, windowHeight-62-20, 1);
+
+    btn_Exit.setAction(exitProgram);
+    btn_Standard_Functions.setAction(changeStateTo1);
+    btn_Custom_Functions.setAction(changeStateTo1);
+    btn_Back.setAction(changeStateTo0);
+
+    Slider slider1(300, 200, 1);
+    Slider slider2(300, 500, 1);
 
     while(window.isOpen()){
         sf::Event event;
@@ -66,12 +81,21 @@ int main(){
                 for(int i=0; i<Button::list.size(); i++){
                     if(state == Button::list[i]->state && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
                         // HL-> Add method to be called when a button is pressed here
-                        std::cout<<1;
-                        state = 1;
+                        Button::list[i]->clicked = true;
                     }
                 }
             }
+//           ================= FOR BUTTON RELEASE =================           
             if(event.type==sf::Event::MouseButtonReleased){ // <-----------
+            // FOR BUTTONS
+                for(int i=0; i<Button::list.size(); i++){
+                // Checking if the button is being clicked and is in correct state
+                    if(state == Button::list[i]->state && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+                        // HL-> Add method to be called when a button is pressed here
+                        (*(Button::list[i]->action))();
+                    }
+                }
+            // FOR SLIDERS
                 for(int i=0; i<Slider::list.size(); i++){
                         Slider::list[i]->unclicked();
                 }
@@ -97,6 +121,8 @@ int main(){
                 window.draw(Slider::list[i]);
             }
         }
+        window.draw(title);
         window.display();
     }
 }
+
