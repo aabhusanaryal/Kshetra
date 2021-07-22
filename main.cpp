@@ -26,6 +26,13 @@ int main(){
     
     vector::setHighest(arrows);
     vector::setColor(arrows);
+    
+    Grid grid;
+    std::cout<<"Top: "<<grid.top()<<std::endl;
+    std::cout<<"left: "<<grid.left()<<std::endl;
+    std::cout<<"bottom: "<<grid.bottom()<<std::endl;
+    std::cout<<"right: "<<grid.right()<<std::endl;
+
 
     while(window.isOpen()){
         
@@ -40,6 +47,9 @@ int main(){
         for(int i=0;i<arrows.size();i++){
             arrows[i].displayArrow(window);
         }
+        //window.draw(rect);
+        //window.draw(rect2);
+        grid.display(window);
         window.display();
     }
 }
