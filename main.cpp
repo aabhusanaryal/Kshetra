@@ -30,14 +30,14 @@ int main(){
     title.setPosition((windowWidth - 493)/2, 150); 
 
     Button btn_Standard_Functions("main_Std_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+50, 0);
-    Button btn_Custom_Functions("main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+150, 0);
-    Button btn_Exit("main_Exit", 62, 62, (windowWidth-60-20), 30, 0);
+    Button btn_Custom_Functions("main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+150, 0);    Button btn_Exit("main_Exit", 62, 62, (windowWidth-60-20), 30, 0);
     Button btn_Back("one_Back", 33, 37, 20, windowHeight-62-20, 1);
 
     btn_Exit.setAction(exitProgram);
     btn_Standard_Functions.setAction(changeStateTo1);
     btn_Custom_Functions.setAction(changeStateTo1);
     btn_Back.setAction(changeStateTo0);
+
 
     Slider slider1(300, 200, 1);
     Slider slider2(300, 500, 1);
