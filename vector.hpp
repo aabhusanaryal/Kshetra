@@ -5,11 +5,16 @@
 #include<iostream>
 
 #define pi 3.1415926
+const int lowerX=-10;
+const int lowerY=-10;
+const int higherX=10;
+const int higherY=10;
 
 class vector{
     private:
         double posX,posY,angle,magnitude,pixelX,pixelY; //posX,posY for graph coordinates, pixlX,pixelY for plotting
         sf::Texture texture;
+        sf::Color arrowColor;
     public:
         //expresson is a function pointer, have to pass a function for the parsed expression, maybe 1 for x, 1 for y
         vector(int posX,int posY,double (*expressionX)(double,double),double (*expressionY)(double,double)){ 
@@ -18,12 +23,10 @@ class vector{
             this->pixelX=500+(this->posX*39.5); //origin at 500 pixels
             this->pixelY=500-((this->posY*39.5)); //origin at 500 pixels
 
-            double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
             double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
-
+            double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
 
             this->magnitude=sqrt(pow(magnX,2)+pow(magnY,2));
-            
 
             //angle set according to quadrant
             if(magnX>0 && magnY>0) 
@@ -44,4 +47,6 @@ class vector{
             }
         }
         void displayArrow(sf::RenderWindow&);
+        static void setHighest(std::vector<vector>&);
+        static void setColor(std::vector<vector>&);
 };

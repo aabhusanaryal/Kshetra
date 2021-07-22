@@ -1,6 +1,7 @@
 #include "SFML/Graphics.hpp"
 #include "components.h"
 #include "vector.hpp"
+#include<vector>
 
 double forX(double x,double y){
     return x;
@@ -11,26 +12,20 @@ double forY(double x,double y){
 }
 
 int main(){
+
+    std::vector<vector> arrows;
     int windowWidth = 1920;
     int windowHeight = 1080;
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
-    // Button btn1("./assets/Button.png", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2);
-    // sf::RectangleShape rect = btn1.getElement();
-    // sf::Texture texture;
-    // texture.loadFromFile(btn1.path);
-    // rect.setTexture(&texture);
-
-
-    // sf::Texture texture2;
-    // texture2.loadFromFile("./assets/Button2.png");
-    // sf::RectangleShape rect2(sf::Vector2f(298, 70));
-    // rect2.setTexture(&texture2);
-    // rect2.setPosition((windowWidth-298)/2, (windowHeight-70)/2+110);
+    for(int i=lowerX;i<higherX;i++){
+        for(int j=lowerY;j<higherY;j++){
+            arrows.push_back(vector(i,j,forX,forY));
+        }
+    }
     
-    
-    
-    // rect.setTexture(&texture2);
+    vector::setHighest(arrows);
+    vector::setColor(arrows);
 
     while(window.isOpen()){
         
@@ -42,11 +37,8 @@ int main(){
         
         window.clear(sf::Color(251, 245, 243));
         // Draw stuff here
-        for(int i=-15;i<=15;i++){
-            for(int j=-15;j<=15;j++){
-                vector a(i,j,forX,forY);
-                a.displayArrow(window);
-            }
+        for(int i=0;i<arrows.size();i++){
+            arrows[i].displayArrow(window);
         }
         window.display();
     }
