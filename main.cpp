@@ -31,7 +31,7 @@ int main(){
 
     Button btn_Standard_Functions("main_Std_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+50, 0);
     Button btn_Custom_Functions("main_Custom_Functions", 298, 70, (windowWidth-298)/2, (windowHeight-70)/2+150, 0);
-    Button btn_Exit("main_Exit", 62, 62, 20, windowHeight-62-20, 0);
+    Button btn_Exit("main_Exit", 62, 62, (windowWidth-60-20), 30, 0);
     Button btn_Back("one_Back", 33, 37, 20, windowHeight-62-20, 1);
 
     btn_Exit.setAction(exitProgram);
