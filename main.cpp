@@ -39,7 +39,7 @@ int main(){
     btn_Back.setAction(changeStateTo0);
 
 
-    Slider slider1(400, 200, 1);
+    Slider slider1((windowWidth-298)/2+10, (windowHeight-70)/2+80, ALL_STATES);
     Slider slider2(300, 500, 1);
 
     window.draw(title);
