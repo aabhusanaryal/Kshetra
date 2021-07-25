@@ -1,5 +1,5 @@
 // ===========================================================================
-// Usage: Button btnName(path, width, height, posX, posY);
+// Usage: Button btnName(path, width, height, posX, posY, state);
 // ===========================================================================
 // textureHovered is the texture that's to be rendered when the user hovers
 // over the button. We set rect's texxture as textureHovered on hovering.

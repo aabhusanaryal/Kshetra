@@ -19,8 +19,11 @@ Slider::Slider(int posX, int posY, int state){
     circle.setRadius(radius);
     circle.setOrigin(radius, radius);
     // Setting up RECT for click detection
-    rect = sf::IntRect(posX-radius, posY-radius, radius*2, radius*2);
-    testRectangle = sf::RectangleShape(sf::Vector2f(radius*2, radius*2));
+    rect = sf::IntRect(posX-radius, posY-radius, width+radius*2, radius*2);
+// HL-> testRectangle is used for debugging purpose and has no functional use
+//      uncomment testRectangle line in the .draw() function overload for slider
+//      to see the area where click is registered
+    testRectangle = sf::RectangleShape(sf::Vector2f(width+radius*2, height));
     testRectangle.setFillColor(sf::Color::Red);
     testRectangle.setPosition(posX-radius, posY-radius);
     // Setting up positions
@@ -50,13 +53,18 @@ void Slider::unclicked(){
     circle.setTexture(&textureCircle);
 }
 
-void Slider::slide(float x){
-    if(x>posX & x<posX+width){
-        circleX = x;
-        circle.setPosition(circleX, posY);
-        rect = sf::IntRect(circleX-radius, posY-radius, radius*2, radius*2);
-        calculateProgress();
+void Slider::slide(float mouseX){
+    if(mouseX>posX & mouseX<posX+width){
+        circleX = mouseX;
     }
+    if(mouseX<posX){
+        circleX = posX;
+    }
+    if(mouseX>posX+width){
+        circleX = posX+width;
+    }
+    circle.setPosition(circleX, posY);
+    calculateProgress();
 }
 
 void Slider::calculateProgress(){
