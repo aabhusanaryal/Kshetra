@@ -7,6 +7,7 @@ class Window : public sf::RenderWindow{
 public:
     int state = 0;
     int mouseX, mouseY;
+    int magicNumber = 69;
 //HL-> Constructor
     Window(sf::VideoMode video, const sf::String path): sf::RenderWindow(video, path){}
 //HL-> .draw() method overloads
@@ -37,11 +38,11 @@ public:
 //           ================= FOR BUTTONS' HOVER ANIMATION =================
             for(int i=0; i<Button::list.size(); i++){
                 // On hover
-                if(state == Button::list[i]->state && Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
+                if(((state == Button::list[i]->state || Button::list[i]->state == magicNumber) || (state == Button::list[i]->state || Button::list[i]->state == magicNumber) == magicNumber)&& Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
                  // If mouse is over btn1
                     Button::list[i]->hovered();
                 // On not hovering
-                if(state == Button::list[i]->state && !Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+                if((state == Button::list[i]->state || Button::list[i]->state == magicNumber) && !Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
                     Button::list[i]->unhovered();
             }
         }
@@ -62,7 +63,7 @@ public:
                     
 //           ================= FOR BUTTONS' CLICK HANDLING =================
                 for(int i=0; i<Button::list.size(); i++){
-                    if(state == Button::list[i]->state && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+                    if((state == Button::list[i]->state || Button::list[i]->state == magicNumber) && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
                         // HL-> Add method to be called when a button is pressed here
                         Button::list[i]->clicked = true;
                     }
@@ -73,7 +74,7 @@ public:
             // FOR BUTTONS
                 for(int i=0; i<Button::list.size(); i++){
                 // Checking if the button is being clicked and is in correct state
-                    if(state == Button::list[i]->state && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+                    if((state == Button::list[i]->state || Button::list[i]->state == magicNumber) && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
                         // HL-> Add method to be called when a button is pressed here
                         (*(Button::list[i]->action))();
                         Button::list[i]->unhovered(); // Unhovering the button
@@ -96,7 +97,7 @@ public:
         // Draw stuff here
         // Only drawing the button if it belongs to the said state
         for(int i=0; i<Button::list.size(); i++){
-            if(state == Button::list[i]->state)
+            if((state == Button::list[i]->state || Button::list[i]->state == magicNumber))
                 draw(Button::list[i]);
         }
 
