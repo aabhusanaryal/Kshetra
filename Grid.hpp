@@ -5,14 +5,15 @@ class Grid
 private:
     sf::RectangleShape bg;
     int paddingRight = 10;
-    int paddingVertical = 30;
-    int windowWidth = 1080;
-    int width = windowWidth/2 + 80;
-    int windowHeight = 720;
-    int height = windowHeight - paddingVertical;
+    int windowWidth;
+    int windowHeight;
+    int width = 700;
+    int height = 700;
+    int cellWidth,cellHeight,cellCol,cellRow;
+    float topPaddingcell,leftPaddingcell;
 
 public:
-    Grid();
+    Grid(int=0,int=0);
     void display(sf::RenderWindow& window);
     void make_bg(sf::RenderWindow& window);
     void make_cells(sf::RenderWindow& window);
@@ -20,4 +21,8 @@ public:
     float right();
     float bottom();
     float left();
+    sf::Vector2f returnOrigin();
+    int returnCellWidth();
+    int returnCellCol();
+    int returnCellRow();
 };

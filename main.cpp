@@ -1,7 +1,8 @@
 #include "SFML/Graphics.hpp"
 #include "components.h"
 #include "vector.hpp"
-#include<vector>
+#include "canvas.hpp"
+#include <vector>
 
 double forX(double x,double y){
     return x;
@@ -11,28 +12,19 @@ double forY(double x,double y){
     return y;
 }
 
+int vector::lowerX=0;
+int vector::lowerY=0;
+int vector::higherX=0;
+int vector::higherY=0;
+
+int windowWidth = 1250;
+int windowHeight = 850;
+
 int main(){
 
-    std::vector<vector> arrows;
-    int windowWidth = 1920;
-    int windowHeight = 1080;
+    canvas canvas(windowWidth,windowHeight,forX,forY);
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
-    for(int i=lowerX;i<higherX;i++){
-        for(int j=lowerY;j<higherY;j++){
-            arrows.push_back(vector(i,j,forX,forY));
-        }
-    }
-    
-    vector::setHighest(arrows);
-    vector::setColor(arrows);
-    
-    Grid grid;
-    std::cout<<"Top: "<<grid.top()<<std::endl;
-    std::cout<<"left: "<<grid.left()<<std::endl;
-    std::cout<<"bottom: "<<grid.bottom()<<std::endl;
-    std::cout<<"right: "<<grid.right()<<std::endl;
-
 
     while(window.isOpen()){
         
@@ -44,12 +36,10 @@ int main(){
         
         window.clear(sf::Color(251, 245, 243));
         // Draw stuff here
-        for(int i=0;i<arrows.size();i++){
-            arrows[i].displayArrow(window);
+        canvas.grid.display(window);
+        for(int i=0;i<canvas.arrows.size();i++){
+            canvas.arrows[i].displayArrow(window);
         }
-        //window.draw(rect);
-        //window.draw(rect2);
-        grid.display(window);
         window.display();
     }
 }
