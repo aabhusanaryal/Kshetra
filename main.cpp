@@ -7,7 +7,7 @@
 int windowWidth = 1250;
 int windowHeight = 850;
 
-Window window(sf::VideoMode(windowWidth, windowHeight), "Kshetra");
+Window window(sf::VideoMode(windowWidth, windowHeight), "Kshetra", sf::Style::None);
 
 void changeStateTo1(){
     window.state = 1;
@@ -21,13 +21,13 @@ void exitProgram(){
 
 int main(){
 
-    Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-298)/2, (windowHeight-70)/2+50, 0);
-    Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-298)/2, (windowHeight-70)/2+170, 0);
+    Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
+    Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, 1);
     
 
-    Slider slider1(20, 20, 0);
+    Slider slider1(500, 500, 1);
 
     btn_Exit.setAction(exitProgram);
     btn_Standard_Functions.setAction(changeStateTo1);

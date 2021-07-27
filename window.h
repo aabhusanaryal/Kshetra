@@ -8,9 +8,11 @@ public:
     int state = 0;
     int mouseX, mouseY;
     int magicNumber = 69;
+    int width = 1250;
+    int height = 850;
 
 //HL-> Constructor
-    Window(sf::VideoMode video, const sf::String path): sf::RenderWindow(video, path){};
+    Window(sf::VideoMode video, const sf::String path, int style): sf::RenderWindow(video, path, style){};
 
 //HL-> .draw() method overloads
     void draw(Button* btn){
@@ -23,6 +25,9 @@ public:
     }
     void draw(sf::RectangleShape rectangle){
         sf::RenderWindow::draw(rectangle);
+    }
+    void draw(sf::Sprite sprite){
+        sf::RenderWindow::draw(sprite);
     }
 
 //HL-> Main Loop

@@ -1,6 +1,14 @@
 #include "./window.h"
+#include "SFML/Graphics.hpp"
 
 void Window::mainLoop(){
+
+// Creating the title for home screen
+    sf::Sprite title;
+    sf::Texture titleTexture;
+    titleTexture.loadFromFile("./assets/main_Kshetra.png");
+    title.setTexture(titleTexture);
+    title.setPosition((width-431)/2, 250);
 
 // Polling for events
     while(isOpen()){
@@ -26,6 +34,8 @@ void Window::mainLoop(){
             }
         }
 
+// Drawing Title Text
+        if(state == 0) draw(title);
         display();
     }
 }
