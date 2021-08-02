@@ -17,7 +17,7 @@ class vector{
         sf::Texture texture;
         sf::Color arrowColor;
     public:
-    sf::Sprite sprite;
+        sf::Sprite sprite;
         static int lowerX,lowerY,higherX,higherY;
         //expresson is a function pointer, one expression for i component, other for j
         //sf::vector2f is origin, and last int is cell width
@@ -25,6 +25,6 @@ class vector{
         void displayArrow(sf::RenderWindow&);
         void setTexture();
         static void setLimits(Grid);
-        static void setHighest(std::vector<vector>&);
-        static void setColor(std::vector<vector>&);
+        static void setHighest(std::vector<vector*>&);
+        static void setColor(std::vector<vector*>&);
 };

@@ -39,7 +39,9 @@ float Grid::left()  { return (right() - width);}
 void Grid::display(sf::RenderWindow& window)
 {
     make_bg(window);
-    make_cells(window);
+    for(int i=0;i<cells.size();i++){
+        window.draw(cells[i]);
+    }
 }
 
 void Grid::make_bg(sf::RenderWindow& window)
@@ -47,7 +49,7 @@ void Grid::make_bg(sf::RenderWindow& window)
     window.draw(bg);
 }
 
-void Grid::make_cells(sf::RenderWindow& window)
+void Grid::make_cells()
 {
 //make cells
 
@@ -69,7 +71,7 @@ void Grid::make_cells(sf::RenderWindow& window)
             cell.setFillColor(sf::Color(251, 245, 243));
             //cell.setOutlineThickness(1.5);
             //cell.setOutlineColor(sf::Color::Green);
-            window.draw(cell);
+            cells.push_back(cell);
             //std::cout<<"No of rows:"<<cellRow<<"\nNo of columns:"<<cellCol;
         }
     }

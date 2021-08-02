@@ -7,10 +7,11 @@ canvas::canvas(int windowWidth,int windowHeight,double (*expressionX)(double,dou
     list.push_back(this);
     this->state = state;
     grid=Grid(windowWidth,windowHeight);
+    grid.make_cells();
     vector::setLimits(grid);
     for(int i=vector::lowerX;i<vector::higherX;i++){
         for(int j=vector::lowerY;j<vector::higherY;j++){
-            arrows.push_back(vector(i,j,expressionX,expressionY,grid));
+            arrows.push_back(new vector(i,j,expressionX,expressionY,grid));
         }
     }
     vector::setHighest(arrows);
