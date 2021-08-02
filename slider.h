@@ -14,6 +14,9 @@ public:
     sf::IntRect rect; // Click detection
     int posX, posY; // Coords of the left side of the slider
     int circleX; // Coords of the circle
+    int width = 244;
+    int height = 4;
+    int radius = 27/2;
     int progress=0;
     bool sliding=0;
     int state;

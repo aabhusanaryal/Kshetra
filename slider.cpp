@@ -2,10 +2,6 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-int width = 244;
-int height = 4;
-int radius = 27/2;
-
 std::vector<Slider*> Slider::list;
 
 Slider::Slider(int posX, int posY, int state){
