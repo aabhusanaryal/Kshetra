@@ -2,6 +2,9 @@
 #include "button.h"
 #include "slider.h"
 #include "window.h"
+#include "vector.hpp"
+#include "canvas.hpp"
+
 #define ALL_STATES 69
 
 int windowWidth = 1250;
@@ -20,6 +23,16 @@ void exitProgram(){
     window.close();
 };
 
+// Plot fn
+double forX(double x,double y){
+    return x;
+}
+
+double forY(double x,double y){
+    return y;
+}
+
+
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
@@ -30,7 +43,9 @@ int main(){
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, 1);
     
 
-    Slider slider1(window.width-244-70, window.height-70, 1);
+    Slider slider1(90, 50, 1);
+
+    canvas canvas1(window.width-50, window.height+40, forX, forY, 1);
 
     // Assigning functions to be called on button click
     btn_Exit.setAction(exitProgram);

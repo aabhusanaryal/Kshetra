@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "button.h"
 #include "slider.h"
+#include "vector.hpp"
 
 class Window : public sf::RenderWindow{
 public:
@@ -28,6 +29,9 @@ public:
     }
     void draw(sf::Sprite sprite){
         sf::RenderWindow::draw(sprite);
+    }
+    void draw(vector v){
+        sf::RenderWindow::draw(v.sprite);
     }
 
 //HL-> Main Loop

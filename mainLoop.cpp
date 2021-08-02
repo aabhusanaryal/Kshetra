@@ -1,6 +1,6 @@
 #include "./window.h"
 #include "SFML/Graphics.hpp"
-
+#include "canvas.hpp"
 void Window::mainLoop(){
 
 // Creating the title for home screen
@@ -9,6 +9,8 @@ void Window::mainLoop(){
     titleTexture.loadFromFile("./assets/main_Kshetra.png");
     title.setTexture(titleTexture);
     title.setPosition((width-431)/2, 250);
+
+
 
 // Polling for events
     while(isOpen()){
@@ -33,6 +35,15 @@ void Window::mainLoop(){
                 draw(Slider::list[i]);
             }
         }
+
+        if(state == canvas::list[0]->state){
+            canvas::list[0]->grid.display(*(this));
+            for(int i=0;i<canvas::list[0]->arrows.size();i++){
+                draw(canvas::list[0]->arrows[i]);
+            }
+        }
+
+
 
 // Drawing Title Text
         if(state == 0) draw(title);
