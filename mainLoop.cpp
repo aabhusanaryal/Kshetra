@@ -37,7 +37,7 @@ void Window::mainLoop(){
         }
 
         if(state == canvas::list[0]->state){
-            canvas::list[0]->grid.display(*(this));
+            // canvas::list[0]->grid.display(*(this));
             for(int i=0;i<canvas::list[0]->arrows.size();i++){
                 draw(canvas::list[0]->arrows[i]);
             }
