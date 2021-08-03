@@ -28,7 +28,8 @@ if(event.type==sf::Event::MouseButtonReleased){ // <-----------
         if((state == Button::list[i]->state || Button::list[i]->state == magicNumber) && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
             // HL-> Add method to be called when a button is pressed here
             (*(Button::list[i]->action))();
-            Button::list[i]->unhovered(); // Unhovering the button
+            if(!Button::list[i]->rect.contains(mouseX, mouseY))
+                Button::list[i]->unhovered(); // Unhovering the button
         }
     }
 // FOR SLIDERS
