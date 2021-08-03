@@ -14,9 +14,10 @@
 class vector{
     private:
         double posX,posY,angle,magnitude,pixelX,pixelY; //posX,posY for graph coordinates, pixlX,pixelY for plotting
-        sf::Texture texture;
         sf::Color arrowColor;
+        static bool textureLoaded;
     public:
+        static sf::Texture* texture;
         sf::Sprite sprite;
         static int lowerX,lowerY,higherX,higherY;
         //expresson is a function pointer, one expression for i component, other for j

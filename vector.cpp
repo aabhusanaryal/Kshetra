@@ -6,12 +6,18 @@ int vector::lowerY=0;
 int vector::higherX=0;
 int vector::higherY=0;
 
+sf::Texture* vector::texture = new sf::Texture;
+bool vector::textureLoaded = 0;
 vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*expressionY)(double,double),Grid grid){
     this->posX=posX;
     this->posY=posY;
     this->pixelX=grid.returnOrigin().x+(this->posX*grid.returnCellWidth()); //origin set at middle of graph
     this->pixelY=grid.returnOrigin().y-((this->posY*grid.returnCellWidth())); 
 
+    if(!textureLoaded){
+        setTexture();
+        textureLoaded = 1;
+    }
     double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
     double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
 
@@ -35,8 +41,7 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         else if(magnX<0){this->angle=-180;}
     }
     if(magnitude!=0){
-        texture.loadFromFile("assets/one_Arrow.png");
-        sprite.setTexture(texture);
+        sprite.setTexture(*(texture));
         sprite.setPosition(pixelX,pixelY);
         sprite.setRotation(angle);
         sprite.setOrigin(0,12);
@@ -70,6 +75,10 @@ void vector::setLimits(Grid grid){
     lowerY=-(grid.returnCellRow()/2)+1;
     higherX=(grid.returnCellCol()/2);
     higherY=(grid.returnCellRow()/2);
+}
+
+void vector::setTexture(){
+    texture->loadFromFile("./assets/one_Arrow.png");
 }
 
 
