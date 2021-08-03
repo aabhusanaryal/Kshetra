@@ -19,7 +19,7 @@ Grid::Grid(int wwidth,int wheight, float scalar)
     //number of column and rows that will fit in the required area
     for(int i =0; (i+1)*cellWidth+left() < (right()); i++)
         cellCol +=1;
-    for(int j=0; (j+1)*cellHeight+top() < bottom(); j++)
+    for(int j=0; (j+1)*cellHeight+top() < (bottom()); j++)
         cellRow +=1;  
 
 //gap on the edges of the cells
@@ -78,7 +78,8 @@ void Grid::make_cells()
 }
 
 sf::Vector2f Grid::returnOrigin(){
-    return sf::Vector2f(leftPaddingcell+left()+(cellWidth*(cellCol/2)),topPaddingcell+top()+(cellWidth*(cellRow/2)));
+    //leftPaddingcell+left()+(cellWidth*(cellCol/2)),topPaddingcell+top()+(cellWidth*(cellRow/2))
+    return sf::Vector2f(830, 445);
 }
 
 int Grid::returnCellWidth(){
