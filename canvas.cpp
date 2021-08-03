@@ -17,3 +17,14 @@ canvas::canvas(int windowWidth,int windowHeight,double (*expressionX)(double,dou
     vector::setHighest(arrows);
     vector::setColor(arrows);
 }
+
+void canvas::reinitialise(double (*expressionX)(double,double),double (*expressionY)(double,double)){
+    arrows.clear();
+    for(int i=vector::lowerX;i<vector::higherX;i++){
+        for(int j=vector::lowerY;j<vector::higherY;j++){
+            arrows.push_back(new vector(i,j,expressionX,expressionY,grid));
+        }
+    }
+    vector::setHighest(arrows);
+    vector::setColor(arrows);
+}

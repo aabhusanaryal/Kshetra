@@ -7,4 +7,5 @@ class canvas{
         std::vector<vector*> arrows;
         Grid grid;
         canvas(int,int,double (*expressionX)(double,double),double (*expressionY)(double,double), int state);
+        void reinitialise(double (*expressionX)(double,double),double (*expressionY)(double,double));
 };
