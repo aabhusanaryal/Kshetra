@@ -30,7 +30,7 @@ double forX(double x,double y){
 }
 
 double forY(double x,double y){
-    return x;
+    return 1;
 }
 
 double forX1(double x,double y){

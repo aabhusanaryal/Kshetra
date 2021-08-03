@@ -13,20 +13,18 @@ Grid::Grid(int wwidth,int wheight, float scalar)
     cellWidth= width/scalar; 
     cellHeight = cellWidth;
     //number of column and rows
-    cellCol = 0;
-    cellRow = 0;
+    cellCol = width/cellWidth;
+    cellRow = height/cellHeight;
 
     //number of column and rows that will fit in the required area
-    for(int i =0; (i+1)*cellWidth+left() < (right()); i++)
-        cellCol +=1;
-    for(int j=0; (j+1)*cellHeight+top() < bottom(); j++)
-        cellRow +=1;  
+
+        
 
 //gap on the edges of the cells
 //subtracts the background rect width with the number of cells * cell width and the value is divide by 2
 //obtained value is applied to the left (makes the grid centered)  
-    topPaddingcell = (height - cellHeight*cellRow)/2; 
-    leftPaddingcell = (width - cellWidth*cellCol)/2;
+    topPaddingcell = 0;//(height - cellHeight*cellRow)/2; 
+    leftPaddingcell = 0;//(width - cellWidth*cellCol)/2;
 }
 
 
@@ -58,6 +56,7 @@ void Grid::make_cells()
         for(int j=0; (j+1)*cellHeight+top() < bottom(); j++)
         {
             sf::RectangleShape cell;
+            cell.setOrigin(cellWidth/2, cellHeight/2);
             cell.setSize(sf::Vector2f(cellWidth-1.5, cellHeight-1.5));
             cell.setPosition
             (
