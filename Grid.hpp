@@ -14,7 +14,7 @@ private:
     float topPaddingcell,leftPaddingcell;
 
 public:
-    Grid(int=0,int=0);
+    Grid(int=0,int=0, float=22.f);
     void display(sf::RenderWindow& window);
     void make_bg(sf::RenderWindow& window);
     void make_cells();

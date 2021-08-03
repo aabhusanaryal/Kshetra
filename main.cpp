@@ -44,11 +44,11 @@ double forY1(double x,double y){
 
 void changeFunction(){
     if(something == 1){
-        canvas::list[0]->reinitialise(forX1, forY1);
+        canvas::list[0]->reinitialiseVectors(forX1, forY1);
         something = 2;
     }
     else{
-        canvas::list[0]->reinitialise(forX, forY);
+        canvas::list[0]->reinitialiseVectors(forX, forY);
         something = 1;
     }
 }
@@ -62,10 +62,11 @@ int main(){
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, 1);
-    Button changeFn("main_Std_Functions", 311, 80, 30, 50, 1);
+    
+    Button changeFn("main_Std_Functions", 311, 80, 30, 200, 1);
     
 
-    Slider slider1(90, 50, 1);
+    Slider slider1(90, 100, 1);
 
     canvas canvas1(window.width-50, window.height+40, forX, forY, 1);
 

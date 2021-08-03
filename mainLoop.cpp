@@ -43,6 +43,10 @@ void Window::mainLoop(){
             }
         }
 
+        if(Slider::list[0]->sliding && state == Slider::list[0]->state){
+            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.2);
+        }
+
 
 
 // Drawing Title Text

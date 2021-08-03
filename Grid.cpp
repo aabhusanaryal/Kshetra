@@ -1,7 +1,7 @@
 #include "Grid.hpp"
 #include <iostream>
 
-Grid::Grid(int wwidth,int wheight)
+Grid::Grid(int wwidth,int wheight, float scalar)
 {
     windowWidth=wwidth;
     windowHeight=wheight;
@@ -10,7 +10,7 @@ Grid::Grid(int wwidth,int wheight)
     bg.setPosition((windowWidth - width/2- paddingRight) , windowHeight/2);
     bg.setFillColor(sf::Color(229, 229, 229));
     //the size of each cell
-    cellWidth= width/22.f; 
+    cellWidth= width/scalar; 
     cellHeight = cellWidth;
     //number of column and rows
     cellCol = 0;
