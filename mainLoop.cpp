@@ -24,6 +24,32 @@ void Window::mainLoop(){
         
 // Rendering stuff   
         clear(sf::Color(251, 245, 243));
+        // clear(sf::Color(0, 0, 0));
+
+        // Drawing Canvas and arrows and all handling zomming in
+        if(Slider::list[0]->sliding && state == Slider::list[0]->state){
+            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
+        }
+        if(state == canvas::list[0]->state){
+            if(showGrid)
+                canvas::list[0]->grid.display(*(this));
+            if(showArrows){
+                for(int i=0;i<canvas::list[0]->arrows.size();i++){
+                    draw(canvas::list[0]->arrows[i]);
+                }
+            }
+        }
+
+        // Making overlay for state 1
+        sf::RectangleShape overlay(sf::Vector2f(width, height));
+        sf::Texture overlayTexture;
+        overlayTexture.loadFromFile("./assets/one_Overlay.png");
+        overlay.setTexture(&overlayTexture);
+        overlay.setPosition(0,0);
+        if(state==1)
+            draw(overlay);
+
+// Drawing other components such as buttons and sliders
 // Only draw the component if it belongs to the current state
         for(int i=0; i<Button::list.size(); i++){
             if((state == Button::list[i]->state || Button::list[i]->state == magicNumber))
@@ -36,19 +62,9 @@ void Window::mainLoop(){
             }
         }
 
-        if(state == canvas::list[0]->state){
-            if(showGrid)
-                canvas::list[0]->grid.display(*(this));
-            if(showArrows){
-                for(int i=0;i<canvas::list[0]->arrows.size();i++){
-                    draw(canvas::list[0]->arrows[i]);
-                }
-            }
-        }
+        
 
-        if(Slider::list[0]->sliding && state == Slider::list[0]->state){
-            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.1);
-        }
+        
 
 
 
