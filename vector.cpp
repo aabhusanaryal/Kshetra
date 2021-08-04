@@ -71,10 +71,10 @@ void vector::setColor(std::vector<vector*>& arrows){
 }
 
 void vector::setLimits(Grid grid){
-    lowerX=-(grid.returnCellCol()/2)+1;
-    lowerY=-(grid.returnCellRow()/2)+1;
-    higherX=(grid.returnCellCol()/2);
-    higherY=(grid.returnCellRow()/2);
+    lowerX=-(grid.returnCellCol()/2)-1;
+    lowerY=-(grid.returnCellRow()/2)-1;
+    higherX=(grid.returnCellCol()/2)+1;
+    higherY=(grid.returnCellRow()/2)+1;
 }
 
 void vector::setTexture(){
