@@ -37,14 +37,14 @@ void Window::mainLoop(){
         }
 
         if(state == canvas::list[0]->state){
-            // canvas::list[0]->grid.display(*(this));
+            canvas::list[0]->grid.display(*(this));
             for(int i=0;i<canvas::list[0]->arrows.size();i++){
                 draw(canvas::list[0]->arrows[i]);
             }
         }
 
         if(Slider::list[0]->sliding && state == Slider::list[0]->state){
-            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.2);
+            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.1);
         }
 
 

@@ -29,13 +29,13 @@ void canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn ex
             arrows.push_back(new vector(i,j,expressionX,expressionY,grid));
         }
     }
-    vector::setHighest(arrows);
+    // vector::setHighest(arrows);
     vector::setColor(arrows);
 }
 
 void canvas::reinitialiseGrid(float scalar){
     // HL-> Need to un-hardcode windowWidth and windowHeight
-    grid=Grid(1250, 850, scalar);
+    grid=Grid(1250-50, 850+40, scalar);
     grid.make_cells();
     vector::setLimits(grid);
     reinitialiseVectors(fnX, fnY);

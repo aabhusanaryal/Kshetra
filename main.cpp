@@ -26,11 +26,11 @@ void exitProgram(){
 
 // Plot fn
 double forX(double x,double y){
-    return 0;
+    return -y;
 }
 
 double forY(double x,double y){
-    return 1;
+    return x;
 }
 
 double forX1(double x,double y){
