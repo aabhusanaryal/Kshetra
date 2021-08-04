@@ -4,9 +4,12 @@
 #include "window.h"
 #include "vector.hpp"
 #include "canvas.hpp"
+#include "Parser.h"
 
 #define ALL_STATES 69
 
+
+float coeffX, coeffY, constant;
 int windowWidth = 1250;
 int windowHeight = 850;
 int something = 1;
@@ -61,10 +64,28 @@ void fnToggleArrows(){
     window.showArrows = !window.showArrows;
 }
 
+double fnParserX(double x,double y){
+    return coeffX*x + coeffY*y + constant;
+}
+double fnParserY(double x,double y){
+    return x;
+}
+
 
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
+// Parser stuff
+    Parser parser;
+    std::string strExpression;
+    std::cin>>strExpression;
+    parser.tokenify(strExpression);
+
+    coeffX = parser.CoeffX();
+    coeffY = parser.CoeffY();
+    constant = parser.Constant();
+
+
 // Initialising Button and Slider components
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
@@ -73,7 +94,7 @@ int main(){
     // State 1 components:
     Button changeFn("one_Plot", 183, 47, 30, 200, 1);
     Slider slider1(90, 100, 1);
-    canvas canvas1(window.width-50, window.height+40, forX, forY, 1);
+    canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, 1);
     // HL-> DELETE LATER: Debugging tools 
     Button toggleGrid("one_Back", 33, 37, 50, 300, 1);
     Button toggleArrows("one_Back", 33, 37, 95, 300, 1);
