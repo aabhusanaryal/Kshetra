@@ -1,3 +1,4 @@
+#pragma once
 #include "vector.hpp"
 
 typedef double (*doublePointerFn)(double, double);

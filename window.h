@@ -3,12 +3,17 @@
 #include "button.h"
 #include "slider.h"
 #include "vector.hpp"
+#include "canvas.hpp"
+
 
 class Window : public sf::RenderWindow{
 public:
+    static std::vector<std::vector<doublePointerFn>> stdFunctions;
+    static int functionIndex;
     int state = 0;
     int mouseX, mouseY;
     int magicNumber = 69;
+    int oneAndTwo = 420;
     int width = 1250;
     int height = 850;
 // HL-> DELETE LATER: Debiugging
