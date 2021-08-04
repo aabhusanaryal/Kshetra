@@ -53,6 +53,14 @@ void changeFunction(){
     }
 }
 
+// HL-> DELETE LATER: Debugging
+void fnToggleGrid(){
+    window.showGrid = !window.showGrid;
+}
+void fnToggleArrows(){
+    window.showArrows = !window.showArrows;
+}
+
 
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
@@ -66,7 +74,11 @@ int main(){
     Button changeFn("one_Plot", 183, 47, 30, 200, 1);
     Slider slider1(90, 100, 1);
     canvas canvas1(window.width-50, window.height+40, forX, forY, 1);
-
+    // HL-> DELETE LATER: Debugging tools 
+    Button toggleGrid("one_Back", 33, 37, 50, 300, 1);
+    Button toggleArrows("one_Back", 33, 37, 95, 300, 1);
+    toggleGrid.setAction(fnToggleGrid);
+    toggleArrows.setAction(fnToggleArrows);
     // Assigning functions to be called on button click
     btn_Exit.setAction(exitProgram);
     btn_Standard_Functions.setAction(changeStateTo1);

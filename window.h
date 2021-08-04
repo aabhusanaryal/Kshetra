@@ -11,7 +11,9 @@ public:
     int magicNumber = 69;
     int width = 1250;
     int height = 850;
-
+// HL-> DELETE LATER: Debiugging
+    bool showGrid = true;
+    bool showArrows = true;
 //HL-> Constructor
     Window(sf::VideoMode video, const sf::String path, int style): sf::RenderWindow(video, path, style){};
 
