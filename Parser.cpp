@@ -69,3 +69,41 @@ double Parser::CoeffY()
 	else
 		return -Numberify(tokens[pos - 1]);
 }
+
+double Parser::Constant()
+{
+	int length = 0;
+	for (Token current : tokens)
+		length += 1;
+
+	//case equation = 69
+	if (length == 1 && tokens[0]._Type == NUM_LITERAL)
+		return Numberify(tokens[0]);
+	//case equation = -69
+	if (length == 2 && tokens[1]._Type == NUM_LITERAL && tokens[0]._Text == "-")
+		return -Numberify(tokens[1]);
+
+	int pos = 0;
+	bool PossibleConstant = false;
+
+	//search for constants
+	for (Token current : tokens)
+	{
+		PossibleConstant = false;
+		if (current._Type == NUM_LITERAL)
+			PossibleConstant = true;
+		if (PossibleConstant)
+		{
+			//case ax+b and ax-b
+			if (pos == length-1)
+				return (tokens[pos - 1]._Text == "-" ? -Numberify(tokens[pos]) : Numberify(tokens[pos]));
+
+			//case b+ax and -b+ax
+			else if (tokens[pos + 1]._Type == OPERATOR && (tokens[pos + 1]._Text == "+" || tokens[pos + 1]._Text == "-"))
+				return (tokens[pos - 1]._Text == "-" ? -Numberify(tokens[pos]) : Numberify(tokens[pos]));
+		}
+		pos += 1;
+	}
+	//none of the conditions is satisfied
+	return 0;
+}
