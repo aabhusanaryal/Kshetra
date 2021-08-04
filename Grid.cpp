@@ -52,25 +52,27 @@ void Grid::make_bg(sf::RenderWindow& window)
 void Grid::make_cells()
 {
 //make cells
-
-    for(int i =0; i*cellWidth+left() < (right()); i++)
+    for(int i =0; i*ogCellWidth+left() < (right()); i++)
     {
-        for(int j=0; j*cellHeight+top() < bottom(); j++)
+        for(int j=0; j*ogCellWidth+top() < bottom(); j++)
         {
             sf::RectangleShape cell;
             cell.setSize(sf::Vector2f(cellWidth-1.5, cellHeight-1.5));
+            float initialPositionX = (leftPaddingcell + left() + cellWidth*i);
+            float initialPositionY = (topPaddingcell + top() + cellHeight*j);
             cell.setPosition
             (
-                leftPaddingcell + left() + cellWidth*i, 
-                topPaddingcell + top() + cellHeight*j
+                (leftPaddingcell + left() + ogCellWidth*i) - (cellWidth - ogCellWidth)*(11-i) , 
+                (topPaddingcell + top() + ogCellWidth*j) - (cellHeight - ogCellWidth)*(11-j)
             );
+ 
             
             /* We can do grid by setting thickness of the rectangle 
             without decreasing its size
             remove set size from the setsize and uncomment bottom code*/
             cell.setFillColor(sf::Color(251, 245, 243));
-            //cell.setOutlineThickness(1.5);
-            //cell.setOutlineColor(sf::Color::Green);
+            // cell.setOutlineThickness(1.5);
+            // cell.setOutlineColor(sf::Color::Green);
             cells.push_back(cell);
             //std::cout<<"No of rows:"<<cellRow<<"\nNo of columns:"<<cellCol;
         }
@@ -79,7 +81,7 @@ void Grid::make_cells()
 
 sf::Vector2f Grid::returnOrigin(){
     //leftPaddingcell+left()+(cellWidth*(cellCol/2)),topPaddingcell+top()+(cellWidth*(cellRow/2))
-    return sf::Vector2f(830, 445);
+    return sf::Vector2f(820, 436);
 }
 
 int Grid::returnCellWidth(){

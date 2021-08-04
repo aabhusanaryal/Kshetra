@@ -29,7 +29,7 @@ void canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn ex
             arrows.push_back(new vector(i,j,expressionX,expressionY,grid));
         }
     }
-    // vector::setHighest(arrows);
+    vector::setHighest(arrows);
     vector::setColor(arrows);
 }
 

@@ -10,6 +10,7 @@ private:
     int width = 700;
     int height = 700;
     int cellWidth,cellHeight,cellCol,cellRow;
+    int ogCellWidth = 700/22.f;
     std::vector<sf::RectangleShape> cells;
     float topPaddingcell,leftPaddingcell;
 
