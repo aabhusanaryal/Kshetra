@@ -8,7 +8,8 @@ enum TokenType {
 	WHITESPACE,
 	OPERATOR,
 	NUM_LITERAL,
-	UNKNOWN		
+	UNKNOWN,
+	FUNCTION	
 };
 
 static const char *tk[] =
@@ -16,7 +17,8 @@ static const char *tk[] =
 	"WHITESPACE",
 	"OPERATOR",
 	"NUM_LITERAL",
-	"UNKNOWN"
+	"UNKNOWN",
+	"FUNCTION"
 };
 
 

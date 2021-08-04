@@ -29,6 +29,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 				currentToken._Text.append(1, currentChar);
 			}
 			break;
+
 		case'+':
 		case'-':
 		case'*':
@@ -56,6 +57,16 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 				endToken(currentToken, tokens);
 			}
 			break;
+
+		 default:
+			if (currentToken._Type != FUNCTION)
+			{
+				endToken(currentToken, tokens);
+				currentToken._Type = FUNCTION;
+				currentToken._Text.append(1, currentChar);
+			}
+			else if (currentToken._Type == FUNCTION)
+				currentToken._Text.append(1, currentChar);
 		}
 	}
 
