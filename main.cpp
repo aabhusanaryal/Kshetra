@@ -1,6 +1,7 @@
 #include "SFML/Graphics.hpp"
 #include "button.h"
 #include "slider.h"
+#include "textfield.h"
 #include "window.h"
 #include "vector.hpp"
 #include "canvas.hpp"
@@ -114,7 +115,7 @@ void nextFn(){
     canvas::list[0]->reinitialiseVectors(Window::stdFunctions[i][0], Window::stdFunctions[i][1]);
 };
 
-
+// HL-> DELETE LATER: DEBUGGING
 void changeFunction(){
     if(something == 1){
         canvas::list[0]->reinitialiseVectors(forX1, forY1);
@@ -174,6 +175,10 @@ int main(){
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, 1);
+    
+    Textfield tex1(201, 54, 100, 100, 0);
+    Textfield tex2(201, 54, 100, 170, 0);
+
     // State 1 components:
     Button changeFn("one_Plot", 183, 47, 30, 200, 1);
     Slider slider1(90, 100, ONE_AND_TWO);

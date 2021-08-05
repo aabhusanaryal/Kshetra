@@ -20,6 +20,7 @@ void Window::mainLoop(){
             if(event.type==sf::Event::Closed) close();
             #include "./events/mousemove.h"
             #include "./events/mouseclick.h"
+            #include "./events/keypress.h"
         }
         
 // Rendering stuff   
@@ -61,6 +62,13 @@ void Window::mainLoop(){
                 draw(Slider::list[i]);
             }
         }
+
+        for(int i=0; i<Textfield::list.size(); i++){
+            if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber) || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
+                draw(Textfield::list[i]);
+            }
+        }
+        
 
 // Drawing Title Text
         if(state == 0) draw(title);

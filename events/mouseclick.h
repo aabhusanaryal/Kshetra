@@ -15,10 +15,24 @@ if(event.type==sf::Event::MouseButtonPressed){ // <-----------
 //           ================= FOR BUTTONS' CLICK HANDLING =================
     for(int i=0; i<Button::list.size(); i++){
         if((state == Button::list[i]->state || Button::list[i]->state == magicNumber || (Button::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
-            // HL-> Add method to be called when a button is pressed here
             Button::list[i]->clicked = true;
         }
     }
+
+//           ================= FOR TEXTFIELD' CLICK HANDLING =================
+    for(int i=0; i<Textfield::list.size(); i++){ // If clicked on textfield
+        if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+            Textfield::list[i]->focused();
+        }
+    }
+
+    for(int i=0; i<Textfield::list.size(); i++){ // If clicked outside textfield
+        if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && !Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+            if(Textfield::list[i]->isFocused) // If the text field is focused, change to unfocused
+                Textfield::list[i]->unfocused();
+        }
+    }
+
 }
 //           ================= FOR BUTTON RELEASE =================           
 if(event.type==sf::Event::MouseButtonReleased){ // <-----------

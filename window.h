@@ -4,7 +4,7 @@
 #include "slider.h"
 #include "vector.hpp"
 #include "canvas.hpp"
-
+#include "textfield.h"
 
 class Window : public sf::RenderWindow{
 public:
@@ -25,6 +25,9 @@ public:
 //HL-> .draw() method overloads
     void draw(Button* btn){
         sf::RenderWindow::draw(btn->rectangle);
+    }
+    void draw(Textfield* textfield){
+        sf::RenderWindow::draw(textfield->rectangle);
     }
     void draw(Slider* slider){
         sf::RenderWindow::draw(slider->rectangle);
