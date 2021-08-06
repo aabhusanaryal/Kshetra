@@ -6,7 +6,7 @@ Textfield::Textfield(std::string label, int width,int height,int posX, int posY,
     int labelSize = 22; //in pixels not points
     int contentSize = 20; //in pixels not points
     int paddingBottom = 15;
-    int paddingRight = 20;
+    int paddingRight = 28;
     contentPosX = posX+width-paddingRight;
     contentPosY = (posY+height-contentSize-paddingBottom);
     this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), state);
@@ -17,6 +17,7 @@ Textfield::Textfield(std::string label, int width,int height,int posX, int posY,
     this->posY = posY;
     this->state = state;
     list.push_back(this);
+
 
     rectangle = sf::RectangleShape (sf::Vector2f(width, height));
     rectangle.setPosition(posX, posY);
@@ -66,10 +67,14 @@ void Textfield::unfocused(){ // Sets the right texture when the textbox is not h
 
 void Textfield::setContent(bool isBackspace){
     float width = this->content->text.getLocalBounds().width; // Width of text
+    // Setting the origin of text to top right to make the text right aligned
     if(!isBackspace)
-        contentPosX = posX + this->width - width - 27;
+        this->content->text.setOrigin(width, 0);
+    if(isBackspace)
+        this->content->text.setOrigin(width-17, 0);
+ 
+    if(this->text.length() < 15) // Over 15 characters will overflow
+        this->content->text.setString(text);
     else
-        contentPosX += 10;
-    this->content->text.setString(text);
-    this->content->text.setPosition(contentPosX,contentPosY);
+        this->content->text.setString(text.substr(this->text.length()-15,15)); // Only displaying the last 15 characters if total char count > 15
 }
