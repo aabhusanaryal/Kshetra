@@ -5,6 +5,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 {
 	std::vector<Token> tokens;
 	Token currentToken;
+	bool negativeInt = false;
 
 	for (char currentChar : inProgram)
 	{
@@ -20,7 +21,15 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 		case '7':
 		case '8':
 		case '9':
-			if (currentToken._Type == NUM_LITERAL)
+
+			if (negativeInt && currentToken._Text == "-")
+			{
+				currentToken._Type = NUM_LITERAL;
+				currentToken._Text.append(1, currentChar);
+				negativeInt = false;
+			}
+
+			else if (currentToken._Type == NUM_LITERAL)
 				currentToken._Text.append(1, currentChar);
 			else 
 			{	
@@ -30,18 +39,33 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			}
 			break;
 
-		case'+':
 		case'-':
+			if ((currentToken._Type == OPERATOR && currentToken._Text == "(") || currentToken._Type == WHITESPACE)
+			{
+				negativeInt = true;
+				endToken(currentToken, tokens);
+				currentToken._Type = OPERATOR;
+				currentToken._Text.append(1, currentChar);
+			}
+			else
+			{
+				endToken(currentToken, tokens);
+				currentToken._Type = OPERATOR;
+				currentToken._Text.append(1, currentChar);
+				endToken(currentToken, tokens);
+			}
+			break;
+		case'+':
 		case'*':
 		case'/':
 		case'^':
 		case'(':
 		case')':
+
 			endToken(currentToken, tokens);
 			currentToken._Type = OPERATOR;
 			currentToken._Text.append(1, currentChar);
 			endToken(currentToken, tokens);
-
 		case' ':
 			currentToken._Type = WHITESPACE;
 			endToken(currentToken, tokens);
@@ -59,16 +83,33 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			break;
 
 		 default:
-			if (currentToken._Type != FUNCTION)
-			{
-				endToken(currentToken, tokens);
-				currentToken._Type = FUNCTION;
-				currentToken._Text.append(1, currentChar);
-			}
-			else if (currentToken._Type == FUNCTION)
-				currentToken._Text.append(1, currentChar);
-			if (currentToken._Text == "pi")
-				currentToken._Type = CONSTANT;
+			 if (negativeInt)
+			 {
+				 if (currentToken._Type != FUNCTION)
+				 {
+					 currentToken._Type = FUNCTION;
+					 currentToken._Text.append(1, currentChar);
+				 }
+				 else if (currentToken._Type == FUNCTION)
+					 currentToken._Text.append(1, currentChar);
+
+				 if (currentToken._Text == "pi" || currentToken._Text == "-pi")
+					 currentToken._Type = CONSTANT;
+			 }
+			 else
+			 {
+				 if (currentToken._Type != FUNCTION)
+				 {
+					 endToken(currentToken, tokens);
+					 currentToken._Type = FUNCTION;
+					 currentToken._Text.append(1, currentChar);
+				 }
+				 else if (currentToken._Type == FUNCTION)
+					 currentToken._Text.append(1, currentChar);
+
+				 if (currentToken._Text == "pi")
+					 currentToken._Type = CONSTANT;
+			 }
 		}
 	}
 

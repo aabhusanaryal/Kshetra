@@ -5,8 +5,10 @@ double Parser::Numberify(Token& token)
 	float number;
 	if (token._Type == NUM_LITERAL)
 		number = std::stod(token.returnTokenValue());
-	else if (token._Text == "pi")
+	if (token._Text == "pi")
 		number = 3.141596;
+	if (token._Text == "-pi")
+		number = -3.141596;
 	return number;
 }
 
@@ -165,8 +167,12 @@ void Parser::evaluateRPN()
 		}
 		currentIndex += 1;
 
+		for (Token current : output)
+		{
+			std::cout << current._Text << " ";
+		}
+		std::cout <<std::endl;
 	}
-	std::cout << output[0]._Text << std::endl;
 	
 }
 
@@ -206,10 +212,16 @@ Token Parser::evaluate(Token function, Token operand)
 	
 	if (function._Text == "sin")
 		temp._Text = Textify(sin(Numberify(operand)));
+	if (function._Text == "-sin")
+		temp._Text = Textify(-sin(Numberify(operand)));
 	if (function._Text == "cos")
 		temp._Text = Textify(cos(Numberify(operand)));
+	if (function._Text == "-cos")
+		temp._Text = Textify(-cos(Numberify(operand)));
 	if (function._Text == "tan")
 		temp._Text = Textify(tan(Numberify(operand)));
+	if (function._Text == "-tan")
+		temp._Text = Textify(-tan(Numberify(operand)));
 	return temp;
 }
 
