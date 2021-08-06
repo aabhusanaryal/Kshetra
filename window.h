@@ -40,6 +40,9 @@ public:
     void draw(sf::Sprite sprite){
         sf::RenderWindow::draw(sprite);
     }
+    void draw(sf::Text text){
+        sf::RenderWindow::draw(text);
+    }
     void draw(vector* v){
         sf::RenderWindow::draw(v->sprite);
     }

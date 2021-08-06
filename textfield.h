@@ -6,7 +6,7 @@
 class Textfield{
 public:
     int state;
-    std::string text;
+    std::string text = "";
     bool isFocused;
     bool isHovered;
     bool hoverTex = 0;

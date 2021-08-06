@@ -1,6 +1,8 @@
 #include "./window.h"
 #include "SFML/Graphics.hpp"
 #include "canvas.hpp"
+#include "text.h"
+
 void Window::mainLoop(){
 
 // Creating the title for home screen
@@ -66,6 +68,12 @@ void Window::mainLoop(){
         for(int i=0; i<Textfield::list.size(); i++){
             if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber) || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
                 draw(Textfield::list[i]);
+            }
+        }
+
+        for(int i=0; i<Text::list.size(); i++){
+            if((state == Text::list[i]->state || Text::list[i]->state == magicNumber) || (Text::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
+                draw(Text::list[i]->text);
             }
         }
         

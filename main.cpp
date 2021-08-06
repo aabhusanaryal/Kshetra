@@ -3,9 +3,11 @@
 #include "slider.h"
 #include "textfield.h"
 #include "window.h"
+#include "text.h"
 #include "vector.hpp"
 #include "canvas.hpp"
 #include "Parser.h"
+
 
 #define ALL_STATES 69
 #define ONE_AND_TWO 420
@@ -15,7 +17,7 @@
 // 1. Standard Functions         ||
 // 2. Custom Functions          ||
 // =========================== ||
-
+std::vector<Text*> Text::list;
 std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
 int Window::functionIndex = 0;
 
@@ -174,7 +176,7 @@ int main(){
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
-    Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, 1);
+    Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ONE_AND_TWO);
     
     Textfield tex1(201, 54, 100, 100, 0);
     Textfield tex2(201, 54, 100, 170, 0);
@@ -184,6 +186,9 @@ int main(){
     Slider slider1(90, 100, ONE_AND_TWO);
     canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
     
+
+    Text text1("Hello World", 20, 100, 100, ALL_STATES);
+    Text text2("Aloha", 50, 100, 200, ALL_STATES);
 // ============================================================
 // HL-> DELETE LATER: Debugging tools 
     Button toggleGrid("one_Back", 33, 37, 50, 300, 1);
@@ -203,7 +208,7 @@ int main(){
     changeFn.setAction(changeFunction);
     btnPrevious.setAction(previousFn);
     btnNext.setAction(nextFn);
-    // window.draw(title);
+
     window.mainLoop();
 }
 
