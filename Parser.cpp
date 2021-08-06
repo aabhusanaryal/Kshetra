@@ -2,8 +2,19 @@
 
 double Parser::Numberify(Token& token)
 {
-	int number = std::stoi(token.returnTokenValue());
+	float number;
+	if (token._Type == NUM_LITERAL)
+		number = std::stod(token.returnTokenValue());
+	else if (token._Text == "pi")
+		number = 3.141596;
 	return number;
+}
+
+std::string Parser::Textify(double num)
+{
+	std::string str;
+	str = std::to_string(num);
+	return str;
 }
 
 void Parser::tokenify(std::string& equation)
@@ -12,98 +23,195 @@ void Parser::tokenify(std::string& equation)
 	tokens = tokenizer.parse(equation);
 }
 
-double Parser::CoeffX()
+void Parser::AddtoOutput(Token& token)
 {
-	int length = 0;
-	for (Token current : tokens)
-		length += 1;
-
-	int pos = 0;
-	for (Token current : tokens)
-	{
-		if (current._Text != "x")
-			pos += 1;
-		else
-			break;
-	}
-
-	if (pos == length)
-		return 0;
-	else if (pos == 0 || (tokens[pos - 1].returnTokenType() == "OPERATOR" && tokens[pos - 1].returnTokenValue() == "+"))
-		return 1;
-	else if (tokens[pos - 1].returnTokenType() == "OPERATOR" && tokens[pos - 1].returnTokenValue() == "-")
-		return -1;
-	else if (pos == 1)
-		return Numberify(tokens[pos - 1]);
-	else if (tokens[pos - 2].returnTokenValue() == "+" && tokens[pos - 1].returnTokenType() == "NUM_LITERAL")
-		return Numberify(tokens[pos - 1]);
-	else
-		return -Numberify(tokens[pos - 1]);
+	output.push_back(token);
 }
 
-double Parser::CoeffY()
+void Parser::AddtoStack(Token& token)
 {
-
-	int length = 0;
-	for (Token current : tokens)
-		length += 1;
-
-	int pos = 0;
-	for (Token current : tokens)
-	{
-		if (current._Text != "y")
-			pos += 1;
-		else
-			break;
-	}
-	if (pos == length)
-		return 0;
-	else if (pos == 0 || (tokens[pos - 1].returnTokenType() == "OPERATOR" && tokens[pos - 1].returnTokenValue() == "+"))
-		return 1;
-	else if (tokens[pos - 1].returnTokenType() == "OPERATOR" && tokens[pos - 1].returnTokenValue() == "-")
-		return -1;
-	else if (pos == 1)
-		return Numberify(tokens[pos - 1]);
-	else if (tokens[pos - 2].returnTokenValue() == "+" && tokens[pos - 1].returnTokenType() == "NUM_LITERAL")
-		return Numberify(tokens[pos - 1]);
-	else
-		return -Numberify(tokens[pos - 1]);
+	operatorStack.insert(operatorStack.begin(), token);
 }
 
-double Parser::Constant()
+void Parser::RemovefromStack()
 {
-	int length = 0;
-	for (Token current : tokens)
-		length += 1;
+	operatorStack.erase(operatorStack.begin());
+}
 
-	//case equation = 69
-	if (length == 1 && tokens[0]._Type == NUM_LITERAL)
-		return Numberify(tokens[0]);
-	//case equation = -69
-	if (length == 2 && tokens[1]._Type == NUM_LITERAL && tokens[0]._Text == "-")
-		return -Numberify(tokens[1]);
+void Parser::MovetoOutput()
+{
+	AddtoOutput(operatorStack[0]);
+	RemovefromStack();
+}
 
-	int pos = 0;
-	bool PossibleConstant = false;
 
-	//search for constants
+int Parser::Precedence(Token& token)
+{
+	if (token._Type == OPERATOR)
+	{
+		if (token._Text == "+" || token._Text == "-")
+			return 2;
+		if (token._Text == "*" || token._Text == "/")
+			return 3;
+		if (token._Text == "^")
+			return 4;
+	}
+}
+
+std::string Parser::Associavity(Token& token)
+{
+	if (token._Type == OPERATOR)
+		return (token._Text == "^" ? "Right" : "Left");
+}
+
+void Parser::RPN()
+{
 	for (Token current : tokens)
 	{
-		PossibleConstant = false;
-		if (current._Type == NUM_LITERAL)
-			PossibleConstant = true;
-		if (PossibleConstant)
+		if (current._Type == NUM_LITERAL || current._Type == CONSTANT || current._Type == UNKNOWN)
 		{
-			//case ax+b and ax-b
-			if (pos == length-1)
-				return (tokens[pos - 1]._Text == "-" ? -Numberify(tokens[pos]) : Numberify(tokens[pos]));
-
-			//case b+ax and -b+ax
-			else if (tokens[pos + 1]._Type == OPERATOR && (tokens[pos + 1]._Text == "+" || tokens[pos + 1]._Text == "-"))
-				return (tokens[pos - 1]._Text == "-" ? -Numberify(tokens[pos]) : Numberify(tokens[pos]));
+			AddtoOutput(current);
 		}
-		pos += 1;
+
+		if (current._Type == FUNCTION)
+		{
+			AddtoStack(current);
+		}
+
+		if (current._Type == OPERATOR && current._Text !="(")
+		{
+
+			if ( current._Text !=")" && !operatorStack.empty() && (Precedence(current) < Precedence(operatorStack[0]) || Precedence(current) == Precedence(operatorStack[0]) && Associavity(current) == "Left"))
+			{
+				MovetoOutput();
+				AddtoStack(current);
+
+			}
+			else
+			{
+				AddtoStack(current);
+			}
+		}
+
+		if (current._Type == OPERATOR && current._Text == "(")
+		{
+			AddtoStack(current);
+		}
+
+		if (!operatorStack.empty() && current._Type == OPERATOR && current._Text == ")")
+		{
+			RemovefromStack();
+			while (operatorStack[0]._Text != "(")
+			{
+				MovetoOutput();
+			}
+
+			if (operatorStack[0]._Text == "(")
+			{
+				RemovefromStack();
+			}
+
+			if ( !operatorStack.empty() && operatorStack[0]._Type == FUNCTION)
+			{
+				MovetoOutput();
+			}
+		}
 	}
-	//none of the conditions is satisfied
-	return 0;
+
+	while (!operatorStack.empty())
+	{
+		MovetoOutput();
+	}
+
 }
+
+void Parser::displayRPN()
+{
+	for (Token current : output)
+	{
+		std::cout << current._Text << " ";
+	}
+}
+
+void Parser::evaluateRPN()
+{
+	int currentIndex = 0;
+	Token operand1, operand2, operation, function;
+	while(output.size() != 1)
+	{
+		if (output[currentIndex]._Type == OPERATOR)
+		{
+			operand1 = output[currentIndex - 2];
+			operand2 = output[currentIndex - 1];
+			operation = output[currentIndex];
+
+			output.erase(output.begin() + currentIndex-2 ,output.begin()+currentIndex+1);
+
+			Token result = evaluate(operand1, operand2, operation);
+			currentIndex -= 2;
+			output.insert(output.begin()+currentIndex, result);
+		}
+
+		if (output[currentIndex]._Type == FUNCTION)
+		{
+			function = output[currentIndex];
+			operand1 = output[currentIndex - 1];
+
+			output.erase(output.begin() + currentIndex - 1, output.begin() + currentIndex + 1);
+
+			Token result = evaluate(function, operand1);
+			currentIndex -= 1;
+			output.insert(output.begin() + currentIndex, result);
+		}
+		currentIndex += 1;
+
+	}
+	std::cout << output[0]._Text << std::endl;
+	
+}
+
+Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
+{
+	Token temp;
+	temp._Type = NUM_LITERAL;
+	char opr[2];
+	strcpy_s(opr, operation._Text.c_str());
+	char op = opr[0];
+
+	switch (op)
+	{
+	case '+':
+		temp._Text = Textify(Numberify(operand1) + Numberify(operand2));
+		break;
+	case '-':
+		temp._Text = Textify(Numberify(operand1) - Numberify(operand2));
+		break;
+	case '*':
+		temp._Text = Textify(Numberify(operand1) * Numberify(operand2));
+		break;
+	case '/':
+		temp._Text = Textify(Numberify(operand1) / Numberify(operand2));
+		break;
+	case '^':
+		temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
+		break;
+	}
+	return temp;
+}
+
+Token Parser::evaluate(Token function, Token operand)
+{
+	Token temp;
+	temp._Type = NUM_LITERAL;
+	
+	if (function._Text == "sin")
+		temp._Text = Textify(sin(Numberify(operand)));
+	if (function._Text == "cos")
+		temp._Text = Textify(cos(Numberify(operand)));
+	if (function._Text == "tan")
+		temp._Text = Textify(tan(Numberify(operand)));
+	return temp;
+}
+
+
+

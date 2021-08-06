@@ -67,6 +67,8 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			}
 			else if (currentToken._Type == FUNCTION)
 				currentToken._Text.append(1, currentChar);
+			if (currentToken._Text == "pi")
+				currentToken._Type = CONSTANT;
 		}
 	}
 
