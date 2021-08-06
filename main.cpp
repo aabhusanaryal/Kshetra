@@ -65,19 +65,11 @@ double std4Y(double x,double y){
 
 // Plot fn
 double forX(double x,double y){
-    return -x;
+    return 0;
 }
 
 double forY(double x,double y){
-    return y;
-}
-
-double forX1(double x,double y){
-    return pow(x,2*x+1);
-}
-
-double forY1(double x,double y){
-    return 2*x*y;
+    return 0;
 }
 
 
@@ -118,17 +110,6 @@ void nextFn(){
     canvas::list[0]->reinitialiseVectors(Window::stdFunctions[i][0], Window::stdFunctions[i][1]);
 };
 
-// HL-> DELETE LATER: DEBUGGING
-void changeFunction(){
-    if(something == 1){
-        canvas::list[0]->reinitialiseVectors(forX1, forY1);
-        something = 2;
-    }
-    else{
-        canvas::list[0]->reinitialiseVectors(forX, forY);
-        something = 1;
-    }
-}
 
 // HL-> DELETE LATER: Debugging
 void fnToggleGrid(){
@@ -145,27 +126,29 @@ double fnParserY(double x,double y){
     return coeffXj*x + coeffYj*y + constantj;
 }
 
+void changeFunction(){
+// Parser stuff
+    Parser parseri, parserj;
+    std::string strExpressioni, strExpressionj;
+    strExpressioni = Textfield::list[0]->text;
+    strExpressionj = Textfield::list[1]->text;
+    parseri.tokenify(strExpressioni);
+    parserj.tokenify(strExpressionj);
+
+    coeffXi = parseri.CoeffX();
+    coeffYi = parseri.CoeffY();
+    constanti = parseri.Constant();
+
+    coeffXj = parserj.CoeffX();
+    coeffYj = parserj.CoeffY();
+    constantj = parserj.Constant();
+    canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
+}
 
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-// Parser stuff
-    // Parser parseri, parserj;
-    // std::string strExpressioni, strExpressionj;
-    // std::cout<<"Enter Fx: ";
-    // std::cin>>strExpressioni;
-    // std::cout<<"Enter Fy: ";
-    // std::cin>>strExpressionj;
-    // parseri.tokenify(strExpressioni);
-    // parserj.tokenify(strExpressionj);
 
-    // coeffXi = parseri.CoeffX();
-    // coeffYi = parseri.CoeffY();
-    // constanti = parseri.Constant();
-
-    // coeffXj = parserj.CoeffX();
-    // coeffYj = parserj.CoeffY();
-    // constantj = parserj.Constant();
 
     std::vector<doublePointerFn> fnPair1 = {std1X, std1Y};
     std::vector<doublePointerFn> fnPair2 = {std2X, std2Y};
@@ -179,12 +162,12 @@ int main(){
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ONE_AND_TWO);
     
-    Textfield tex1("Fx",201, 54, 100, 100, 0);
-    Textfield tex2("Fy",201, 54, 100, 170, 0);
 
     // State 1 components:
-    Button changeFn("one_Plot", 183, 47, 30, 200, 1);
-    Slider slider1(90, 100, ONE_AND_TWO);
+    Button btn_Plot("one_Plot", 183, 47, 108, 250, 1);
+    Slider slider1(90, 350, ONE_AND_TWO);
+    Textfield fx("Fx",201, 54, 100, 100, 1);
+    Textfield fy("Fy",201, 54, 100, 170, 1);
     canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
     
 
@@ -192,8 +175,8 @@ int main(){
     // Text text2("Aloha", 50, 100, 200, ALL_STATES);
 // ============================================================
 // HL-> DELETE LATER: Debugging tools 
-    Button toggleGrid("one_Back", 33, 37, 50, 300, 1);
-    Button toggleArrows("one_Back", 33, 37, 95, 300, 1);
+    Button toggleGrid("one_Back", 33, 37, 50, 700, 1);
+    Button toggleArrows("one_Back", 33, 37, 95, 700, 1);
     toggleGrid.setAction(fnToggleGrid);
     toggleArrows.setAction(fnToggleArrows);
 // ============================================================
@@ -206,7 +189,7 @@ int main(){
     btn_Standard_Functions.setAction(changeStateTo2);
     btn_Custom_Functions.setAction(changeStateTo1);
     btn_Back.setAction(changeStateTo0);
-    changeFn.setAction(changeFunction);
+    btn_Plot.setAction(changeFunction);
     btnPrevious.setAction(previousFn);
     btnNext.setAction(nextFn);
 
