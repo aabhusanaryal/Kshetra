@@ -10,7 +10,7 @@ class Window : public sf::RenderWindow{
 public:
     static std::vector<std::vector<doublePointerFn>> stdFunctions;
     static int functionIndex;
-    int state = 1;
+    int state = 0;
     int mouseX, mouseY;
     int magicNumber = 69;
     int oneAndTwo = 420;
