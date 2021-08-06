@@ -2,7 +2,15 @@
 
 std::vector<Textfield*> Textfield::list;
 
-Textfield::Textfield(int width,int height,int posX, int posY, int state){
+Textfield::Textfield(std::string label, int width,int height,int posX, int posY, int state){
+    int labelSize = 22; //in pixels not points
+    int contentSize = 20; //in pixels not points
+    int paddingBottom = 15;
+    int paddingRight = 20;
+    contentPosX = posX+width-paddingRight;
+    contentPosY = (posY+height-contentSize-paddingBottom);
+    this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), state);
+    this->content = new Text(text, contentSize, contentPosX, contentPosY, state);
     this->width = width;
     this->height = height;
     this->posX = posX;
@@ -54,4 +62,14 @@ void Textfield::unfocused(){ // Sets the right texture when the textbox is not h
         rectangle.setTexture(&textureUnhovered);
         isFocused = 0;
     }
+}
+
+void Textfield::setContent(bool isBackspace){
+    float width = this->content->text.getLocalBounds().width; // Width of text
+    if(!isBackspace)
+        contentPosX = posX + this->width - width - 27;
+    else
+        contentPosX += 10;
+    this->content->text.setString(text);
+    this->content->text.setPosition(contentPosX,contentPosY);
 }

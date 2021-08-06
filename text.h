@@ -25,4 +25,5 @@ public:
         text.setPosition(posX, posY);
         text.setFillColor(sf::Color::Black);
     }
+    Text(){};
 };

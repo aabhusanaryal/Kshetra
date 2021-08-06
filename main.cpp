@@ -14,9 +14,10 @@
 
 // ============ States ============
 // 0. Main Menu                   ||
-// 1. Standard Functions         ||
-// 2. Custom Functions          ||
+// 1. Custom Functions           ||
+// 2. Standard Functions        ||
 // =========================== ||
+
 std::vector<Text*> Text::list;
 std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
 int Window::functionIndex = 0;
@@ -178,8 +179,8 @@ int main(){
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
     Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ONE_AND_TWO);
     
-    Textfield tex1(201, 54, 100, 100, 0);
-    Textfield tex2(201, 54, 100, 170, 0);
+    Textfield tex1("Fx",201, 54, 100, 100, 0);
+    Textfield tex2("Fy",201, 54, 100, 170, 0);
 
     // State 1 components:
     Button changeFn("one_Plot", 183, 47, 30, 200, 1);
@@ -187,8 +188,8 @@ int main(){
     canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
     
 
-    Text text1("Hello World", 20, 100, 100, ALL_STATES);
-    Text text2("Aloha", 50, 100, 200, ALL_STATES);
+    // Text text1("Hello World", 20, 100, 100, ALL_STATES);
+    // Text text2("Aloha", 50, 100, 200, ALL_STATES);
 // ============================================================
 // HL-> DELETE LATER: Debugging tools 
     Button toggleGrid("one_Back", 33, 37, 50, 300, 1);
