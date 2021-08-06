@@ -28,4 +28,6 @@ class vector{
         static void setLimits(Grid);
         static void setHighest(std::vector<vector*>&);
         static void setColor(std::vector<vector*>&);
+        void hovered();
+        void unhovered();
 };

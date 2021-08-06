@@ -81,4 +81,10 @@ void vector::setTexture(){
     texture->loadFromFile("./assets/one_Arrow.png");
 }
 
+void vector::hovered(){
+    sprite.setColor(sf::Color(0,0,0));
+}
 
+void vector::unhovered(){
+    sprite.setColor(arrowColor);
+}

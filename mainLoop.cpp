@@ -21,6 +21,16 @@ void Window::mainLoop(){
             #include "./events/mousemove.h"
             #include "./events/mouseclick.h"
             #include "./events/keypress.h"
+            if(event.type==sf::Event::MouseMoved){
+                for(int i=0;i<canvas::list[0]->arrows.size();i++){
+                    if(canvas::list[0]->arrows[i]->sprite.getGlobalBounds().contains(mouseX,mouseY)){
+                        canvas::list[0]->arrows[i]->hovered();
+                    }
+                    else   
+                        canvas::list[0]->arrows[i]->unhovered();
+                }
+
+            }
         }
         
 // Rendering stuff   
