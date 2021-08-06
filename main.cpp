@@ -160,7 +160,7 @@ int main(){
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
-    Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ONE_AND_TWO);
+    Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ALL_STATES);
     
 
     // State 1 components:
