@@ -2,7 +2,7 @@
 
 double Parser::Numberify(Token& token)
 {
-	float number;
+	float number = 0;
 	if (token._Type == NUM_LITERAL)
 		number = std::stod(token.returnTokenValue());
 	if (token._Text == "pi")
@@ -135,45 +135,78 @@ void Parser::displayRPN()
 	}
 }
 
-void Parser::evaluateRPN()
+double Parser::evaluateRPN(double x=0, double y=0)
 {
+	std::vector<Token> tempout = output;
 	int currentIndex = 0;
 	Token operand1, operand2, operation, function;
-	while(output.size() != 1)
+	while(tempout.size() != 1)
 	{
-		if (output[currentIndex]._Type == OPERATOR)
+		if (tempout[currentIndex]._Type == OPERATOR)
 		{
-			operand1 = output[currentIndex - 2];
-			operand2 = output[currentIndex - 1];
-			operation = output[currentIndex];
+			operand1 = tempout[currentIndex - 2];
+			operand2 = tempout[currentIndex - 1];
+			operation = tempout[currentIndex];
+			Token result;
 
-			output.erase(output.begin() + currentIndex-2 ,output.begin()+currentIndex+1);
+			if (operand1._Type == UNKNOWN)
+			{
+				operand1._Text = (operand1._Text == "x") ? Textify(x) : Textify(y);
+				operand1._Type = NUM_LITERAL;
+			}
 
-			Token result = evaluate(operand1, operand2, operation);
+			if (operand2._Type == UNKNOWN)
+			{
+				operand2._Text = (operand2._Text == "x") ? Textify(x) : Textify(y);
+				operand2._Type = NUM_LITERAL;
+			}
+
+			tempout.erase(tempout.begin() + currentIndex-2 ,tempout.begin()+currentIndex+1);
+			result = evaluate(operand1, operand2, operation);
+			
+			//if(operand1._Type == NUM_LITERAL &&operand2._Type == NUM_LITERAL)
+			//else if (operand1._Type == UNKNOWN && operand2._Type == NUM_LITERAL)
+			//	result = evaluate(op1, operand2, operation);
+			//else if (operand1._Type == NUM_LITERAL && operand2._Type == UNKNOWN)
+			//	result = evaluate(operand1, op2, operation);
+			//else
+			//	result = evaluate(op1, op2, operation);
+
 			currentIndex -= 2;
-			output.insert(output.begin()+currentIndex, result);
+			tempout.insert(tempout.begin()+currentIndex, result);
 		}
 
-		if (output[currentIndex]._Type == FUNCTION)
+		if (tempout[currentIndex]._Type == FUNCTION)
 		{
-			function = output[currentIndex];
-			operand1 = output[currentIndex - 1];
+			Token result;
+			function = tempout[currentIndex];
+			operand1 = tempout[currentIndex - 1];
 
-			output.erase(output.begin() + currentIndex - 1, output.begin() + currentIndex + 1);
+			if (operand1._Type == UNKNOWN)
+			{
+				operand1._Text = (operand1._Text == "x") ? Textify(x) : Textify(y);
+				operand1._Type = NUM_LITERAL;
+			}
 
-			Token result = evaluate(function, operand1);
+			tempout.erase(tempout.begin() + currentIndex - 1, tempout.begin() + currentIndex + 1);
+			
+			result = evaluate(function, operand1);
+
 			currentIndex -= 1;
-			output.insert(output.begin() + currentIndex, result);
+			tempout.insert(tempout.begin() + currentIndex, result);
 		}
 		currentIndex += 1;
 
-		for (Token current : output)
-		{
-			std::cout << current._Text << " ";
-		}
-		std::cout <<std::endl;
+		//check the steps of parcing from here
+		//for (Token current : tempout)
+		//{
+		//	std::cout << current._Text<<" ";
+		//}
+		//std::cout<<std::endl;
 	}
-	
+
+	if (tempout.size() == 1)
+		return Numberify(tempout[0]);
 }
 
 Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
