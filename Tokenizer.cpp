@@ -22,8 +22,10 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 		case '8':
 		case '9':
 
-			if (negativeInt && currentToken._Text == "-")
+			if (negativeInt)
 			{
+				endToken(currentToken, tokens);
+				currentToken._Text.append(1, '-');
 				currentToken._Type = NUM_LITERAL;
 				currentToken._Text.append(1, currentChar);
 				negativeInt = false;
@@ -31,6 +33,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 
 			else if (currentToken._Type == NUM_LITERAL)
 				currentToken._Text.append(1, currentChar);
+
 			else 
 			{	
 				endToken(currentToken, tokens);
@@ -39,33 +42,36 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			}
 			break;
 
+		case'.':
+			if (currentToken._Type == NUM_LITERAL)
+				currentToken._Text.append(1, currentChar);
+			break;
+
 		case'-':
-			if ((currentToken._Type == OPERATOR && currentToken._Text == "(") || currentToken._Type == WHITESPACE)
+			if ((currentToken._Type == OPERATOR && currentToken._Text != ")") || currentToken._Type == WHITESPACE)
 			{
 				negativeInt = true;
-				endToken(currentToken, tokens);
-				currentToken._Type = OPERATOR;
-				currentToken._Text.append(1, currentChar);
 			}
 			else
 			{
+				negativeInt = false;
 				endToken(currentToken, tokens);
 				currentToken._Type = OPERATOR;
 				currentToken._Text.append(1, currentChar);
-				endToken(currentToken, tokens);
 			}
 			break;
+
 		case'+':
 		case'*':
 		case'/':
 		case'^':
 		case'(':
 		case')':
-
 			endToken(currentToken, tokens);
 			currentToken._Type = OPERATOR;
 			currentToken._Text.append(1, currentChar);
-			endToken(currentToken, tokens);
+			break;
+
 		case' ':
 			currentToken._Type = WHITESPACE;
 			endToken(currentToken, tokens);
@@ -85,16 +91,14 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 		 default:
 			 if (negativeInt)
 			 {
+				 endToken(currentToken,tokens);
+				 currentToken._Text.append(1, '-');
 				 if (currentToken._Type != FUNCTION)
 				 {
 					 currentToken._Type = FUNCTION;
 					 currentToken._Text.append(1, currentChar);
 				 }
-				 else if (currentToken._Type == FUNCTION)
-					 currentToken._Text.append(1, currentChar);
-
-				 if (currentToken._Text == "pi" || currentToken._Text == "-pi")
-					 currentToken._Type = CONSTANT;
+				 negativeInt = false;
 			 }
 			 else
 			 {
@@ -106,9 +110,11 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 				 }
 				 else if (currentToken._Type == FUNCTION)
 					 currentToken._Text.append(1, currentChar);
+			 }
 
-				 if (currentToken._Text == "pi")
-					 currentToken._Type = CONSTANT;
+			 if (currentToken._Text == "pi" || currentToken._Text == "-pi")
+			 {
+				 currentToken._Type = CONSTANT;
 			 }
 		}
 	}
