@@ -9,7 +9,7 @@ Textfield::Textfield(std::string label, int width,int height,int posX, int posY,
     int paddingRight = 28;
     contentPosX = posX+width-paddingRight;
     contentPosY = (posY+height-contentSize-paddingBottom);
-    this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), state);
+    this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), 1,state);
     this->content = new Text(text, contentSize, contentPosX, contentPosY, state);
     this->width = width;
     this->height = height;

@@ -22,11 +22,15 @@ std::vector<Text*> Text::list;
 std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
 int Window::functionIndex = 0;
 
+
 float coeffXi=0, coeffYi=-1, constanti=0;
 float coeffXj=1, coeffYj=0, constantj=0;
 int windowWidth = 1250;
 int windowHeight = 850;
 int something = 1;
+Text* vector::magnValue;
+Text* vector::angleValue;
+Text* vector::posValue;
 
 Window window(sf::VideoMode(windowWidth, windowHeight), "Kshetra", sf::Style::None);
 
@@ -160,25 +164,36 @@ int main(){
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
-    Button btn_Back("one_Back", 33, 37, 30, (windowHeight-37)-30, ALL_STATES);
+    Button btn_Back("one_Back", 33, 37, 22, 777, ALL_STATES);
     
 
     // State 1 components:
-    Button btn_Plot("one_Plot", 183, 47, 108, 250, 1);
-    Slider slider1(90, 350, ONE_AND_TWO);
-    Textfield fx("Fx",201, 54, 100, 100, 1);
-    Textfield fy("Fy",201, 54, 100, 170, 1);
+    Button btn_Plot("one_Plot", 183, 47, 175, 495, 1);
+    Slider slider1(693, 803, ONE_AND_TWO);
+    Textfield fx("Fx",201, 54, 165, 345, 1);
+    Textfield fy("Fy",201, 54, 165, 418, 1);
     canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
+
+    Text* magnitude=new Text("Magnitude:",18,131,662,1);
+    Text* angle=new Text("Angle:",18,131,689,1);
+    Text* position=new Text("Position:",18,131,716,1);
+    Text* function=new Text("Enter Function",36,131,290,1,1);
+    Text* details=new Text("Details:",36,131,620,1,1);
     
+    vector::magnValue=new Text("NA",18,225,662,1);
+    vector::angleValue=new Text("NA",18,185,689,1);
+    vector::posValue=new Text("NA",18,205,716,1);
+
+
 
     // Text text1("Hello World", 20, 100, 100, ALL_STATES);
     // Text text2("Aloha", 50, 100, 200, ALL_STATES);
 // ============================================================
 // HL-> DELETE LATER: Debugging tools 
-    Button toggleGrid("one_Back", 33, 37, 50, 700, 1);
-    Button toggleArrows("one_Back", 33, 37, 95, 700, 1);
-    toggleGrid.setAction(fnToggleGrid);
-    toggleArrows.setAction(fnToggleArrows);
+    //Button toggleGrid("one_Back", 33, 37, 50, 700, 1);
+    //Button toggleArrows("one_Back", 33, 37, 95, 700, 1);
+    //toggleGrid.setAction(fnToggleGrid);
+    //toggleArrows.setAction(fnToggleArrows);
 // ============================================================
 
     // State 2 components

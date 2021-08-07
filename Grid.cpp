@@ -51,6 +51,7 @@ void Grid::make_bg(sf::RenderWindow& window)
 
 void Grid::make_cells()
 {
+    cells.clear();
 //make cells
     for(int i =0; i*ogCellWidth+left() < (right()); i++)
     {

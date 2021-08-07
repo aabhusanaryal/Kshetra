@@ -18,6 +18,7 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         setTexture();
         textureLoaded = 1;
     }
+
     double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
     double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
 
@@ -81,4 +82,38 @@ void vector::setTexture(){
     texture->loadFromFile("./assets/one_Arrow.png");
 }
 
+std::string vector::roundNumber(double a){
+    std::string b= std::to_string(a);
+    char c[10];
+    int i=0;
+    while(b[i]!='.'){
+        c[i]=b[i];
+        i++;
+    }
+    c[i]=b[i];
+    i++;
+    c[i]=b[i];
+    i++;
+    c[i]=b[i];
+    c[i+1]='\0';
+    return std::string(c);
+}
 
+void vector::hovered(){
+    double angle;
+    sprite.setColor(sf::Color(0,0,0));
+    
+    vector::magnValue->setString(roundNumber(this->magnitude));
+    if(this->angle==90)
+        angle=270;
+    else if(this->angle==0)
+        angle=0;
+    else    
+        angle=-this->angle;
+    vector::angleValue->setString(roundNumber(angle)+" deg");
+    vector::posValue->setString(("("+std::to_string(int(this->posX))+","+std::to_string(int(this->posY))+")"));
+}
+
+void vector::unhovered(){
+    sprite.setColor(arrowColor);
+}
