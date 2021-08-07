@@ -5,7 +5,7 @@ if(event.type==sf::Event::MouseButtonPressed){ // <-----------
         // std::cout<<"mouse button pressed"<<event.mouseButton.x;
 //           ================= FOR SLIDERS =================
         for(int i=0; i<Slider::list.size(); i++){
-            if((state == Slider::list[i]->state || Slider::list[i]->state == magicNumber || (Slider::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && Slider::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+            if((std::find(Slider::list[i]->state.begin(), Slider::list[i]->state.end(), state) != Slider::list[i]->state.end()) && Slider::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
                 // HL-> Add method to be called when a slider is pressed here
                 Slider::list[i]->clicked();
             }
@@ -54,7 +54,7 @@ if(event.type==sf::Event::MouseButtonReleased){ // <-----------
 }
 
 for(int i=0; i<Slider::list.size(); i++){
-    if((state == Slider::list[i]->state || Slider::list[i]->state == magicNumber || ((Slider::list[0]->state==oneAndTwo && (state == 1 || state == 2)))) && Slider::list[i]->sliding){
+    if((std::find(Slider::list[i]->state.begin(), Slider::list[i]->state.end(), state) != Slider::list[i]->state.end()) && Slider::list[i]->sliding){
         Slider::list[i]->slide(mouseX);
     }
 }

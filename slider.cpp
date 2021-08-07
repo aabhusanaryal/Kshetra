@@ -4,7 +4,7 @@
 
 std::vector<Slider*> Slider::list;
 
-Slider::Slider(int posX, int posY, int state){
+Slider::Slider(int posX, int posY, std::vector<int> state){
     this->posX = posX;
     this->posY = posY;
     this->state = state;

@@ -192,7 +192,7 @@ int main(){
 
     // State 1 components:
     Button btn_Plot("one_Plot", 183, 47, 175, 495, {1});
-    Slider slider1(698, 803, ONE_AND_TWO);
+    Slider slider1(698, 803, {1,2});
     Textfield fx("Fx",201, 54, 165, 345, 1);
     Textfield fy("Fy",201, 54, 165, 418, 1);
     canvas canvas1(window.width-50, window.height+40, forX, forY, ONE_AND_TWO);

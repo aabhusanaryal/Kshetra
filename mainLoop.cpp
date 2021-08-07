@@ -31,7 +31,7 @@ void Window::mainLoop(){
         // clear(sf::Color(0, 0, 0));
 
         // Drawing Canvas and arrows and all handling zomming in
-        if(Slider::list[0]->sliding && (state == Slider::list[0]->state || (Slider::list[0]->state==420 && (state == 1 || state == 2)))){
+        if(Slider::list[0]->sliding && (std::find(Slider::list[0]->state.begin(), Slider::list[0]->state.end(), state) != Slider::list[0]->state.end())){
             canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
         }
         if(state == canvas::list[0]->state || (canvas::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
@@ -61,7 +61,7 @@ void Window::mainLoop(){
         }
 
         for(int i=0; i<Slider::list.size(); i++){
-            if((state == Slider::list[i]->state || Slider::list[i]->state == magicNumber) || (Slider::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
+            if(std::find(Slider::list[i]->state.begin(), Slider::list[i]->state.end(), state) != Slider::list[i]->state.end()){
                 draw(Slider::list[i]);
             }
         }

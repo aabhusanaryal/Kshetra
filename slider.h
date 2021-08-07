@@ -5,6 +5,7 @@
 
 class Slider{
 public:
+    std::vector<int> state;
     static std::vector<Slider*> list; // Contains the pointer to all the slider objects
     std::string textureRectPath = "./assets/sliderRect";
     std::string textureCirclePath = "./assets/sliderCircle";
@@ -19,9 +20,8 @@ public:
     int radius = 27/2;
     int progress=0;
     bool sliding=0;
-    int state;
     // Methods
-    Slider(int posX, int posY, int state);
+    Slider(int posX, int posY, std::vector<int> state);
     void calculateProgress();
     void clicked();
     void unclicked();
