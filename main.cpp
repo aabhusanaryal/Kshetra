@@ -31,8 +31,8 @@ float coeffXj=1, coeffYj=0, constantj=0;
 // The windowWidth and windowHeight is 1250 and 850 for a FHD monitor,
 // and scales likewise for other screen resolutions preserving the 
 // aspect ratio
-int windowWidth = (1250/1920.f) * sf::VideoMode::getDesktopMode().width;
-int windowHeight = (850/1250.f) * windowWidth;
+int windowWidth = 1250;
+int windowHeight = 850;
 int something = 1;
 Text* vector::magnValue;
 Text* vector::angleValue;
