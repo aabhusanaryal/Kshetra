@@ -27,7 +27,7 @@
 
 std::vector<Button*> Button::list;
 
-Button::Button(std::string path,int width,int height,int posX, int posY, int state){ // Constructor
+Button::Button(std::string path,int width,int height,int posX, int posY, std::vector<int> state){ // Constructor
     // Setting up member datas
     this->path = path;
     this->width = width;

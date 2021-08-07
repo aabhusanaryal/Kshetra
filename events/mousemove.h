@@ -8,11 +8,11 @@ if(event.type==sf::Event::MouseMoved){ // If mouse is moved
 //           ================= FOR BUTTONS' HOVER ANIMATION =================
 for(int i=0; i<Button::list.size(); i++){
     // On hover
-    if(((state == Button::list[i]->state || Button::list[i]->state == magicNumber || (Button::list[i]->state==oneAndTwo && (state == 1 || state == 2))) || (state == Button::list[i]->state || Button::list[i]->state == magicNumber) == magicNumber)&& Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
+    if(std::find(Button::list[i]->state.begin(), Button::list[i]->state.end(), state) != Button::list[i]->state.end() && Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
         // If mouse is over btn1
         Button::list[i]->hovered();
     // On not hovering
-    if((state == Button::list[i]->state || Button::list[i]->state == magicNumber || (Button::list[i]->state==oneAndTwo && (state == 1 || state == 2))) && !Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
+    if(std::find(Button::list[i]->state.begin(), Button::list[i]->state.end(), state) != Button::list[i]->state.end() && !Button::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
         Button::list[i]->unhovered();
 }
 

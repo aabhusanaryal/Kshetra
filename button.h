@@ -7,7 +7,7 @@ typedef void (*pointerFn)();
 
 class Button{
 public:
-    int state;
+    std::vector<int> state;
     bool clicked = false;
     static std::vector<Button*> list;
     std::string path; // Where the texture image is located
@@ -19,7 +19,7 @@ public:
     bool hoverTex = 0; // Stores if the currently active texture is textureHover
     pointerFn action;
 
-    Button(std::string path,int width,int height,int posX, int posY, int state);
+    Button(std::string path,int width,int height,int posX, int posY, std::vector<int> state);
 
     sf::RectangleShape getElement(); // Returns sf::RectangleShape object
     void setPosition(int x, int y); // Sets the position of button on screen

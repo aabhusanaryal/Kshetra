@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "canvas.hpp"
 #include "text.h"
+#include <algorithm>
 
 void Window::mainLoop(){
 
@@ -55,7 +56,7 @@ void Window::mainLoop(){
 // Drawing other components such as buttons and sliders
 // Only draw the component if it belongs to the current state
         for(int i=0; i<Button::list.size(); i++){
-            if((state == Button::list[i]->state || Button::list[i]->state == magicNumber) || (Button::list[0]->state==oneAndTwo && (state == 1 || state == 2)))
+            if(std::find(Button::list[i]->state.begin(), Button::list[i]->state.end(), state) != Button::list[i]->state.end())
                 draw(Button::list[i]);
         }
 

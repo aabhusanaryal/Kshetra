@@ -28,9 +28,7 @@ int Window::functionIndex = 0;
 
 float coeffXi=0, coeffYi=-1, constanti= 0;
 float coeffXj=1, coeffYj=0, constantj=0;
-// The windowWidth and windowHeight is 1250 and 850 for a FHD monitor,
-// and scales likewise for other screen resolutions preserving the 
-// aspect ratio
+
 int windowWidth = 1250;
 int windowHeight = 850;
 int something = 1;
@@ -186,14 +184,14 @@ int main(){
     window.stdFunctions = {fnPair1, fnPair2, fnPair3, fnPair4};
 
 // Initialising Button and Slider components
-    Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, 0);
-    Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, 0);
-    Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, ALL_STATES);
-    Button btn_Back("one_Back", 33, 37, 22, 777, ALL_STATES);
+    Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
+    Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, {0});
+    Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
+    Button btn_Back("one_Back", 33, 37, 22, 777, {1, 2});
     
 
     // State 1 components:
-    Button btn_Plot("one_Plot", 183, 47, 175, 495, 1);
+    Button btn_Plot("one_Plot", 183, 47, 175, 495, {1});
     Slider slider1(698, 803, ONE_AND_TWO);
     Textfield fx("Fx",201, 54, 165, 345, 1);
     Textfield fy("Fy",201, 54, 165, 418, 1);
@@ -222,8 +220,8 @@ int main(){
 // ============================================================
 
     // State 2 components
-    Button btnPrevious("two_Arrow_Left", 36, 80, 44, 385, 2);
-    Button btnNext("two_Arrow_Right", 36, 80, window.width-80, 385, 2);
+    Button btnPrevious("two_Arrow_Left", 36, 80, 44, 385, {2});
+    Button btnNext("two_Arrow_Right", 36, 80, window.width-80, 385, {2});
     // Assigning functions to be called on button click
     btn_Exit.setAction(exitProgram);
     btn_Standard_Functions.setAction(changeStateTo2);
