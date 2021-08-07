@@ -37,7 +37,7 @@ if(event.type==sf::Event::MouseButtonPressed){ // <-----------
 //           ================= FOR BUTTON RELEASE =================           
 if(event.type==sf::Event::MouseButtonReleased){ // <-----------
 // FOR BUTTONS
-    //std::cout<<"("<<mouseX<<","<<mouseY<<")\n";
+    std::cout<<"("<<mouseX<<","<<mouseY<<")\n";
     for(int i=0; i<Button::list.size(); i++){
     // Checking if the button is being clicked and is in correct state
         if((state == Button::list[i]->state || Button::list[i]->state == magicNumber || ((Button::list[0]->state==oneAndTwo && (state == 1 || state == 2)))) && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){

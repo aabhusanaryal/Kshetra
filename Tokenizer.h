@@ -8,7 +8,9 @@ enum TokenType {
 	WHITESPACE,
 	OPERATOR,
 	NUM_LITERAL,
-	UNKNOWN		
+	UNKNOWN,
+	FUNCTION,
+	CONSTANT
 };
 
 static const char *tk[] =
@@ -16,7 +18,9 @@ static const char *tk[] =
 	"WHITESPACE",
 	"OPERATOR",
 	"NUM_LITERAL",
-	"UNKNOWN"
+	"UNKNOWN",
+	"FUNCTION",
+	"CONSTANT"
 };
 
 
@@ -35,4 +39,3 @@ public:
 	std::vector<Token> parse(const std::string& inProgram);
 	void endToken(Token &token, std::vector<Token>& tokens);
 };
-

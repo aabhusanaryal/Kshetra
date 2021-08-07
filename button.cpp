@@ -49,6 +49,8 @@ Button::Button(std::string path,int width,int height,int posX, int posY, int sta
     // Loading different images in texture
     textureHover.loadFromFile(std::string("./assets/"+path+"_Hovered.png"));
     textureUnhovered.loadFromFile(std::string("./assets/"+path+".png"));
+    textureHover.setSmooth(true);
+    textureUnhovered.setSmooth(true);
     // Setting the initial textureRendered to be the unhovered one
     rectangle.setTexture(&textureUnhovered);
 }

@@ -5,6 +5,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 {
 	std::vector<Token> tokens;
 	Token currentToken;
+	bool negativeInt = false;
 
 	for (char currentChar : inProgram)
 	{
@@ -20,8 +21,19 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 		case '7':
 		case '8':
 		case '9':
-			if (currentToken._Type == NUM_LITERAL)
+
+			if (negativeInt)
+			{
+				endToken(currentToken, tokens);
+				currentToken._Text.append(1, '-');
+				currentToken._Type = NUM_LITERAL;
 				currentToken._Text.append(1, currentChar);
+				negativeInt = false;
+			}
+
+			else if (currentToken._Type == NUM_LITERAL)
+				currentToken._Text.append(1, currentChar);
+
 			else 
 			{	
 				endToken(currentToken, tokens);
@@ -29,8 +41,27 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 				currentToken._Text.append(1, currentChar);
 			}
 			break;
-		case'+':
+
+		case'.':
+			if (currentToken._Type == NUM_LITERAL)
+				currentToken._Text.append(1, currentChar);
+			break;
+
 		case'-':
+			if ((currentToken._Type == OPERATOR && currentToken._Text != ")") || currentToken._Type == WHITESPACE)
+			{
+				negativeInt = true;
+			}
+			else
+			{
+				negativeInt = false;
+				endToken(currentToken, tokens);
+				currentToken._Type = OPERATOR;
+				currentToken._Text.append(1, currentChar);
+			}
+			break;
+
+		case'+':
 		case'*':
 		case'/':
 		case'^':
@@ -39,7 +70,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			endToken(currentToken, tokens);
 			currentToken._Type = OPERATOR;
 			currentToken._Text.append(1, currentChar);
-			endToken(currentToken, tokens);
+			break;
 
 		case' ':
 			currentToken._Type = WHITESPACE;
@@ -51,11 +82,44 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			if (currentToken._Type != UNKNOWN)
 			{
 				endToken(currentToken, tokens);
+				if (negativeInt)
+				{
+					currentToken._Text.append(1, '-');
+				}
 				currentToken._Type = UNKNOWN;
 				currentToken._Text.append(1, currentChar);
 				endToken(currentToken, tokens);
 			}
 			break;
+
+		 default:
+			 if (negativeInt)
+			 {
+				 endToken(currentToken,tokens);
+				 currentToken._Text.append(1, '-');
+				 if (currentToken._Type != FUNCTION)
+				 {
+					 currentToken._Type = FUNCTION;
+					 currentToken._Text.append(1, currentChar);
+				 }
+				 negativeInt = false;
+			 }
+			 else
+			 {
+				 if (currentToken._Type != FUNCTION)
+				 {
+					 endToken(currentToken, tokens);
+					 currentToken._Type = FUNCTION;
+					 currentToken._Text.append(1, currentChar);
+				 }
+				 else if (currentToken._Type == FUNCTION)
+					 currentToken._Text.append(1, currentChar);
+			 }
+
+			 if (currentToken._Text == "pi" || currentToken._Text == "-pi")
+			 {
+				 currentToken._Type = CONSTANT;
+			 }
 		}
 	}
 

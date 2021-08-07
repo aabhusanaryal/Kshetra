@@ -169,7 +169,7 @@ int main(){
 
     // State 1 components:
     Button btn_Plot("one_Plot", 183, 47, 175, 495, 1);
-    Slider slider1(693, 803, ONE_AND_TWO);
+    Slider slider1(698, 803, ONE_AND_TWO);
     Textfield fx("Fx",201, 54, 165, 345, 1);
     Textfield fy("Fy",201, 54, 165, 418, 1);
     canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
@@ -197,8 +197,8 @@ int main(){
 // ============================================================
 
     // State 2 components
-    Button btnPrevious("two_Previous", 33, 37, 100, 300, 2);
-    Button btnNext("two_Next", 33, 37, 150, 300, 2);
+    Button btnPrevious("two_Arrow_Left", 36, 80, 44, 385, 2);
+    Button btnNext("two_Arrow_Right", 36, 80, window.width-80, 385, 2);
     // Assigning functions to be called on button click
     btn_Exit.setAction(exitProgram);
     btn_Standard_Functions.setAction(changeStateTo2);
