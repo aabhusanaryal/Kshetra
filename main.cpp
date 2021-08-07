@@ -23,7 +23,7 @@ Parser *parseri, *parserj;
 
 std::vector<Text*> Text::list;
 std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
-int Window::functionIndex = 0;
+int Window::functionIndex = 0; 
 
 
 float coeffXi=0, coeffYi=-1, constanti=0;
