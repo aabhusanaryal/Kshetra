@@ -12,6 +12,9 @@
 #define ALL_STATES 69
 #define ONE_AND_TWO 420
 
+
+Parser *parseri, *parserj;
+
 // ============ States ============
 // 0. Main Menu                   ||
 // 1. Custom Functions           ||
@@ -124,28 +127,29 @@ void fnToggleArrows(){
 }
 
 double fnParserX(double x,double y){
-    return coeffXi*x + coeffYi*y + constanti;
+    return parseri->evaluateRPN(x,y);
 }
 double fnParserY(double x,double y){
-    return coeffXj*x + coeffYj*y + constantj;
+    return parserj->evaluateRPN(x,y);
 }
 
 void changeFunction(){
 // Parser stuff
-    Parser parseri, parserj;
+    delete parseri;
+    delete parserj;
+
+    parseri = new Parser();
+    parserj = new Parser();
+
     std::string strExpressioni, strExpressionj;
     strExpressioni = Textfield::list[0]->text;
     strExpressionj = Textfield::list[1]->text;
-    parseri.tokenify(strExpressioni);
-    parserj.tokenify(strExpressionj);
 
-    coeffXi = parseri.CoeffX();
-    coeffYi = parseri.CoeffY();
-    constanti = parseri.Constant();
+    parseri->tokenify(strExpressioni);
+    parserj->tokenify(strExpressionj);
 
-    coeffXj = parserj.CoeffX();
-    coeffYj = parserj.CoeffY();
-    constantj = parserj.Constant();
+    parseri->RPN();
+    parserj->RPN();
     canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
 }
 
@@ -172,7 +176,7 @@ int main(){
     Slider slider1(698, 803, ONE_AND_TWO);
     Textfield fx("Fx",201, 54, 165, 345, 1);
     Textfield fy("Fy",201, 54, 165, 418, 1);
-    canvas canvas1(window.width-50, window.height+40, fnParserX, fnParserY, ONE_AND_TWO);
+    canvas canvas1(window.width-50, window.height+40, forX, forY, ONE_AND_TWO);
 
     Text* magnitude=new Text("Magnitude:",18,131,662,1);
     Text* angle=new Text("Angle:",18,131,689,1);

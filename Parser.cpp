@@ -230,12 +230,12 @@ double Parser::evaluateRPN(double x=0, double y=0)
 			return -(x);
 		else if (tempout[0]._Text == "-y" && y != 0)
 			return(-y);
-		else if (tempout[0]._Text == "x" || x == 0)
+		else if (tempout[0]._Text == "x")
 			return (x);
-		else
+		else if (tempout[0]._Text == "y")
 			return (y);
 	}
-		return Numberify(tempout[0]);
+	return Numberify(tempout[0]);
 }
 
 Token Parser::evaluate(Token operand1, Token operand2, Token& operation)

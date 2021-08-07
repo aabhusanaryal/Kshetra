@@ -1,6 +1,7 @@
 #pragma once
 #include "Tokenizer.h"
-#include <stack>
+#include <math.h>
+#include <string.h>
 
 class Parser
 {
