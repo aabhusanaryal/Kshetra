@@ -7,7 +7,7 @@
 #include "vector.hpp"
 #include "canvas.hpp"
 #include "Parser.h"
-
+#include <math.h>
 
 #define ALL_STATES 69
 #define ONE_AND_TWO 420
@@ -28,8 +28,11 @@ int Window::functionIndex = 0;
 
 float coeffXi=0, coeffYi=-1, constanti=0;
 float coeffXj=1, coeffYj=0, constantj=0;
-int windowWidth = 1250;
-int windowHeight = 850;
+// The windowWidth and windowHeight is 1250 and 850 for a FHD monitor,
+// and scales likewise for other screen resolutions preserving the 
+// aspect ratio
+int windowWidth = (1250/1920.f) * sf::VideoMode::getDesktopMode().width;
+int windowHeight = (850/1250.f) * windowWidth;
 int something = 1;
 Text* vector::magnValue;
 Text* vector::angleValue;
@@ -48,10 +51,30 @@ double std1Y(double x,double y){
 }
 
 double std2X(double x,double y){
-    return x;
+    float r = sqrt(pow(x,2) + pow(y,2));
+    float phi;
+    if(x>=0 && y>=0) //First quad
+        phi = atan(y/x);
+    else if(x<0 && y>=0) //Second quad
+        phi = 3.1415+atan(y/x);
+    else if(x<0 && y<0) //Third quad
+        phi = 3.1415 + atan(y/x);
+    else if(x>=0 && y<0) //Fourth quad
+        phi = atan(y/x);
+    return (1/r)*cos(phi);
 }
 double std2Y(double x,double y){
-    return y;
+    float r = sqrt(pow(x,2) + pow(y,2));
+    float phi;
+    if(x>=0 && y>=0) //First quad
+        phi = atan(y/x);
+    else if(x<0 && y>=0) //Second quad
+        phi = 3.1415+atan(y/x);
+    else if(x<0 && y<0) //Third quad
+        phi = 3.1415 + atan(y/x);
+    else if(x>=0 && y<0) //Fourth quad
+        phi = atan(y/x);
+    return (1/r)*sin(phi);
 }
 
 double std3X(double x,double y){
@@ -127,7 +150,7 @@ void fnToggleArrows(){
 }
 
 double fnParserX(double x,double y){
-    return parseri->evaluateRPN(x,y); // Tese comment
+    return parseri->evaluateRPN(x,y);
 }
 double fnParserY(double x,double y){
     return parserj->evaluateRPN(x,y);
@@ -156,7 +179,6 @@ void changeFunction(){
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-
     std::vector<doublePointerFn> fnPair1 = {std1X, std1Y};
     std::vector<doublePointerFn> fnPair2 = {std2X, std2Y};
     std::vector<doublePointerFn> fnPair3 = {std3X, std3Y};
