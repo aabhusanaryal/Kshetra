@@ -195,7 +195,7 @@ int main(){
     Slider slider1(698, 803, {1,2});
     Textfield fx("Fx",201, 54, 165, 345, {1});
     Textfield fy("Fy",201, 54, 165, 418, {1});
-    canvas canvas1(window.width-50, window.height+40, forX, forY, ONE_AND_TWO);
+    canvas canvas1(window.width-50, window.height+40, forX, forY, {1, 2});
 
     Text* magnitude=new Text("Magnitude:",18,131,662,{1});
     Text* angle=new Text("Angle:",18,131,689,{1});

@@ -3,7 +3,7 @@
 
 std::vector<canvas*> canvas::list;
 
-canvas::canvas(int windowWidth,int windowHeight,doublePointerFn expressionX, doublePointerFn expressionY, int state){
+canvas::canvas(int windowWidth,int windowHeight,doublePointerFn expressionX, doublePointerFn expressionY, std::vector<int> state){
     this->fnX = expressionX;
     this->fnY = expressionY;
     list.push_back(this);

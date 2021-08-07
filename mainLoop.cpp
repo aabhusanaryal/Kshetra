@@ -34,7 +34,7 @@ void Window::mainLoop(){
         if(Slider::list[0]->sliding && (std::find(Slider::list[0]->state.begin(), Slider::list[0]->state.end(), state) != Slider::list[0]->state.end())){
             canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
         }
-        if(state == canvas::list[0]->state || (canvas::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
+        if(std::find(canvas::list[0]->state.begin(), canvas::list[0]->state.end(), state) != canvas::list[0]->state.end()){
             if(showGrid)
                 canvas::list[0]->grid.display(*(this));
             if(showArrows){

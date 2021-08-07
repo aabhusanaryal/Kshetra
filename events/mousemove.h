@@ -31,7 +31,7 @@ for(int i=0; i<Textfield::list.size(); i++){
 }
 
 for(int i=0;i<canvas::list[0]->arrows.size();i++){
-        if((canvas::list[0]->arrows[i]->sprite.getGlobalBounds().contains(mouseX,mouseY)&& mouseX>518 && mouseX<1124 && mouseY>135 && mouseY<737) && (state==1 || state==2)){
+        if((canvas::list[0]->arrows[i]->sprite.getGlobalBounds().contains(mouseX,mouseY)&& mouseX>518 && mouseX<1124 && mouseY>135 && mouseY<737) && std::find(canvas::list[0]->state.begin(), canvas::list[0]->state.end(), state) != canvas::list[0]->state.end()){
             canvas::list[0]->arrows[i]->hovered();
         }
         else   
