@@ -13,8 +13,8 @@ public:
     Text* content;
     int contentPosX;
     int contentPosY;
-    bool isFocused;
-    bool isHovered;
+    bool isFocused = 0;
+    bool isHovered = 0;
     bool hoverTex = 0;
     bool focusTex = 0;
     static std::vector<Textfield*> list;
