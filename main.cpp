@@ -23,10 +23,10 @@ Parser *parseri, *parserj;
 
 std::vector<Text*> Text::list;
 std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
-int Window::functionIndex = 0; 
+int Window::functionIndex = 0;  
 
 
-float coeffXi=0, coeffYi=-1, constanti=0;
+float coeffXi=0, coeffYi=-1, constanti= 0;
 float coeffXj=1, coeffYj=0, constantj=0;
 // The windowWidth and windowHeight is 1250 and 850 for a FHD monitor,
 // and scales likewise for other screen resolutions preserving the 
