@@ -127,7 +127,7 @@ void fnToggleArrows(){
 }
 
 double fnParserX(double x,double y){
-    return parseri->evaluateRPN(x,y);
+    return parseri->evaluateRPN(x,y); // Tese comment
 }
 double fnParserY(double x,double y){
     return parserj->evaluateRPN(x,y);
@@ -156,7 +156,6 @@ void changeFunction(){
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-
 
     std::vector<doublePointerFn> fnPair1 = {std1X, std1Y};
     std::vector<doublePointerFn> fnPair2 = {std2X, std2Y};
