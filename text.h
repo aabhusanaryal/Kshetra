@@ -4,13 +4,14 @@
 class Text : public sf::Text{
 public:
     static std::vector<Text*> list;
+    std::vector<int> state;
     std::string content;
     sf::Text text;
     sf::Font font;
     int size;
-    int posX, posY, state;
+    int posX, posY;
 
-    Text(std::string content, int size, int posX, int posY, int state){
+    Text(std::string content, int size, int posX, int posY, std::vector<int> state){
         this->content = content;
         this->size = size;
         this->posX = posX;
@@ -25,7 +26,7 @@ public:
         text.setPosition(posX, posY);
         text.setFillColor(sf::Color::Black);
     }
-    Text(std::string content, int size, int posX, int posY, int param,int state){
+    Text(std::string content, int size, int posX, int posY, std::string type, std::vector<int> state){
         this->content = content;
         this->size = size;
         this->posX = posX;
@@ -33,7 +34,7 @@ public:
         this->state = state;
         this->list.push_back(this);
 
-        font.loadFromFile("./assets/Fonts/Jaldi-Bold.ttf");
+        font.loadFromFile(std::string("./assets/Fonts/"+type+".ttf"));
         text.setFont(font);
         text.setString(content);
         text.setCharacterSize(size);

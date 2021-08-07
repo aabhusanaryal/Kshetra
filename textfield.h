@@ -6,7 +6,8 @@
 
 class Textfield{
 public:
-    int state;
+    static std::vector<Textfield*> list;
+    std::vector<int> state;
     std::string text = "";
     std::string label;
     Text* name;
@@ -17,13 +18,12 @@ public:
     bool isHovered = 0;
     bool hoverTex = 0;
     bool focusTex = 0;
-    static std::vector<Textfield*> list;
     int height, width, posX, posY;
     sf::Texture textureUnhovered, textureHover, textureFocused;
     sf::RectangleShape rectangle;
     sf::IntRect rect;
 
-    Textfield(std::string label, int width,int height,int posX, int posY, int state);
+    Textfield(std::string label, int width,int height,int posX, int posY, std::vector<int> state);
     void hovered();
     void unhovered();
     void focused();

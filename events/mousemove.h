@@ -18,11 +18,11 @@ for(int i=0; i<Button::list.size(); i++){
 
 for(int i=0; i<Textfield::list.size(); i++){
     // On hover
-    if(((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[i]->state==oneAndTwo && (state == 1 || state == 2))) || (state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber) == magicNumber)&& Textfield::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
+    if(std::find(Textfield::list[i]->state.begin(), Textfield::list[i]->state.end(), state) != Textfield::list[i]->state.end() && Textfield::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y))
         // If mouse is over btn1
         Textfield::list[i]->hovered();
     // On not hovering
-    if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[i]->state==oneAndTwo && (state == 1 || state == 2))) && !Textfield::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)){ // If mouse is over btn1
+    if(std::find(Textfield::list[i]->state.begin(), Textfield::list[i]->state.end(), state) != Textfield::list[i]->state.end() && !Textfield::list[i]->rect.contains(event.mouseMove.x, event.mouseMove.y)){ // If mouse is over btn1
         if(!Textfield::list[i]->isFocused){ // Dont change to unhovered state if the text field is in focus
             Textfield::list[i]->unhovered();
         }

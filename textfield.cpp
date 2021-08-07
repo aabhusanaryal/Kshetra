@@ -2,14 +2,14 @@
 
 std::vector<Textfield*> Textfield::list;
 
-Textfield::Textfield(std::string label, int width,int height,int posX, int posY, int state){
+Textfield::Textfield(std::string label, int width,int height,int posX, int posY, std::vector<int> state){
     int labelSize = 22; //in pixels not points
     int contentSize = 20; //in pixels not points
     int paddingBottom = 15;
     int paddingRight = 28;
     contentPosX = posX+width-paddingRight;
     contentPosY = (posY+height-contentSize-paddingBottom);
-    this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), 1,state);
+    this->name = new Text(label, labelSize, posX-35, (posY+height/2-labelSize/2-5), "Jaldi-Bold",state);
     this->content = new Text(text, contentSize, contentPosX, contentPosY, state);
     this->width = width;
     this->height = height;

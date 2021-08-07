@@ -193,19 +193,19 @@ int main(){
     // State 1 components:
     Button btn_Plot("one_Plot", 183, 47, 175, 495, {1});
     Slider slider1(698, 803, {1,2});
-    Textfield fx("Fx",201, 54, 165, 345, 1);
-    Textfield fy("Fy",201, 54, 165, 418, 1);
+    Textfield fx("Fx",201, 54, 165, 345, {1});
+    Textfield fy("Fy",201, 54, 165, 418, {1});
     canvas canvas1(window.width-50, window.height+40, forX, forY, ONE_AND_TWO);
 
-    Text* magnitude=new Text("Magnitude:",18,131,662,1);
-    Text* angle=new Text("Angle:",18,131,689,1);
-    Text* position=new Text("Position:",18,131,716,1);
-    Text* function=new Text("Enter Function",36,131,290,1,1);
-    Text* details=new Text("Details:",36,131,620,1,1);
+    Text* magnitude=new Text("Magnitude:",18,131,662,{1});
+    Text* angle=new Text("Angle:",18,131,689,{1});
+    Text* position=new Text("Position:",18,131,716,{1});
+    Text* function=new Text("Enter Function",36,131,290,"Jaldi-Bold",{1});
+    Text* details=new Text("Details:",36,131,620,"Jaldi-Bold",{1});
     
-    vector::magnValue=new Text("NA",18,225,662,1);
-    vector::angleValue=new Text("NA",18,185,689,1);
-    vector::posValue=new Text("NA",18,205,716,1);
+    vector::magnValue=new Text("NA",18,225,662,{1});
+    vector::angleValue=new Text("NA",18,185,689,{1});
+    vector::posValue=new Text("NA",18,205,716,{1});
 
 
 

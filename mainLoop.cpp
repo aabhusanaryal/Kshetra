@@ -65,15 +65,16 @@ void Window::mainLoop(){
                 draw(Slider::list[i]);
             }
         }
+        
 
         for(int i=0; i<Textfield::list.size(); i++){
-            if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber) || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))){
+            if(std::find(Textfield::list[i]->state.begin(), Textfield::list[i]->state.end(), state) != Textfield::list[i]->state.end()){
                 draw(Textfield::list[i]);
             }
         }
 
         for(int i=0; i<Text::list.size(); i++){
-            if((state == Text::list[i]->state || Text::list[i]->state == magicNumber) || (Text::list[0]->state==oneAndTwo && (state == 1 || state == 2)) || state == 2){
+            if(std::find(Text::list[i]->state.begin(), Text::list[i]->state.end(), state) != Text::list[i]->state.end()){
                 draw(Text::list[i]->text);
             }
         }

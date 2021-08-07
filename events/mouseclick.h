@@ -21,13 +21,13 @@ if(event.type==sf::Event::MouseButtonPressed){ // <-----------
 
 //           ================= FOR TEXTFIELD' CLICK HANDLING =================
     for(int i=0; i<Textfield::list.size(); i++){ // If clicked on textfield
-        if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+        if(std::find(Textfield::list[i]->state.begin(), Textfield::list[i]->state.end(), state) != Textfield::list[i]->state.end() && Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
             Textfield::list[i]->focused();
         }
     }
 
     for(int i=0; i<Textfield::list.size(); i++){ // If clicked outside textfield
-        if((state == Textfield::list[i]->state || Textfield::list[i]->state == magicNumber || (Textfield::list[0]->state==oneAndTwo && (state == 1 || state == 2))) && !Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
+        if(std::find(Textfield::list[i]->state.begin(), Textfield::list[i]->state.end(), state) != Textfield::list[i]->state.end() && !Textfield::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
             if(Textfield::list[i]->isFocused) // If the text field is focused, change to unfocused
                 Textfield::list[i]->unfocused();
         }
