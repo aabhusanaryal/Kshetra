@@ -1,7 +1,7 @@
 #pragma once
 #include "Tokenizer.h"
-#include <stack>
-
+#include <string.h>
+#include <math.h>
 class Parser
 {
 private:
