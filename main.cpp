@@ -25,6 +25,8 @@ Parser *parseri, *parserj;
 std::vector<Text*> Text::list; 
 
 std::vector<StdFn> StdFn::fnList;
+Text* StdFn::currentEqn = new Text("NA",40,150,350,"Jaldi-Bold",{2});
+Text* StdFn::currentDescription = new Text("NA",22,150,410,"Roboto-Medium",{2});
 int StdFn::fnIndex=0;
 
 float coeffXi=0, coeffYi=-1, constanti= 0;
@@ -123,6 +125,8 @@ void previousFn(){
         StdFn::fnIndex -= 1;
     }
     int i = StdFn::fnIndex;
+    StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
+    StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
     canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
@@ -136,6 +140,8 @@ void nextFn(){
         StdFn::fnIndex += 1;
     }
     int i = StdFn::fnIndex;
+    StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
+    StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
     canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
@@ -180,10 +186,13 @@ void changeFunction(){
 int main(){
 
 //Initialising Standard Functions
-    StdFn std1(std1X, std1Y,"(-y,x)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
-    StdFn std2(std2X, std2Y,"(1/r*cos(phi),1/r*sin(phi))","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
-    StdFn std3(std3X, std3Y,"(-x,-y)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
-    StdFn std4(std4X, std4Y,"(x,x)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
+    StdFn std1(std1X, std1Y,"F = (-y, x)","Models circular motion such\nas that of a air molecules\nin a cyclone.");
+    StdFn std2(std2X, std2Y,"F = (1/r*cos(phi), 1/r*sin(phi))","Models a positive charge\nat the origin");
+    StdFn std3(std3X, std3Y,"F = (-x, -y)","Models a sink.");
+    StdFn std4(std4X, std4Y,"F = (x, x)","Models a idk wtf\nthis is.");
+
+    StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
+    StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
 
 // Initialising Button and Slider components
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
@@ -198,6 +207,9 @@ int main(){
     Textfield fx("Fx",201, 54, 165, 345, {1});
     Textfield fy("Fy",201, 54, 165, 418, {1});
     canvas canvas1(window.width-50, window.height+40, std1X, std1Y, {1, 2});
+
+    // Text fnEquation(StdFn::currentEqn,40,150,350,"Jaldi-Bold",{2});
+    // Text fnDetails(StdFn::currentDescription,22,150,410,{2});
 
     Text* magnitude=new Text("Magnitude:",18,131,662,{1});
     Text* angle=new Text("Angle:",18,131,689,{1});

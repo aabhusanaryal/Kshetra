@@ -6,6 +6,8 @@ class StdFn{
     public:
         static std::vector<StdFn> fnList;
         static int fnIndex;
+        static Text *currentEqn;
+        static Text *currentDescription;
         doublePointerFn fnX,fnY;
         std::string eqn,description;
 
@@ -16,6 +18,4 @@ class StdFn{
             this->description=desc;
             fnList.push_back(*(this));
         }
-
-
 };
