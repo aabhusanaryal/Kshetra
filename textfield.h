@@ -16,10 +16,9 @@ public:
     int contentPosY;
     bool isFocused = 0;
     bool isHovered = 0;
-    bool hoverTex = 0;
-    bool focusTex = 0;
+    bool isError = 0;
     int height, width, posX, posY;
-    sf::Texture textureUnhovered, textureHover, textureFocused;
+    sf::Texture textureUnhovered, textureHover, textureFocused, textureError;
     sf::RectangleShape rectangle;
     sf::IntRect rect;
 
@@ -28,5 +27,6 @@ public:
     void unhovered();
     void focused();
     void unfocused(); // IK defocused huna parne ho but let that sink in
+    void error();
     void setContent(bool isBackspace);
 };

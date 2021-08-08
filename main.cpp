@@ -221,8 +221,6 @@ int main(){
     vector::angleValue=new Text("NA",18,185,689,{1});
     vector::posValue=new Text("NA",18,205,716,{1});
 
-
-
     // Text text1("Hello World", 20, 100, 100, ALL_STATES);
     // Text text2("Aloha", 50, 100, 200, ALL_STATES);
 // ============================================================

@@ -32,19 +32,20 @@ Textfield::Textfield(std::string label, int width,int height,int posX, int posY,
     textureHover.loadFromFile(std::string("./assets/textbox_Hovered.png"));
     textureUnhovered.loadFromFile(std::string("./assets/textbox.png"));
     textureFocused.loadFromFile(std::string("./assets/textbox_Focused.png"));
+    textureError.loadFromFile(std::string("./assets/textbox_Error.png"));
     // Setting the initial textureRendered to be the unhovered one
     rectangle.setTexture(&textureUnhovered);
 }
 
 void Textfield::hovered(){ // Sets the right texture when the textbox is hovered
-    if(!isHovered && !isFocused){ // Setting texture to textureHover iff it's not already textureHover
+    if(!isHovered && !isFocused && !isError){ // Setting texture to textureHover iff it's not already textureHover
         rectangle.setTexture(&textureHover);
         isHovered = 1;
     }
 }
 
 void Textfield::unhovered(){ // Sets the right texture when the textbox is not hovered
-    if(isHovered && !isFocused){ // Setting texture to textureUnover iff it's not already textureUnhover
+    if(isHovered && !isFocused && !isError){ // Setting texture to textureUnover iff it's not already textureUnhover
         rectangle.setTexture(&textureUnhovered);
         isHovered = 0;
     }
@@ -55,13 +56,23 @@ void Textfield::focused(){ // Sets the right texture when the textbox is focused
         rectangle.setTexture(&textureFocused);
         isFocused = 1;
         isHovered = 0;
+        isError = 0;
     }
 }
 
 void Textfield::unfocused(){ // Sets the right texture when the textbox is not hovered
-    if(isFocused){ // Setting texture to textureUnover iff it's not already textureUnhover
+    if(isFocused && !isError){ // Setting texture to textureUnover iff it's not already textureUnhover and making sure that there's no error
         rectangle.setTexture(&textureUnhovered);
         isFocused = 0;
+    }
+}
+
+void Textfield::error(){ // Sets the right texture when the textbox has some error
+    if(!isError){ 
+        rectangle.setTexture(&textureError);
+        isFocused = 0;
+        isHovered = 0;
+        isError = 1;
     }
 }
 
