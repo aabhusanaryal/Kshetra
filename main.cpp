@@ -8,6 +8,7 @@
 #include "canvas.hpp"
 #include "Parser.h"
 #include <math.h>
+#include"stdFun.hpp"
 
 #define ALL_STATES 69
 #define ONE_AND_TWO 420
@@ -21,10 +22,10 @@ Parser *parseri, *parserj;
 // 2. Standard Functions        ||
 // =========================== ||
 
-std::vector<Text*> Text::list;
-std::vector<std::vector<doublePointerFn>> Window::stdFunctions;
-int Window::functionIndex = 0;  
+std::vector<Text*> Text::list; 
 
+std::vector<StdFn> StdFn::fnList;
+int StdFn::fnIndex=0;
 
 float coeffXi=0, coeffYi=-1, constanti= 0;
 float coeffXj=1, coeffYj=0, constantj=0;
@@ -115,27 +116,27 @@ void exitProgram(){
     window.close();
 };
 void previousFn(){
-    if(Window::functionIndex == 0){
-        Window::functionIndex = Window::stdFunctions.size()-1;
+    if(StdFn::fnIndex == 0){
+        StdFn::fnIndex =StdFn::fnList.size()-1;
     }
     else{
-        Window::functionIndex -= 1;
+        StdFn::fnIndex -= 1;
     }
-    int i = Window::functionIndex;
-    canvas::list[0]->reinitialiseVectors(Window::stdFunctions[i][0], Window::stdFunctions[i][1]);
+    int i = StdFn::fnIndex;
+    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 
 
 void nextFn(){
-    if(Window::functionIndex == Window::stdFunctions.size()-1){
-        Window::functionIndex = 0;
+    if(StdFn::fnIndex ==StdFn::fnList.size()-1){
+        StdFn::fnIndex = 0;
     }
     else{
-        Window::functionIndex += 1;
+        StdFn::fnIndex += 1;
     }
-    int i = Window::functionIndex;
-    canvas::list[0]->reinitialiseVectors(Window::stdFunctions[i][0], Window::stdFunctions[i][1]);
+    int i = StdFn::fnIndex;
+    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 
@@ -177,11 +178,12 @@ void changeFunction(){
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-    std::vector<doublePointerFn> fnPair1 = {std1X, std1Y};
-    std::vector<doublePointerFn> fnPair2 = {std2X, std2Y};
-    std::vector<doublePointerFn> fnPair3 = {std3X, std3Y};
-    std::vector<doublePointerFn> fnPair4 = {std4X, std4Y};
-    window.stdFunctions = {fnPair1, fnPair2, fnPair3, fnPair4};
+
+//Initialising Standard Functions
+    StdFn std1(std1X, std1Y,"(-y,x)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
+    StdFn std2(std2X, std2Y,"(1/r*cos(phi),1/r*sin(phi))","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
+    StdFn std3(std3X, std3Y,"(-x,-y)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
+    StdFn std4(std4X, std4Y,"(x,x)","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
 
 // Initialising Button and Slider components
     Button btn_Standard_Functions("main_Std_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
@@ -195,7 +197,7 @@ int main(){
     Slider slider1(698, 803, {1,2});
     Textfield fx("Fx",201, 54, 165, 345, {1});
     Textfield fy("Fy",201, 54, 165, 418, {1});
-    canvas canvas1(window.width-50, window.height+40, forX, forY, {1, 2});
+    canvas canvas1(window.width-50, window.height+40, std1X, std1Y, {1, 2});
 
     Text* magnitude=new Text("Magnitude:",18,131,662,{1});
     Text* angle=new Text("Angle:",18,131,689,{1});
