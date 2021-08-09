@@ -184,7 +184,10 @@ void changeFunction(){
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-
+// Setting app icon
+    sf::Image icon;
+    icon.loadFromFile("./assets/icon.ico");
+    window.setIcon(icon.getSize().x,icon.getSize().y, icon.getPixelsPtr());
 //Initialising Standard Functions
     StdFn std1(std1X, std1Y,"F = (-y, x)","Models circular motion such\nas that of a air molecules\nin a cyclone.");
     StdFn std2(std2X, std2Y,"F = (1/r*cos(phi), 1/r*sin(phi))","Models a positive charge\nat the origin");
