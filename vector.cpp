@@ -18,7 +18,6 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         setTexture();
         textureLoaded = 1;
     }
-
     double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
     double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
 

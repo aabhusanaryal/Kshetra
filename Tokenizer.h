@@ -31,6 +31,7 @@ public:
 	void print() const;
 	std::string returnTokenType();
 	std::string returnTokenValue();
+	bool isNegative = false;
 };
 
 class Tokenizer

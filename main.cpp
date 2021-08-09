@@ -172,18 +172,27 @@ void changeFunction(){
     std::string strExpressioni, strExpressionj;
     strExpressioni = Textfield::list[0]->text;
     strExpressionj = Textfield::list[1]->text;
-
+   
     parseri->tokenify(strExpressioni);
     parserj->tokenify(strExpressionj);
 
     parseri->RPN();
     parserj->RPN();
-    canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
+    
+    if(!parseri->syntaxError && !parserj->syntaxError)
+        canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
+    else{
+        if(parseri->syntaxError)
+            Textfield::list[0]->error();
+        if(parserj->syntaxError)
+            Textfield::list[1]->error();
+    }
 }
 
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
+try{
 // Setting app icon
     sf::Image icon;
     icon.loadFromFile("./assets/icon.ico");
@@ -247,6 +256,11 @@ int main(){
     btnNext.setAction(nextFn);
 
     window.mainLoop();
+}
+catch(...){
+	Textfield::list[0]->error();
+	Textfield::list[1]->error();
+}
 }
 
 
