@@ -1,5 +1,5 @@
 #include "vector.hpp"
-
+#include "Parser.h"
 double highestMagn;
 int vector::lowerX=0;
 int vector::lowerY=0;
@@ -18,8 +18,11 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         setTexture();
         textureLoaded = 1;
     }
-    double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
-    double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
+    double magnX=0, magnY=0;
+    if(!Parser::list[0]->numError)
+        magnX=expressionX(this->posX,this->posY); //temp to store value on i component
+    if(!Parser::list[1]->numError)
+        magnY=expressionY(this->posX,this->posY); //temp to store value at j component
 
     this->magnitude=sqrt(pow(magnX,2)+pow(magnY,2));
 

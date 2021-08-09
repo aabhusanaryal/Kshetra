@@ -160,7 +160,8 @@ std::string Parser::Associavity(Token& token)
 
 void Parser::RPN()
 {
-
+	output.clear();
+    operatorStack.clear();
 	checkSyntaxError();
 	for (Token current : tokens)
 	{

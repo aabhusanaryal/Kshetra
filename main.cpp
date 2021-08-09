@@ -13,8 +13,8 @@
 #define ALL_STATES 69
 #define ONE_AND_TWO 420
 
-
-Parser *parseri, *parserj;
+std::vector<Parser*> Parser::list;
+Parser parseri, parserj;
 
 // ============ States ============
 // 0. Main Menu                   ||
@@ -155,36 +155,36 @@ void fnToggleArrows(){
 }
 
 double fnParserX(double x,double y){
-    return parseri->evaluateRPN(x,y);
+    return parseri.evaluateRPN(x,y);
 }
 double fnParserY(double x,double y){
-    return parserj->evaluateRPN(x,y);
+    return parserj.evaluateRPN(x,y);
 }
 
 void changeFunction(){
 // Parser stuff
-    delete parseri;
-    delete parserj;
+    // delete parseri;
+    // delete parserj;
 
-    parseri = new Parser();
-    parserj = new Parser();
+    parseri = Parser();
+    parserj = Parser();
 
     std::string strExpressioni, strExpressionj;
     strExpressioni = Textfield::list[0]->text;
     strExpressionj = Textfield::list[1]->text;
    
-    parseri->tokenify(strExpressioni);
-    parserj->tokenify(strExpressionj);
+    parseri.tokenify(strExpressioni);
+    parserj.tokenify(strExpressionj);
 
-    parseri->RPN();
-    parserj->RPN();
+    parseri.RPN();
+    parserj.RPN();
     
-    if(!parseri->syntaxError && !parserj->syntaxError)
+    if(!parseri.syntaxError && !parserj.syntaxError)
         canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
     else{
-        if(parseri->syntaxError)
+        if(parseri.syntaxError)
             Textfield::list[0]->error();
-        if(parserj->syntaxError)
+        if(parserj.syntaxError)
             Textfield::list[1]->error();
     }
 }
@@ -192,7 +192,6 @@ void changeFunction(){
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
 int main(){
-try{
 // Setting app icon
     sf::Image icon;
     icon.loadFromFile("./assets/icon.ico");
@@ -256,11 +255,7 @@ try{
     btnNext.setAction(nextFn);
 
     window.mainLoop();
-}
-catch(...){
-	Textfield::list[0]->error();
-	Textfield::list[1]->error();
-}
+
 }
 
 
