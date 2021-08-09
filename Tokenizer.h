@@ -10,7 +10,7 @@ enum TokenType {
 	NUM_LITERAL,
 	UNKNOWN,
 	FUNCTION,
-	CONSTANT
+	CONSTANT,
 };
 
 static const char *tk[] =

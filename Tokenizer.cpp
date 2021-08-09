@@ -5,7 +5,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 {
 	std::vector<Token> tokens;
 	Token currentToken;
-	bool negativeInt = false;
+	bool negative = false;
 
 	for (char currentChar : inProgram)
 	{
@@ -22,13 +22,14 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 		case '8':
 		case '9':
 
-			if (negativeInt)
+			if (negative)
 			{
 				endToken(currentToken, tokens);
+
 				currentToken._Text.append(1, '-');
 				currentToken._Type = NUM_LITERAL;
 				currentToken._Text.append(1, currentChar);
-				negativeInt = false;
+				negative = false;
 			}
 
 			else if (currentToken._Type == NUM_LITERAL)
@@ -48,13 +49,13 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			break;
 
 		case'-':
-			if ((currentToken._Type == OPERATOR && currentToken._Text != ")") || currentToken._Type == WHITESPACE)
+			if (!negative && ((currentToken._Type == OPERATOR && currentToken._Text != ")")|| currentToken._Type == WHITESPACE))
 			{
-				negativeInt = true;
+				negative = true;
 			}
 			else
 			{
-				negativeInt = false;
+				negative = false;
 				endToken(currentToken, tokens);
 				currentToken._Type = OPERATOR;
 				currentToken._Text.append(1, currentChar);
@@ -82,14 +83,17 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			if (currentToken._Type != UNKNOWN)
 			{
 				endToken(currentToken, tokens);
+				if (negative)
+				{
+					currentToken._Text.append(1, '-');
+				}
 				currentToken._Type = UNKNOWN;
 				currentToken._Text.append(1, currentChar);
-				endToken(currentToken, tokens);
 			}
 			break;
 
 		 default:
-			 if (negativeInt)
+			 if (negative)
 			 {
 				 endToken(currentToken,tokens);
 				 currentToken._Text.append(1, '-');
@@ -98,7 +102,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 					 currentToken._Type = FUNCTION;
 					 currentToken._Text.append(1, currentChar);
 				 }
-				 negativeInt = false;
+				 negative = false;
 			 }
 			 else
 			 {
