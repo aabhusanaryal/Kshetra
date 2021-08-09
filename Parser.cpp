@@ -1,5 +1,5 @@
 #include "Parser.h"
-
+#include <limits>
 
 double Parser::Numberify(Token& token)
 {
@@ -331,7 +331,7 @@ double Parser::evaluateRPN(double x=0, double y=0)
 
 	if (numError)
 	{
-		return -69;
+		return std::numeric_limits<double>::quiet_NaN();
 	}
 
 		//std::cout << tempout[0]._Text << std::endl;
@@ -361,13 +361,10 @@ Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
 		if (Numberify(operand2) == 0)
 		{
 			raiseNumError();
-			temp._Text = "0";
-			return temp;
 		}
 		temp._Text = Textify(Numberify(operand1) / Numberify(operand2));
 		break;
 	case '^':
-
 		temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
 		break;
 	}

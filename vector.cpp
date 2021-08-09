@@ -1,5 +1,5 @@
 #include "vector.hpp"
-
+#include <cmath>
 double highestMagn;
 int vector::lowerX=0;
 int vector::lowerY=0;
@@ -18,8 +18,8 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         setTexture();
         textureLoaded = 1;
     }
-    double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
     double magnX=expressionX(this->posX,this->posY); //temp to store value on i component
+    double magnY=expressionY(this->posX,this->posY); //temp to store value at j component
 
     this->magnitude=sqrt(pow(magnX,2)+pow(magnY,2));
 
@@ -40,7 +40,7 @@ vector::vector(int posX,int posY,double (*expressionX)(double,double),double (*e
         if(magnX>0){this->angle=0;}
         else if(magnX<0){this->angle=-180;}
     }
-    if(magnitude!=0){
+    if(magnitude!=0 && !std::isnan(magnitude)){
         sprite.setTexture(*(texture));
         sprite.setPosition(pixelX,pixelY);
         sprite.setRotation(angle);
