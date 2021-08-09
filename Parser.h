@@ -5,9 +5,8 @@
 
 class Parser
 {
-public:
-    static std::vector<Parser*> list;
 private:
+
     std::vector<Token> tokens;
     std::vector<Token> output;
     std::vector<Token> operatorStack;
@@ -31,9 +30,6 @@ private:
     int checkSyntaxError();
 
 public:
-    Parser(){
-        list.push_back(this);
-    }
     bool syntaxError;
     bool numError;
     double evaluateRPN(double x, double y);
