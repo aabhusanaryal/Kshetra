@@ -4,3 +4,4 @@
 a.exe
 *.exe
 *.o
+/Releases
