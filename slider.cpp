@@ -1,4 +1,4 @@
-#include "./slider.h"
+#include<slider.hpp>
 #include <iostream>
 #include "SFML/Graphics.hpp"
 

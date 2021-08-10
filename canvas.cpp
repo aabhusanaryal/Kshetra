@@ -1,5 +1,5 @@
-#include "canvas.hpp"
-#include "window.h"
+#include<window.hpp>
+#include<canvas.hpp>
 
 std::vector<canvas*> canvas::list;
 

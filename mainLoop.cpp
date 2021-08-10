@@ -1,7 +1,7 @@
-#include "./window.h"
+#include<window.hpp>
+#include<canvas.hpp>
+#include<text.hpp>
 #include "SFML/Graphics.hpp"
-#include "canvas.hpp"
-#include "text.h"
 #include <algorithm>
 
 void Window::mainLoop(){

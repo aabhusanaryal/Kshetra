@@ -1,4 +1,4 @@
-#include "Grid.hpp"
+#include<grid.hpp>
 #include <iostream>
 
 Grid::Grid(int wwidth,int wheight, float scalar)

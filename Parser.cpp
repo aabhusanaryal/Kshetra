@@ -1,4 +1,4 @@
-#include "Parser.h"
+#include <parser.hpp>
 #include <limits>
 
 double Parser::Numberify(Token& token)

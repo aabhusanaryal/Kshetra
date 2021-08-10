@@ -1,14 +1,15 @@
 #include "SFML/Graphics.hpp"
-#include "button.h"
-#include "slider.h"
-#include "textfield.h"
-#include "window.h"
-#include "text.h"
-#include "vector.hpp"
-#include "canvas.hpp"
-#include "Parser.h"
+#include<button.hpp>
+#include<slider.hpp>
+#include<textfield.hpp>
+#include<window.hpp>
+#include<text.hpp>
+#include<vector.hpp>
+#include<canvas.hpp>
+#include<parser.hpp>
+#include<commonfunctions.hpp>
 #include <math.h>
-#include"stdFun.hpp"
+
 
 #define ALL_STATES 69
 #define ONE_AND_TWO 420

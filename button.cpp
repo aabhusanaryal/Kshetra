@@ -21,7 +21,7 @@
 //             }
 // ===========================================================================
 
-#include "./button.h"
+#include <button.hpp>
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
