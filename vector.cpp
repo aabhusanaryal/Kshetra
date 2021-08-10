@@ -59,7 +59,7 @@ void vector::displayArrow(sf::RenderWindow& window){
 //                 continue;
 //             }
 void vector::setHighest(std::vector<vector*>& arrows){
-    highestMagn=arrows[0]->magnitude;
+    highestMagn=0;
     for(int i=0;i<arrows.size();i++){
         if(!std::isnan(arrows[i]->magnitude)){
             if(arrows[i]->magnitude>highestMagn)
