@@ -9,7 +9,7 @@ class Button{
 private:
     std::string path; // Where the texture image is located
     int height, width, posX, posY; // Basic props of the Button
-    sf::Texture textureUnhovered, textureHoverd; 
+    sf::Texture textureUnhovered, textureHovered; 
     bool isHovered = 0; // Stores if the currently active texture is textureHover
 public:
     std::vector<int> state;
