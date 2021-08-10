@@ -78,8 +78,12 @@ int Parser::checkSyntaxError()
 				else
 				{
 					raiseSyntaxError();
-					std::cout << "Error: " << tokens[i]._Text << tokens[i + 1]._Text << std::endl;
 				}
+			}
+			if (tokens[i]._Type == UNKNOWN || tokens[i]._Type == CONSTANT || tokens[i]._Type == NUM_LITERAL)
+			{
+				if (tokens[i + 1]._Type != OPERATOR)
+					raiseSyntaxError();
 			}
 		}
 
@@ -175,9 +179,9 @@ void Parser::RPN()
 		}
 
 		//If the operator type is other than a left paranthesis
-		if (current._Type == OPERATOR && current._Text !="(")
+		if (current._Type == OPERATOR && current._Text != "(")
 		{
-			if ( current._Text !=")" && !operatorStack.empty() && (Precedence(current) < Precedence(operatorStack[0]) || Precedence(current) == Precedence(operatorStack[0]) && Associavity(current) == "Left"))
+			if (current._Text != ")" && !operatorStack.empty() && (Precedence(current) < Precedence(operatorStack[0]) || Precedence(current) == Precedence(operatorStack[0]) && Associavity(current) == "Left"))
 			{
 				MovetoOutput();
 				AddtoStack(current);
@@ -196,7 +200,7 @@ void Parser::RPN()
 		if (current._Type == OPERATOR && current._Text == ")")
 		{
 			RemovefromStack();
-			while (!operatorStack.empty() &&operatorStack[0]._Text != "(")
+			while (!operatorStack.empty() && operatorStack[0]._Text != "(")
 			{
 				MovetoOutput();
 				if (operatorStack.empty())
@@ -208,7 +212,7 @@ void Parser::RPN()
 				RemovefromStack();
 			}
 
-			if ( !operatorStack.empty() && operatorStack[0]._Type == FUNCTION)
+			if (!operatorStack.empty() && operatorStack[0]._Type == FUNCTION)
 			{
 				MovetoOutput();
 			}
@@ -236,7 +240,7 @@ void Parser::displayRPN()
 	}
 }
 
-double Parser::evaluateRPN(double x=0, double y=0)
+double Parser::evaluateRPN(double x = 0, double y = 0)
 {
 	numError = false;
 	if (syntaxError)
@@ -249,7 +253,7 @@ double Parser::evaluateRPN(double x=0, double y=0)
 	int currentIndex = 0;
 	Token operand1, operand2, operation, function;
 
-	while(tempout.size() != 1)
+	while (tempout.size() != 1)
 	{
 		if (tempout[currentIndex]._Type == OPERATOR)
 		{
@@ -269,18 +273,18 @@ double Parser::evaluateRPN(double x=0, double y=0)
 
 			if (operand2._Type == UNKNOWN)
 			{
-				if(isNegative(operand2))
+				if (isNegative(operand2))
 					operand2._Text = (operand2._Text == "-x") ? Textify(-x) : Textify(-y);
 				else
 					operand2._Text = (operand2._Text == "x") ? Textify(x) : Textify(y);
 				operand2._Type = NUM_LITERAL;
 			}
 
-			tempout.erase(tempout.begin() + currentIndex-2 ,tempout.begin()+currentIndex+1);
+			tempout.erase(tempout.begin() + currentIndex - 2, tempout.begin() + currentIndex + 1);
 			result = evaluate(operand1, operand2, operation);
-			
+
 			currentIndex -= 2;
-			tempout.insert(tempout.begin()+currentIndex, result);
+			tempout.insert(tempout.begin() + currentIndex, result);
 		}
 
 		if (tempout[currentIndex]._Type == FUNCTION)
@@ -299,7 +303,7 @@ double Parser::evaluateRPN(double x=0, double y=0)
 			}
 
 			tempout.erase(tempout.begin() + currentIndex - 1, tempout.begin() + currentIndex + 1);
-			
+
 			result = evaluate(function, operand1);
 
 			currentIndex -= 1;
@@ -318,7 +322,7 @@ double Parser::evaluateRPN(double x=0, double y=0)
 	if (tempout.size() == 1 && tempout[0]._Type == UNKNOWN)
 	{
 		double value;
-		if (tempout[0]._Text == "-x" && x !=0)
+		if (tempout[0]._Text == "-x" && x != 0)
 			return -(x);
 		else if (tempout[0]._Text == "-y" && y != 0)
 			return(-y);
@@ -363,22 +367,22 @@ Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
 		break;
 	case '^':
 		if (Numberify(operand2) != 0 && findFraction(Numberify(operand2)))
-        {
-            if (Numberify(operand1) <= 0)
-            {
-                raiseNumError();
-            }
-            else
-                temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
-        }
-        else if (Numberify(operand1) < 0)
-            temp._Text = Textify(-pow(-Numberify(operand1), Numberify(operand2)));
-        else if (Numberify(operand1) == 0 && Numberify(operand2) ==0) // 0^0
+		{
+			if (Numberify(operand1) <= 0)
+			{
+				raiseNumError();
+			}
+			else
+				temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
+		}
+		else if (Numberify(operand1) < 0)
+			temp._Text = Textify(-pow(-Numberify(operand1), Numberify(operand2)));
+		else if (Numberify(operand1) == 0 && Numberify(operand2) == 0) // 0^0
 			raiseNumError();
 		else
-            temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
+			temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
 
-        break;
+		break;
 	}
 	return temp;
 }
@@ -388,7 +392,7 @@ Token Parser::evaluate(Token function, Token operand)
 {
 	Token temp;
 	temp._Type = NUM_LITERAL;
-	
+
 	if (function._Text == "sin")
 		temp._Text = Textify(sin(Numberify(operand)));
 	if (function._Text == "-sin")
@@ -407,31 +411,31 @@ Token Parser::evaluate(Token function, Token operand)
 bool Parser::findFraction(double input)
 {
 
-        double integral = std::floor(input);
-        double frac = input - integral;
+	double integral = std::floor(input);
+	double frac = input - integral;
 
-        const long precision = 100000; // This is the accuracy.
+	const long precision = 100000; // This is the accuracy.
 
-        long gcd_ = gcd(round(frac * precision), precision);
+	long gcd_ = gcd(round(frac * precision), precision);
 
-        long denominator = precision / gcd_;
-        long numerator = round(frac * precision) / gcd_;
-        //std::cout << numerator << "/" << denominator << std::endl;
-        if ((numerator == 1 && denominator % 2 == 0) || (numerator %2 != 0 && denominator % 2==0))
-            return true;
-        return false;
+	long denominator = precision / gcd_;
+	long numerator = round(frac * precision) / gcd_;
+	//std::cout << numerator << "/" << denominator << std::endl;
+	if ((numerator == 1 && denominator % 2 == 0) || (numerator % 2 != 0 && denominator % 2 == 0))
+		return true;
+	return false;
 }
 
 
 long Parser::gcd(long a, long b)
 {
-    if (a == 0)
-        return b;
-    else if (b == 0)
-        return a;
+	if (a == 0)
+		return b;
+	else if (b == 0)
+		return a;
 
-    if (a < b)
-        return gcd(a, b % a);
-    else
-        return gcd(b, a % b);
+	if (a < b)
+		return gcd(a, b % a);
+	else
+		return gcd(b, a % b);
 }
