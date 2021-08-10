@@ -176,11 +176,8 @@ void changeFunction(){
     strExpressioni = (Textfield::list[0]->text != ""? Textfield::list[0]->text : "0");
     strExpressionj = (Textfield::list[1]->text != ""? Textfield::list[1]->text : "0");
    
-    parseri->tokenify(strExpressioni);
-    parserj->tokenify(strExpressionj);
-
-    parseri->RPN();
-    parserj->RPN();
+    parseri->parse(strExpressioni);
+    parserj->parse(strExpressionj);
     
     if(!parseri->syntaxError && !parserj->syntaxError)
         canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);

@@ -6,7 +6,7 @@
 class Parser
 {
 private:
-
+    std::string equation;
     std::vector<Token> tokens;
     std::vector<Token> output;
     std::vector<Token> operatorStack;
@@ -28,12 +28,20 @@ private:
     void raiseNumError();
     bool isNegative(Token& token);
     int checkSyntaxError();
+    bool findFraction(double input);
+    long gcd(long a, long b);
+    void tokenify(std::string& equation);
+    void RPN();
 
 public:
     bool syntaxError;
     bool numError;
     double evaluateRPN(double x, double y);
-    void tokenify(std::string& equation);
-    void RPN();
     void displayRPN();
+    void parse(std::string eq)
+    {
+        equation = eq;
+        tokenify(equation);
+        RPN();
+    }
 };

@@ -53,7 +53,6 @@ void Parser::raiseNumError()
 
 int Parser::checkSyntaxError()
 {
-
 	//if no input is given
 	if (tokens.empty())
 	{
@@ -328,13 +327,11 @@ double Parser::evaluateRPN(double x=0, double y=0)
 		else if (tempout[0]._Text == "y")
 			return (y);
 	}
-
 	if (numError)
 	{
 		return std::numeric_limits<double>::quiet_NaN();
 	}
-
-		//std::cout << tempout[0]._Text << std::endl;
+	//std::cout << tempout[0]._Text << std::endl;
 	return Numberify(tempout[0]);
 }
 
@@ -365,11 +362,27 @@ Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
 		temp._Text = Textify(Numberify(operand1) / Numberify(operand2));
 		break;
 	case '^':
-		temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
-		break;
+		if (Numberify(operand2) != 0 && findFraction(Numberify(operand2)))
+        {
+            if (Numberify(operand1) < 0)
+            {
+                raiseNumError();
+            }
+            else
+                temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
+        }
+        else if (Numberify(operand1) < 0)
+            temp._Text = Textify(-pow(-Numberify(operand1), Numberify(operand2)));
+        else if (Numberify(operand1) == 0 && Numberify(operand2) ==0) // 0^0
+			raiseNumError();
+		else
+            temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
+
+        break;
 	}
 	return temp;
 }
+
 
 Token Parser::evaluate(Token function, Token operand)
 {
@@ -389,4 +402,36 @@ Token Parser::evaluate(Token function, Token operand)
 	if (function._Text == "-tan")
 		temp._Text = Textify(-tan(Numberify(operand)));
 	return temp;
+}
+
+bool Parser::findFraction(double input)
+{
+
+        double integral = std::floor(input);
+        double frac = input - integral;
+
+        const long precision = 100000; // This is the accuracy.
+
+        long gcd_ = gcd(round(frac * precision), precision);
+
+        long denominator = precision / gcd_;
+        long numerator = round(frac * precision) / gcd_;
+        //std::cout << numerator << "/" << denominator << std::endl;
+        if ((numerator == 1 && denominator % 2 == 0) || (numerator %2 != 0 && denominator % 2==0))
+            return true;
+        return false;
+}
+
+
+long Parser::gcd(long a, long b)
+{
+    if (a == 0)
+        return b;
+    else if (b == 0)
+        return a;
+
+    if (a < b)
+        return gcd(a, b % a);
+    else
+        return gcd(b, a % b);
 }

@@ -1,5 +1,6 @@
 #include "vector.hpp"
 #include <cmath>
+
 double highestMagn;
 int vector::lowerX=0;
 int vector::lowerY=0;
@@ -52,11 +53,18 @@ void vector::displayArrow(sf::RenderWindow& window){
     window.draw(sprite);
 }
 
-
+// vector *vec = new vector(i,j,fnX,fnY,grid);
+//             if(vec->magnitude==0 && std::isnan(vec->magnitude)){
+//                 arrows.push_back(new vector(i,j,zeroReturner,zeroReturner,grid));
+//                 continue;
+//             }
 void vector::setHighest(std::vector<vector*>& arrows){
     highestMagn=arrows[0]->magnitude;
     for(int i=0;i<arrows.size();i++){
-        if(arrows[i]->magnitude>highestMagn){highestMagn=arrows[i]->magnitude;}
+        if(!std::isnan(arrows[i]->magnitude)){
+            if(arrows[i]->magnitude>highestMagn)
+                highestMagn=arrows[i]->magnitude;
+        }  
     }
 }
 

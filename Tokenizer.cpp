@@ -49,7 +49,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 			break;
 
 		case'-':
-			if ((currentToken._Type == OPERATOR && currentToken._Text != ")"))
+			if (!negative && ((currentToken._Type == OPERATOR && currentToken._Text != ")")|| currentToken._Type == WHITESPACE))
 			{
 				negative = true;
 			}
