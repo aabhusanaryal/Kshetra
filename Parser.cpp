@@ -364,7 +364,7 @@ Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
 	case '^':
 		if (Numberify(operand2) != 0 && findFraction(Numberify(operand2)))
         {
-            if (Numberify(operand1) < 0)
+            if (Numberify(operand1) <= 0)
             {
                 raiseNumError();
             }
