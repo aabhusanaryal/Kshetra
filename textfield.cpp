@@ -84,7 +84,6 @@ void Textfield::setContent(bool isBackspace){
         this->content->text.setOrigin(width, 0);
     if(isBackspace)
         this->content->text.setOrigin(width-17, 0);
- 
     if(this->text.length() < 15) // Over 15 characters will overflow
         this->content->text.setString(text);
     else

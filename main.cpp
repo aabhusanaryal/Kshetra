@@ -125,7 +125,7 @@ void action_CustomFunctions(){ // Changes to the Custom Functions state
 int main(){
 // Setting app icon
     sf::Image icon;
-    icon.loadFromFile("./assets/icon.ico");
+    icon.loadFromFile("./assets/icon.png");
     window.setIcon(icon.getSize().x,icon.getSize().y, icon.getPixelsPtr());
 //Initialising Common Functions
     StdFn std1(std1X, std1Y,"F = (-y, x)","Models circular motion such\nas that of a air molecules\nin a cyclone.");
@@ -141,7 +141,6 @@ int main(){
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, {0});
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
     Button btn_Back("one_Back", 33, 37, 22, 777, {1, 2});
-    
 
     // State 1 components:
     Button btn_Plot("one_Plot", 183, 47, 171, 495, {1});
