@@ -53,70 +53,90 @@ void Parser::raiseNumError()
 
 int Parser::checkSyntaxError()
 {
-	//if no input is given
-	if (tokens.empty())
-	{
-		raiseSyntaxError();
-		std::cout << "Error: No input\n";
-		return 1;
-	}
-	else
-	{
-		//error checking for wrong operators
-		for (int i = 0; i < tokens.size() - 1; i++)
-		{
-			if (tokens[i]._Type == OPERATOR && tokens[i + 1]._Type == OPERATOR)
-			{
-				if (tokens[i]._Text == "(" && (tokens[i + 1]._Text == "(" || tokens[i]._Text == ")"))
-					continue;
-				else if (tokens[i + 1]._Text == ")" && (tokens[i]._Text == "(" || tokens[i]._Text == ")"))
-					continue;
-				else if (tokens[i]._Text != ")" && tokens[i + 1]._Text == "(")
-					continue;
-				else if (tokens[i]._Text == ")" && tokens[i + 1]._Text != "(")
-					continue;
-				else
-				{
-					raiseSyntaxError();
-				}
-			}
-			if (tokens[i]._Type == UNKNOWN || tokens[i]._Type == CONSTANT || tokens[i]._Type == NUM_LITERAL)
-			{
-				if (tokens[i + 1]._Type != OPERATOR)
-					raiseSyntaxError();
-			}
-		}
+	   bool num = 0;
+    //if no input is given
+    if (tokens.empty())
+    {
+        raiseSyntaxError();
+        std::cout << "Error: No input\n";
+        return 1;
+    }
+    else
+    {
+        //error checking for wrong operators
+        for (int i = 0; i < tokens.size() - 1; i++)
+        {
+            //if (tokens[i]._Type == FUNCTION && tokens[i + 1]._Text != "(")
+            //{
+            //    raiseSyntaxError();
+            //    return 1;
+            //}
+            if (tokens[i]._Type == OPERATOR && tokens[i + 1]._Type == OPERATOR)
+            {
+                if (tokens[i]._Text == "(" && tokens[i + 1]._Text == "(")
+                    continue;
+                else if (tokens[i + 1]._Text == ")" && tokens[i]._Text == ")")
+                    continue;
+                else if (tokens[i]._Text != ")" && tokens[i + 1]._Text == "(")
+                    continue;
+                else if (tokens[i]._Text == ")" && tokens[i + 1]._Text != "(")
+                    continue;
+                else
+                {
+                    raiseSyntaxError();
+                    return 1;
+                }
+            }
+            if (tokens[i]._Type == UNKNOWN || tokens[i]._Type == CONSTANT || tokens[i]._Type == NUM_LITERAL)
+            {
+                if (tokens[i + 1]._Type != OPERATOR)
+                {
+                    raiseSyntaxError();
+                    return 1;
+                }
+            }
+            if (tokens[1]._Type == UNKNOWN || tokens[1]._Type == CONSTANT || tokens[1]._Type == NUM_LITERAL)
+                num = 1;
+        }
 
-		//start and end check
-		if (tokens[0]._Type == OPERATOR && tokens[0]._Text != "(")
-		{
-			raiseSyntaxError();
-			std::cout << "Error4:" << tokens[0]._Text << tokens[1]._Text << std::endl;
+        if (num)
+        {
+            raiseSyntaxError();
+            return 1;
+        }
 
-		}
+        //start and end check
+        if (tokens[0]._Type == OPERATOR && tokens[0]._Text != "(")
+        {
+            raiseSyntaxError();
+            return 1;
+        }
 
-		if (tokens[tokens.size() - 1]._Type == OPERATOR && tokens[tokens.size() - 1]._Text != ")")
-		{
-			std::cout << "Error5:" << tokens[tokens.size() - 2]._Text << tokens[tokens.size() - 1]._Text << std::endl;
-			raiseSyntaxError();
-		}
-	}
+        if (tokens[tokens.size() - 1]._Type == OPERATOR && tokens[tokens.size() - 1]._Text != ")")
+        {
+            raiseSyntaxError();
+            return 1;
+        }
+    }
 
-	//error checking for syntax
-	for (Token current : tokens)
-	{
-		int count = 0;
-		if (current._Type == FUNCTION)
-		{
-			for (int i = 0; i < functions.size(); i++)
-			{
-				if (current._Text != functions[i])
-					count++;
-			}
-			if (count == functions.size())
-				raiseSyntaxError();
-		}
-	}
+
+
+
+    //error checking for syntax
+    for (Token current : tokens)
+    {
+        int count = 0;
+        if (current._Type == FUNCTION)
+        {
+            for (int i = 0; i < functions.size(); i++)
+            {
+                if (current._Text != functions[i])
+                    count++;
+            }
+            if (count == functions.size())
+                raiseSyntaxError();
+        }
+    }
 }
 
 void Parser::AddtoOutput(Token& token)

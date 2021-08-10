@@ -74,8 +74,18 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
             break;
 
         case' ':
-            endToken(currentToken, tokens);
-            currentToken._Type = WHITESPACE;
+            if (negative)
+            {
+                endToken(currentToken, tokens);
+                currentToken._Text.append(1, '-');
+                currentToken._Type = OPERATOR;
+                negative = false;
+            }
+            else
+            {
+                endToken(currentToken, tokens);
+                currentToken._Type = WHITESPACE;
+            }
             break;
 
         case'x':
