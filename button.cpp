@@ -1,8 +1,8 @@
 // ===========================================================================
 // Usage: Button btnName(path, width, height, posX, posY, state);
 // ===========================================================================
-// textureHovered is the texture that's to be rendered when the user hovers
-// over the button. We set rect's texxture as textureHovered on hovering.
+// textureHovereded is the texture that's to be rendered when the user hovers
+// over the button. We set rect's texxture as textureHovereded on hovering.
 // ===========================================================================
 // textureUnhovered exists because we need to set textureRendered back to the 
 // original state when the user un-hovers.
@@ -10,7 +10,7 @@
 // ===========================================================================
 
 
-// ===================== POLLING FOR EVENTS IN MAIN.CPP =======================
+// ===================== POLLING FOR EVENTS IN MOUSEMOVE.H =======================
 // if(event.type==sf::Event::MouseMoved){ // If mouse is moved
 //             // On hover
 //                 if(btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
@@ -19,6 +19,20 @@
 //                 if(!btn1.rect.contains(event.mouseMove.x, event.mouseMove.y)) // If mouse is over btn1
 //                     btn1.unhovered();
 //             }
+// ===========================================================================
+
+// ===================== How this component works =======================
+// To create the button, we first create a sf::RectangleShape and then add a texture
+// which essentially is the image that's rendered as the button.
+
+// So we poll for events in the mousemove.h and mouseclick.h, which are included in the
+// main loop. Whenever the button is being hovered on, the texture changes to textureHovered
+// and as soon as the mouse goes out of bound of the button, the texture changes to 
+// textureUnhovered.
+
+// Then, when the button is clicked, it calles a function called action which is of type
+// pointerFn, which basically means it is a pointer to a function. This function takes 
+// in no parameter and returns void.
 // ===========================================================================
 
 #include <button.hpp>
@@ -47,13 +61,12 @@ Button::Button(std::string path,int width,int height,int posX, int posY, std::ve
     // This basically "invisibly wraps" our rectangle
     // =========================================================================
     rect = rectangle.getGlobalBounds();
-    // Loading different images in texture
-    textureHover.loadFromFile(std::string("./assets/"+path+"_Hovered.png"));
+    // Loading different images in textures
+    textureHovered.loadFromFile(std::string("./assets/"+path+"_Hovered.png"));
     textureUnhovered.loadFromFile(std::string("./assets/"+path+".png"));
-    textureHover.setSmooth(true);
+    textureHovered.setSmooth(true); // Avoids pixelation of texture
     textureUnhovered.setSmooth(true);
-    // Setting the initial textureRendered to be the unhovered one
-    rectangle.setTexture(&textureUnhovered);
+    rectangle.setTexture(&textureUnhovered); // Setting the initial textureRendered to be the unhovered one
 }
 
 void Button::setPosition(int x, int y){  // Sets the position of button on screen
@@ -61,16 +74,16 @@ void Button::setPosition(int x, int y){  // Sets the position of button on scree
 }
 
 void Button::hovered(){ // Sets the right texture when the button is hovered
-    if(!hoverTex){ // Setting texture to textureHover iff it's not already textureHover
-        rectangle.setTexture(&textureHover);
-        hoverTex = !hoverTex;
+    if(!isHovered){ // Setting texture to textureHovered iff it's not already textureHovered
+        rectangle.setTexture(&textureHovered);
+        isHovered = 1;
     }
 }
 
 void Button::unhovered(){ // Sets the right texture when the button is not hovered
-    if(hoverTex){ // Setting texture to textureUnover iff it's not already textureUnhover
+    if(isHovered){ // Setting texture to textureUnover iff it's not already textureUnhover
         rectangle.setTexture(&textureUnhovered);
-        hoverTex = !hoverTex;
+        isHovered = !isHovered;
     }
 }
 

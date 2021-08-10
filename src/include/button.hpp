@@ -6,22 +6,20 @@
 typedef void (*pointerFn)();
 
 class Button{
-public:
-    std::vector<int> state;
-    bool clicked = false;
-    static std::vector<Button*> list;
+private:
     std::string path; // Where the texture image is located
     int height, width, posX, posY; // Basic props of the Button
-    // Texture [image] to be rendered as the button
-    sf::Texture textureUnhovered, textureHover; 
-    sf::RectangleShape rectangle; // Rectangle that can be rendered using window.display()
+    sf::Texture textureUnhovered, textureHoverd; 
+    bool isHovered = 0; // Stores if the currently active texture is textureHover
+public:
+    std::vector<int> state;
+    static std::vector<Button*> list;
+    bool clicked = false;
     sf::FloatRect rect; // Used to check if mouse is over the button
-    bool hoverTex = 0; // Stores if the currently active texture is textureHover
-    pointerFn action;
+    pointerFn action; // Function to be called when the button is clicked
+    sf::RectangleShape rectangle; // Rectangle that can be rendered using window.display()
 
     Button(std::string path,int width,int height,int posX, int posY, std::vector<int> state);
-
-    sf::RectangleShape getElement(); // Returns sf::RectangleShape object
     void setPosition(int x, int y); // Sets the position of button on screen
     void hovered();
     void unhovered();

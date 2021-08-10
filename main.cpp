@@ -135,14 +135,14 @@ int main(){
 
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-
-// Initialising Button and Slider components
+// Initializing components:
+    // State 0 [Main Menu] components
     Button btn_Common_Functions("main_Common_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
     Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+170, {0});
     Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
     Button btn_Back("one_Back", 33, 37, 22, 777, {1, 2});
 
-    // State 1 components:
+    // State 1 [Custom Functions] components:
     Button btn_Plot("one_Plot", 183, 47, 171, 495, {1});
     Slider slider1(698, 803, {1,2});
     Textfield fx("Fx",201, 54, 165, 345, {1});
@@ -159,7 +159,7 @@ int main(){
     vector::angleValue=new Text("NA",18,185,689,{1});
     vector::posValue=new Text("NA",18,205,716,{1});
 
-    // State 2 components
+    // State 2 [Common Functions] components
     Button btnPrevious("two_Arrow_Left", 36, 80, 44, 385, {2});
     Button btnNext("two_Arrow_Right", 36, 80, window.width-80, 385, {2});
     // Assigning functions to be called on button click
