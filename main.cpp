@@ -105,12 +105,14 @@ double forY(double x,double y){
 
 
 // Functions to be called on button click:
-void changeStateTo2(){
+void action_StdFunctions(){
+    int i = StdFn::fnIndex;
+    StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
+    StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
+    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
     window.state = 2;
 };
-void changeStateTo1(){
-    window.state = 1;
-};
+
 void changeStateTo0(){
     window.state = 0;
 };
@@ -170,8 +172,9 @@ void changeFunction(){
     parserj = new Parser();
 
     std::string strExpressioni, strExpressionj;
-    strExpressioni = Textfield::list[0]->text;
-    strExpressionj = Textfield::list[1]->text;
+
+    strExpressioni = (Textfield::list[0]->text != ""? Textfield::list[0]->text : "0");
+    strExpressionj = (Textfield::list[1]->text != ""? Textfield::list[1]->text : "0");
    
     parseri->tokenify(strExpressioni);
     parserj->tokenify(strExpressionj);
@@ -188,6 +191,11 @@ void changeFunction(){
             Textfield::list[1]->error();
     }
 }
+
+void action_CustomFunctions(){
+    changeFunction();
+    window.state = 1;
+};
 
 // HL-> TODO: merge in the vector.cpp and h files. Then, plot graphs based on inputs instead of static graph
 
@@ -248,8 +256,8 @@ try{
     Button btnNext("two_Arrow_Right", 36, 80, window.width-80, 385, {2});
     // Assigning functions to be called on button click
     btn_Exit.setAction(exitProgram);
-    btn_Standard_Functions.setAction(changeStateTo2);
-    btn_Custom_Functions.setAction(changeStateTo1);
+    btn_Standard_Functions.setAction(action_StdFunctions);
+    btn_Custom_Functions.setAction(action_CustomFunctions);
     btn_Back.setAction(changeStateTo0);
     btn_Plot.setAction(changeFunction);
     btnPrevious.setAction(previousFn);
