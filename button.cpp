@@ -39,13 +39,14 @@ Button::Button(std::string path,int width,int height,int posX, int posY, std::ve
     // Creating a rectangle, that'll later be rendered using window.display()
     rectangle = sf::RectangleShape (sf::Vector2f(width, height));
     rectangle.setPosition(posX, posY);
+    
     // =========================================================================
     // WARNING:
     // Rect is NOT the rectange that's being rendered, but rather a rectangular
     // space in screen. We need this to check if the button is being hovered on.
     // This basically "invisibly wraps" our rectangle
     // =========================================================================
-    rect = sf::IntRect(posX, posY, width, height);
+    rect = rectangle.getGlobalBounds();
     // Loading different images in texture
     textureHover.loadFromFile(std::string("./assets/"+path+"_Hovered.png"));
     textureUnhovered.loadFromFile(std::string("./assets/"+path+".png"));

@@ -15,7 +15,7 @@ public:
     // Texture [image] to be rendered as the button
     sf::Texture textureUnhovered, textureHover; 
     sf::RectangleShape rectangle; // Rectangle that can be rendered using window.display()
-    sf::IntRect rect; // Used to check if mouse is over the button
+    sf::FloatRect rect; // Used to check if mouse is over the button
     bool hoverTex = 0; // Stores if the currently active texture is textureHover
     pointerFn action;
 
