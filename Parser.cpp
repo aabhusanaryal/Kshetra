@@ -53,7 +53,7 @@ void Parser::raiseNumError()
 
 int Parser::checkSyntaxError()
 {
-	   bool num = 0;
+    bool num = false;
     //if no input is given
     if (tokens.empty())
     {
@@ -95,14 +95,14 @@ int Parser::checkSyntaxError()
                     return 1;
                 }
             }
-            if (tokens[1]._Type == UNKNOWN || tokens[1]._Type == CONSTANT || tokens[1]._Type == NUM_LITERAL)
-                num = 1;
-        }
-
-        if (num)
-        {
-            raiseSyntaxError();
-            return 1;
+			if (tokens[i+1]._Type == UNKNOWN || tokens[i+1]._Type == CONSTANT || tokens[i+1]._Type == NUM_LITERAL)
+            {
+                if (tokens[i]._Type != OPERATOR || tokens[i]._Text == ")")
+                {
+                    raiseSyntaxError();
+                    return 1;
+                }
+            }
         }
 
         //start and end check
@@ -117,11 +117,8 @@ int Parser::checkSyntaxError()
             raiseSyntaxError();
             return 1;
         }
+
     }
-
-
-
-
     //error checking for syntax
     for (Token current : tokens)
     {
@@ -136,7 +133,15 @@ int Parser::checkSyntaxError()
             if (count == functions.size())
                 raiseSyntaxError();
         }
+        if (current._Type == UNKNOWN || current._Type == CONSTANT || current._Type == NUM_LITERAL)
+            num = true;
     }
+    if (num == false)
+    {
+        raiseSyntaxError();
+        return 1;
+    }
+
 }
 
 void Parser::AddtoOutput(Token& token)
@@ -395,7 +400,7 @@ Token Parser::evaluate(Token operand1, Token operand2, Token& operation)
 			else
 				temp._Text = Textify(pow(Numberify(operand1), Numberify(operand2)));
 		}
-		else if (Numberify(operand1) < 0)
+		else if (Numberify(operand1) < 0 && fmod(Numberify(operand2), 2) != 0)
 			temp._Text = Textify(-pow(-Numberify(operand1), Numberify(operand2)));
 		else if (Numberify(operand1) == 0 && Numberify(operand2) == 0) // 0^0
 			raiseNumError();
