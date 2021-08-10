@@ -8,7 +8,7 @@
 #include<canvas.hpp>
 #include<parser.hpp>
 #include<commonfunctions.hpp>
-#include <commonfunctionslist.h>
+#include <commonfunctionslist.hpp>
 #include <math.h>
 
 // ============ States ============
@@ -174,6 +174,3 @@ int main(){
 
     window.mainLoop();
 }
-
-
-
