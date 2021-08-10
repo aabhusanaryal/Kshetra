@@ -1,5 +1,5 @@
 *.dll
-/src
+/src_SFML
 /.vscode
 a.exe
 *.exe
