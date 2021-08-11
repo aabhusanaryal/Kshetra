@@ -12,8 +12,8 @@ public:
     int mouseX, mouseY;
     int magicNumber = 69;
     int oneAndTwo = 420;
-    int width = 1250;
-    int height = 850;
+    int width = 1280;
+    int height = 720;
 // HL-> DELETE LATER: Debiugging
     bool showGrid = true;
     bool showArrows = true;

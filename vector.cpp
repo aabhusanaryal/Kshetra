@@ -87,6 +87,7 @@ void vector::setLimits(Grid grid){
 
 void vector::setTexture(){
     texture->loadFromFile("./assets/one_Arrow.png");
+    texture->setSmooth(true);
 }
 
 std::string vector::roundNumber(double a){

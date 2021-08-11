@@ -11,7 +11,7 @@ void Window::mainLoop(){
     sf::Texture titleTexture;
     titleTexture.loadFromFile("./assets/main_Kshetra.png");
     title.setTexture(titleTexture);
-    title.setPosition((width-431)/2, 250);
+    title.setPosition((width-431)/2, 190);
 
 
 

@@ -1,13 +1,10 @@
 #include<grid.hpp>
 #include <iostream>
 
-Grid::Grid(int wwidth,int wheight, float scalar)
+Grid::Grid(int posX,int posY, float scalar) :posX(posX), posY(posY)
 {
-    windowWidth=wwidth;
-    windowHeight=wheight;
     bg.setSize(sf::Vector2f(width,height));
-    bg.setOrigin(width/2, height/2);
-    bg.setPosition((windowWidth - width/2- paddingRight) , windowHeight/2);
+    bg.setPosition(posX, posY);
     bg.setFillColor(sf::Color(229, 229, 229));
     //the size of each cell
     cellWidth= width/scalar; 
@@ -31,10 +28,10 @@ Grid::Grid(int wwidth,int wheight, float scalar)
 
 
 //return the coordinate of the edges of the background rectangle
-float Grid::top()   { return ((windowHeight-height)/2);}
-float Grid::bottom(){ return (top() + height);}
-float Grid::right() { return (windowWidth-paddingRight);}
-float Grid::left()  { return (right() - width);}
+float Grid::top()   { return posY; }
+float Grid::bottom(){ return (top() + height); }
+float Grid::right() { return (posX+width); }
+float Grid::left()  { return (right() - width); }
 
 void Grid::display(sf::RenderWindow& window)
 {
@@ -59,12 +56,12 @@ void Grid::make_cells()
         {
             sf::RectangleShape cell;
             cell.setSize(sf::Vector2f(cellWidth-1.5, cellHeight-1.5));
-            float initialPositionX = (leftPaddingcell + left() + cellWidth*i);
-            float initialPositionY = (topPaddingcell + top() + cellHeight*j);
+            float initialPositionX = (left() + cellWidth*i);
+            float initialPositionY = (top() + cellHeight*j);
             cell.setPosition
             (
-                (leftPaddingcell + left() + ogCellWidth*i) - (cellWidth - ogCellWidth)*(11-i) , 
-                (topPaddingcell + top() + ogCellWidth*j) - (cellHeight - ogCellWidth)*(11-j)
+                (left() + ogCellWidth*i) - (cellWidth - ogCellWidth)*(11-i) , 
+                (top() + ogCellWidth*j) - (cellHeight - ogCellWidth)*(11-j)
             );
  
             
@@ -82,7 +79,7 @@ void Grid::make_cells()
 
 sf::Vector2f Grid::returnOrigin(){
     //leftPaddingcell+left()+(cellWidth*(cellCol/2)),topPaddingcell+top()+(cellWidth*(cellRow/2))
-    return sf::Vector2f(820, 436);
+    return sf::Vector2f(850, 358);
 }
 
 int Grid::returnCellWidth(){

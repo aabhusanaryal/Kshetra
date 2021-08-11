@@ -5,15 +5,13 @@ class Grid
 {
 private:
     sf::RectangleShape bg;
-    int paddingRight = 20;
-    int windowWidth;
-    int windowHeight;
+    int posX, posY;
     int width = 700;
     int height = 700;
     int cellWidth,cellHeight,cellCol,cellRow;
     int ogCellWidth = 700/22.f;
     std::vector<sf::RectangleShape> cells;
-    float topPaddingcell,leftPaddingcell;
+
 
 public:
     Grid(int=0,int=0, float=22.f);

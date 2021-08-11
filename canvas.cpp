@@ -37,7 +37,7 @@ void canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn ex
 
 void canvas::reinitialiseGrid(float scalar){
     // HL-> Need to un-hardcode windowWidth and windowHeight
-    grid=Grid(1250-50, 850+40, scalar);
+    grid=Grid(510, 18, scalar);
     grid.make_cells();
     vector::setLimits(grid);
     reinitialiseVectors(fnX, fnY);
