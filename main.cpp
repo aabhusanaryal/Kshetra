@@ -29,8 +29,8 @@ Text* vector::posValue;
 // currentEqn and currentDescription are the details of the "common/standard function"
 // that's currently being displayed 
 int StdFn::fnIndex=0;
-Text* StdFn::currentEqn = new Text("NA",40,150,350,"Jaldi-Bold",{2});
-Text* StdFn::currentDescription = new Text("NA",22,150,410,"Roboto-Medium",{2});
+Text* StdFn::currentEqn = new Text("NA",40,150,295,"Jaldi-Bold",{2});
+Text* StdFn::currentDescription = new Text("NA",22,150,355,"Roboto-Medium",{2});
 
 
 //=======================================
@@ -143,22 +143,21 @@ int main(){
     Button btn_Back("one_Back", 33, 37, 22, 665, {1, 2});
 
     // State 1 [Custom Functions] components:
-    Button btn_Plot("one_Plot", 183, 47, 171, 495, {1});
+    Textfield fx("Fx",201, 54, 165, 345-52, {1});
+    Textfield fy("Fy",201, 54, 165, 418-52, {1});
+    Button btn_Plot("one_Plot", 183, 47, 171, 495-52, {1});
     Slider slider1(727, 685, {1,2});
-    Textfield fx("Fx",201, 54, 165, 345, {1});
-    Textfield fy("Fy",201, 54, 165, 418, {1});
     canvas canvas1(510, window.height/2-350+8, std1X, std1Y, {1, 2});
 
-
-    Text* magnitude=new Text("Magnitude:",18,131,662,{1});
-    Text* angle=new Text("Angle:",18,131,689,{1});
-    Text* position=new Text("Position:",18,131,716,{1});
-    Text* function=new Text("Enter Function",36,131,290,"Jaldi-Bold",{1});
-    Text* details=new Text("Details:",36,131,620,"Jaldi-Bold",{1});
+    Text* magnitude=new Text("Magnitude:",18,131,571,{1});
+    Text* angle=new Text("Angle:",18,131,598,{1});
+    Text* position=new Text("Position:",18,131,625,{1});
+    Text* function=new Text("Enter Function",36,131,238,"Jaldi-Bold",{1});
+    Text* details=new Text("Details:",36,131,529,"Jaldi-Bold",{1});
     
-    vector::magnValue=new Text("NA",18,225,662,{1});
-    vector::angleValue=new Text("NA",18,185,689,{1});
-    vector::posValue=new Text("NA",18,205,716,{1});
+    vector::magnValue=new Text("NA",18,225,571,{1});
+    vector::angleValue=new Text("NA",18,185,598,{1});
+    vector::posValue=new Text("NA",18,205,625,{1});
 
     // State 2 [Common Functions] components
     Button btnPrevious("two_Arrow_Left", 36, 80, 44, window.height/2-40, {2});
