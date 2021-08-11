@@ -29,7 +29,6 @@ void canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn ex
             arrows.push_back(new vector(i,j,expressionX,expressionY,grid));
         }
     }
-    vector::setHighest(arrows);
     vector::setColor(arrows);
     vector *test = new vector(0,0,fnX,fnY,grid);
     std::cout<<test->magnitude<<std::endl;
