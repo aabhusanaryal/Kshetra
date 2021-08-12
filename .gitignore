@@ -5,3 +5,5 @@ a.exe
 *.exe
 *.o
 /Releases
+/msvc_SFML
+script.ps1

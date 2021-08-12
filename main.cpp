@@ -137,15 +137,15 @@ int main(){
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
 // Initializing components:
     // State 0 [Main Menu] components
-    Button btn_Custom_Functions("main_Custom_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
-    Button btn_Common_Functions("main_Common_Functions", 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+150, {0});
-    Button btn_Exit("main_Exit", 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
-    Button btn_Back("one_Back", 33, 37, 22, 665, {1, 2});
+    Button btn_Custom_Functions("Custom Functions", Button::showLabel, 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+50, {0});
+    Button btn_Common_Functions("Common Functions", Button::showLabel, 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+150, {0});
+    Button btn_Exit("main_Exit", Button::hideLabel, 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
+    Button btn_Back("one_Back", Button::hideLabel, 33, 37, 22, 665, {1, 2});
 
     // State 1 [Custom Functions] components:
     Textfield fx("Fx",201, 54, 165, 345-52, {1});
     Textfield fy("Fy",201, 54, 165, 418-52, {1});
-    Button btn_Plot("one_Plot", 183, 47, 171, 495-52, {1});
+    Button btn_Plot("Plot", Button::showLabel, 183, 47, 171, 495-52, {1});
     Slider slider1(727, 685, {1,2});
     canvas canvas1(510, window.height/2-350+8, std1X, std1Y, {1, 2});
 
@@ -158,10 +158,9 @@ int main(){
     vector::magnValue=new Text("NA",18,225,571,{1});
     vector::angleValue=new Text("NA",18,185,598,{1});
     vector::posValue=new Text("NA",18,205,625,{1});
-
     // State 2 [Common Functions] components
-    Button btnPrevious("two_Arrow_Left", 36, 80, 44, window.height/2-40, {2});
-    Button btnNext("two_Arrow_Right", 36, 80, window.width-80, window.height/2-40, {2});
+    Button btnPrevious("two_Arrow_Left", Button::hideLabel, 36, 80, 44, window.height/2-40, {2});
+    Button btnNext("two_Arrow_Right", Button::hideLabel, 36, 80, window.width-80, window.height/2-40, {2});
     // Assigning functions to be called on button click
     btn_Exit.setAction(action_ExitProgram);
     btn_Common_Functions.setAction(action_CommonFunctions);
