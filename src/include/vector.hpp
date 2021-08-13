@@ -8,34 +8,30 @@
 #include<text.hpp>
 
 #define pi 3.1415926
-// const int lowerX=-10;
-// const int lowerY=-10;
-// const int higherX=10;
-// const int higherY=10;
 
-class vector{
+class Vector{
     private:
-        double posX,posY,angle,pixelX,pixelY; //posX,posY for graph coordinates, pixlX,pixelY for plotting
-        sf::Color arrowColor;
-        static bool textureLoaded;
+        double posX,posY,angle,pixelX,pixelY; //posX,posY for graph coordinates, pixlX,pixelY for plotting on sfml window
+        sf::Color arrowColor; 
+        static bool textureLoaded; //Checks if the texture for arrow is loaded or not
     public:
-        double magnitude;
+        double magnitude; //Magnitude of a vector
         static sf::Texture* texture;
         static Text* magnValue;
         static Text* angleValue;
         static Text* posValue;
-        // static std::map<std::string,std::string> details {{"Magnitude",std::to_string(magnitude)},{"Angle",std::to_string(angle)},{"Position",(std::to_string(posX)+","+std::to_string(posY))}};
         sf::Sprite sprite;
-        static int lowerX,lowerY,higherX,higherY;
-        //expresson is a function pointer, one expression for i component, other for j
-        //sf::vector2f is origin, and last int is cell width
-        vector(int posX,int posY,double (*expressionX)(double,double),double (*expressionY)(double,double),Grid);
-        void displayArrow(sf::RenderWindow&);
+        static int lowerX,lowerY,higherX,higherY; //Limits of the graph to plot to
+
+        //In the constrcutor below, expresson is a function pointer, one expression for i component, other for j
+        //The grid that is used is passed too
+        Vector(int posX,int posY,double (*expressionX)(double,double),double (*expressionY)(double,double),Grid);
+        void displayArrow(sf::RenderWindow&); //Function to display a single arrow on screen
         void setTexture();
-        static void setLimits(Grid);
-        static void setHighest(std::vector<vector*>&);
-        static void setColor(std::vector<vector*>&);
-        void hovered();
-        void unhovered();
+        static void setLimits(Grid); 
+        static void setHighest(std::vector<Vector*>&); //Setting highest magnitude vector
+        static void setColor(std::vector<Vector*>&); //Setting color of a vector according to magnitude
+        void hovered(); //Called when an arrow is hovered on
+        void unhovered(); //Called when an arrow is unhovered
         std::string roundNumber(double a);
 };

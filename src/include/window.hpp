@@ -37,7 +37,7 @@ public:
     void draw(sf::Text text){
         sf::RenderWindow::draw(text);
     }
-    void draw(vector* v){
+    void draw(Vector* v){
         sf::RenderWindow::draw(v->sprite);
     }
 

@@ -1,5 +1,5 @@
 #include<window.hpp>
-#include<canvas.hpp>
+#include<Canvas.hpp>
 #include<text.hpp>
 #include "SFML/Graphics.hpp"
 #include <algorithm>
@@ -32,12 +32,12 @@ void Window::mainLoop(){
 
         // Drawing Canvas and arrows and all handling zomming in
         if(Slider::list[0]->sliding && (std::find(Slider::list[0]->state.begin(), Slider::list[0]->state.end(), state) != Slider::list[0]->state.end())){
-            canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
+            Canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
         }
-        if(std::find(canvas::list[0]->state.begin(), canvas::list[0]->state.end(), state) != canvas::list[0]->state.end()){
-                canvas::list[0]->grid.display(*(this));
-                for(int i=0;i<canvas::list[0]->arrows.size();i++){
-                    draw(canvas::list[0]->arrows[i]);
+        if(std::find(Canvas::list[0]->state.begin(), Canvas::list[0]->state.end(), state) != Canvas::list[0]->state.end()){
+                Canvas::list[0]->grid.display(*(this));
+                for(int i=0;i<Canvas::list[0]->arrows.size();i++){
+                    draw(Canvas::list[0]->arrows[i]);
                 }
         }
 

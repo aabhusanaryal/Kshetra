@@ -22,9 +22,9 @@ Parser *parseri, *parserj;
 // Declaring static member of various classes
 std::vector<Text*> Text::list; 
 std::vector<StdFn> StdFn::fnList;
-Text* vector::magnValue;
-Text* vector::angleValue;
-Text* vector::posValue;
+Text* Vector::magnValue;
+Text* Vector::angleValue;
+Text* Vector::posValue;
 
 // currentEqn and currentDescription are the details of the "common/standard function"
 // that's currently being displayed 
@@ -63,7 +63,7 @@ void action_PreviousFn(){ // Switches to previous function in Common Functions s
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 void action_NextFn(){ // Switches to next function in Common Functions state
@@ -76,7 +76,7 @@ void action_NextFn(){ // Switches to next function in Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 void action_PlotFunction(){ // Plots the given function
@@ -96,7 +96,7 @@ void action_PlotFunction(){ // Plots the given function
     parserj->parse(strExpressionj);
     
     if(!parseri->syntaxError && !parserj->syntaxError)
-        canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
+        Canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
     else{
         if(parseri->syntaxError)
             Textfield::list[0]->error();
@@ -109,7 +109,7 @@ void action_CommonFunctions(){ // Changes to the Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
     window.state = 2;
 };
 
@@ -146,7 +146,7 @@ int main(){
     Textfield fy("Fy",201, 54, 165, 418-52, {1});
     Button btn_Plot("Plot", Button::showLabel, 183, 47, 171, 495-52, {1});
     Slider slider1(727, 685, {1,2});
-    canvas canvas1(510, window.height/2-350+8, std1X, std1Y, {1, 2});
+    Canvas canvas(510, window.height/2-350+8, std1X, std1Y, {1, 2});
 
     Text* magnitude=new Text("Magnitude:",18,131,571,{1});
     Text* angle=new Text("Angle:",18,131,598,{1});
@@ -154,9 +154,9 @@ int main(){
     Text* function=new Text("Enter Function",36,131,238,"Jaldi-Bold",{1});
     Text* details=new Text("Details:",36,131,529,"Jaldi-Bold",{1});
     
-    vector::magnValue=new Text("NA",18,225,571,{1});
-    vector::angleValue=new Text("NA",18,185,598,{1});
-    vector::posValue=new Text("NA",18,205,625,{1});
+    Vector::magnValue=new Text("NA",18,225,571,{1});
+    Vector::angleValue=new Text("NA",18,185,598,{1});
+    Vector::posValue=new Text("NA",18,205,625,{1});
     // State 2 [Common Functions] components
     Button btnPrevious("two_Arrow_Left", Button::hideLabel, 36, 80, 44, window.height/2-40, {2});
     Button btnNext("two_Arrow_Right", Button::hideLabel, 36, 80, window.width-80, window.height/2-40, {2});
