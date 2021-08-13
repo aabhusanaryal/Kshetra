@@ -141,7 +141,6 @@ int main(){
     Button btn_Common_Functions("Common Functions", Button::showLabel, 311, 80, (windowWidth-311)/2, (windowHeight-70)/2+150, {0});
     Button btn_Exit("main_Exit", Button::hideLabel, 62, 62, (windowWidth-62)-20, 20, {0, 1, 2});
     Button btn_Back("one_Back", Button::hideLabel, 33, 37, 22, 665, {1, 2});
-
     // State 1 [Custom Functions] components:
     Textfield fx("Fx",201, 54, 165, 345-52, {1});
     Textfield fy("Fy",201, 54, 165, 418-52, {1});

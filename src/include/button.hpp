@@ -13,8 +13,9 @@ private:
     sf::Texture textureUnhovered, textureHovered; 
     bool isHovered = 0; // Stores if the currently active texture is textureHover
 public:
-    const static bool showLabel = 1;
-    const static bool hideLabel = 0;
+    enum{
+        hideLabel=0, showLabel
+    };
     std::vector<int> state;
     static std::vector<Button*> list;
     Text* label;

@@ -4,20 +4,20 @@
 #include <vector>
 
 class Slider{
-public:
-    std::vector<int> state;
-    static std::vector<Slider*> list; // Contains the pointer to all the slider objects
     std::string textureRectPath = "./assets/sliderRect";
     std::string textureCirclePath = "./assets/sliderCircle";
-    sf::RectangleShape rectangle, testRectangle;
-    sf::CircleShape circle;
     sf::Texture textureRect, textureCircle, textureCircleClicked;
-    sf::IntRect rect; // Click detection
     int posX, posY; // Coords of the left side of the slider
     int circleX; // Coords of the circle
     int width = 244;
     int height = 4;
     int radius = 27/2;
+public:
+    std::vector<int> state;
+    static std::vector<Slider*> list; // Contains the pointer to all the slider objects
+    sf::IntRect rect; // Click detection
+    sf::RectangleShape rectangle, testRectangle; // Test rectangle helps visualise the bounds of the slider. Check out the function overload in window.hpp to turn on the testRectangle
+    sf::CircleShape circle;
     int progress=0;
     bool sliding=0;
     // Methods

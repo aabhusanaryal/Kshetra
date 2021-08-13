@@ -1,3 +1,14 @@
+// ===========================================================================
+// Usage: Slider sldName(posX, posY, state);
+// ===========================================================================
+
+// ===================== How this component works =======================
+// When the user clicks anywhere on the slider (even outside the circle part), the slider
+// attains a "sliding" state whereby it changes its texture and snaps to the mouse's
+// x position as long as the mouse position remains within the bounds of the slider.
+// A user may access the progress of the slider on a scale of 0 to 100 using as
+// slider.progress
+// ======================================================================
 #include<slider.hpp>
 #include <iostream>
 #include "SFML/Graphics.hpp"
