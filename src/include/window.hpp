@@ -10,17 +10,13 @@ class Window : public sf::RenderWindow{
 public:
     int state = 0;
     int mouseX, mouseY;
-    int magicNumber = 69;
-    int oneAndTwo = 420;
     int width = 1280;
     int height = 720;
-// HL-> DELETE LATER: Debiugging
-    bool showGrid = true;
-    bool showArrows = true;
-//HL-> Constructor
+    std::vector<int> legalChars = {'x', 'y', 's', 'i', 'n', 'c', 'o', 's', 't', 'a', 'n', '/', '*', '+', '-', '^', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '}; // Characters that are allowed in a Textfield
+// Constructor
     Window(sf::VideoMode video, const sf::String path, int style): sf::RenderWindow(video, path, style){};
 
-//HL-> .draw() method overloads
+// .draw() method overloads
     void draw(Button* btn){
         sf::RenderWindow::draw(btn->rectangle);
     }
@@ -45,6 +41,6 @@ public:
         sf::RenderWindow::draw(v->sprite);
     }
 
-//HL-> Main Loop
+// Main Loop
     void mainLoop();
 };

@@ -35,13 +35,10 @@ void Window::mainLoop(){
             canvas::list[0]->reinitialiseGrid(22-Slider::list[0]->progress*0.08); // For zoom in/ out
         }
         if(std::find(canvas::list[0]->state.begin(), canvas::list[0]->state.end(), state) != canvas::list[0]->state.end()){
-            if(showGrid)
                 canvas::list[0]->grid.display(*(this));
-            if(showArrows){
                 for(int i=0;i<canvas::list[0]->arrows.size();i++){
                     draw(canvas::list[0]->arrows[i]);
                 }
-            }
         }
 
         // Making overlay for state 1

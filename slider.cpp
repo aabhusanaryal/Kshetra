@@ -50,12 +50,10 @@ Slider::Slider(int posX, int posY, std::vector<int> state){
 };
 
 void Slider::clicked(){
-    std::cout<<"clicked"<<std::endl;
     sliding = true;
     circle.setTexture(&textureCircleClicked);
 }
 void Slider::unclicked(){
-    std::cout<<"no"<<std::endl;
     sliding = false;
     circle.setTexture(&textureCircle);
 }
@@ -75,9 +73,7 @@ void Slider::slide(float mouseX){
 }
 
 void Slider::calculateProgress(){
-    // std::cout<<circleX<<"\t"<<posX<<"\t"<<width<<std::endl;
     progress = ((circleX-posX)/(float)width)*100;
-    std::cout<<"Progress:"<<progress<<std::endl;
 }
 
 
