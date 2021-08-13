@@ -1,5 +1,15 @@
-#include<textfield.hpp>
+// ===========================================================================
+// Usage: Textfield field1("label", width, height, posX, posY, state);
+// ===========================================================================
 
+// ===================== How this component works =======================
+// It creates two things: a Text component (label) and a space where a user can type stuff.
+// If the parser detects any error in the contents of the Textfield, the .error() method
+// can be called to change the border of the field to red.
+// The contents of the field is stored as Text content.
+// ======================================================================
+
+#include<textfield.hpp>
 
 std::vector<Textfield*> Textfield::list;
 

@@ -5,20 +5,20 @@
 #include <text.hpp>
 
 class Textfield{
+    std::string label;
+    Text* content;
+    int contentPosX;
+    int contentPosY;
+    int height, width, posX, posY;
+    sf::Texture textureUnhovered, textureHover, textureFocused, textureError;
 public:
     static std::vector<Textfield*> list;
     std::vector<int> state;
     std::string text = "";
-    std::string label;
     Text* name;
-    Text* content;
-    int contentPosX;
-    int contentPosY;
     bool isFocused = 0;
     bool isHovered = 0;
     bool isError = 0;
-    int height, width, posX, posY;
-    sf::Texture textureUnhovered, textureHover, textureFocused, textureError;
     sf::RectangleShape rectangle;
     sf::IntRect rect;
 
