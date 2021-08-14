@@ -12,7 +12,7 @@ public:
     int mouseX, mouseY;
     int width = 1280;
     int height = 720;
-    std::vector<int> legalChars = {'x', 'y', 's', 'i', 'n', 'c', 'o', 's', 't', 'a', 'n', '/', '*', '+', '-', '^', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'p', 'i', ' '}; // Characters that are allowed in a Textfield
+    std::vector<int> legalChars = {'.', 'x', 'y', 's', 'i', 'n', 'c', 'o', 's', 't', 'a', 'n', '/', '*', '+', '-', '^', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'p', 'i', ' '}; // Characters that are allowed in a Textfield
 // Constructor
     Window(sf::VideoMode video, const sf::String path, int style): sf::RenderWindow(video, path, style){};
 

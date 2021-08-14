@@ -29,7 +29,7 @@ Text* Vector::posValue;
 // currentEqn and currentDescription are the details of the "common/standard function"
 // that's currently being displayed 
 int StdFn::fnIndex=0;
-Text* StdFn::currentEqn = new Text("NA",40,150,295,"Jaldi-Bold",{2});
+Text* StdFn::currentEqn = new Text("NA",38,150,295,"Jaldi-bold",{2});
 Text* StdFn::currentDescription = new Text("NA",22,150,355,"Roboto-Medium",{2});
 
 
@@ -63,7 +63,7 @@ void action_PreviousFn(){ // Switches to previous function in Common Functions s
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
 };
 
 void action_NextFn(){ // Switches to next function in Common Functions state
@@ -76,7 +76,7 @@ void action_NextFn(){ // Switches to next function in Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
 };
 
 void action_PlotFunction(){ // Plots the given function
@@ -96,7 +96,7 @@ void action_PlotFunction(){ // Plots the given function
     parserj->parse(strExpressionj);
     
     if(!parseri->syntaxError && !parserj->syntaxError)
-        Canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
+        Canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY, Canvas::resetHighest);
     else{
         if(parseri->syntaxError)
             Textfield::list[0]->error();
@@ -109,7 +109,7 @@ void action_CommonFunctions(){ // Changes to the Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
     window.state = 2;
 };
 
@@ -129,9 +129,12 @@ int main(){
     window.setIcon(icon.getSize().x,icon.getSize().y, icon.getPixelsPtr());
 //Initialising Common Functions
     StdFn std1(std1X, std1Y,"F = (-y, x)","Models circular motion such\nas that of a air molecules\nin a cyclone.");
-    StdFn std2(std2X, std2Y,"F = (1/r*cos(phi), 1/r*sin(phi))","Models a positive charge\nat the origin");
+    StdFn std2(std2X, std2Y,"F = (1/r*cos(p), 1/r*sin(p))","Models a positive charge\nat the origin\n\np = arctan(y/x)");
     StdFn std3(std3X, std3Y,"F = (-x, -y)","Models a sink.");
-    StdFn std4(std4X, std4Y,"F = (x, x)","Models a idk wtf\nthis is.");
+    StdFn std4(std4X, std4Y,"F = (x, y)","Models a source.");
+    StdFn std5(std5X, std5Y,"Dipole","Dipole.");
+    StdFn std7(std7X, std7Y,"Dipole","Dipole.");
+    StdFn std6(std6X, std6Y,"Dipole","Dipole.");
 
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);

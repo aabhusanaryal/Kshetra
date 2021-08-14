@@ -35,7 +35,7 @@ Canvas::Canvas(int windowWidth,int windowHeight,doublePointerFn expressionX, dou
     Vector::setColor(arrows); 
 }
 
-void Canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn expressionY){
+void Canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn expressionY, int resetHighest){
     fnX = expressionX;
     fnY = expressionY;
     arrows.clear();
@@ -44,6 +44,8 @@ void Canvas::reinitialiseVectors(doublePointerFn expressionX, doublePointerFn ex
             arrows.push_back(new Vector(i,j,expressionX,expressionY,grid));
         }
     }
+    if(resetHighest)
+        Vector::setHighest(arrows);
     Vector::setColor(arrows);
 }
 
@@ -52,5 +54,5 @@ void Canvas::reinitialiseGrid(float scalar){
     grid=Grid(510, 18, scalar);
     grid.makeCells();
     Vector::setLimits(grid);
-    reinitialiseVectors(fnX, fnY);
+    reinitialiseVectors(fnX, fnY, !Canvas::resetHighest);
 }

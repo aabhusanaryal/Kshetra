@@ -44,5 +44,62 @@ double std4X(double x,double y){
     return x;
 }
 double std4Y(double x,double y){
-    return x;
+    return y;
+}
+int chargeSeparation = 5;
+double std5X(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = (1/r1sq)*(x+chargeSeparation);
+    float e1y = (1/r1sq)*(y);
+    float e2x = (1/r2sq)*(x-chargeSeparation);
+    float e2y = (1/r2sq)*(y);
+    return (e1x+e2x);
+}
+double std5Y(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = (1/r1sq)*(x+chargeSeparation);
+    float e1y = (1/r1sq)*(y);
+    float e2x = (1/r2sq)*(x-chargeSeparation);
+    float e2y = (1/r2sq)*(y);
+    return (e1y+e2y);
+}
+
+double std6X(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = (1/r1sq)*(x+chargeSeparation);
+    float e1y = (1/r1sq)*(y);
+    float e2x = -1*(1/r2sq)*(x-chargeSeparation);
+    float e2y = -1*(1/r2sq)*(y);
+    return (e1x+e2x);
+}
+double std6Y(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = (1/r1sq)*(x+chargeSeparation);
+    float e1y = (1/r1sq)*(y);
+    float e2x = -1*(1/r2sq)*(x-chargeSeparation);
+    float e2y = -1*(1/r2sq)*(y);
+    return (e1y+e2y);
+}
+
+double std7X(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = -(1/r1sq)*(x+chargeSeparation);
+    float e1y = -(1/r1sq)*(y);
+    float e2x = -(1/r2sq)*(x-chargeSeparation);
+    float e2y = -(1/r2sq)*(y);
+    return (e1x+e2x);
+}
+double std7Y(double x, double y){
+    float r1sq = pow((x+chargeSeparation),2)+pow(y,2);
+    float r2sq = pow((x-chargeSeparation),2)+pow(y,2);
+    float e1x = -(1/r1sq)*(x+chargeSeparation);
+    float e1y = -(1/r1sq)*(y);
+    float e2x = -(1/r2sq)*(x-chargeSeparation);
+    float e2y = -(1/r2sq)*(y);
+    return (e1y+e2y);
 }
