@@ -68,7 +68,7 @@ void action_PreviousFn(){ // Switches to previous function in Common Functions s
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 void action_NextFn(){ // Switches to next function in Common Functions state
@@ -86,7 +86,7 @@ void action_NextFn(){ // Switches to next function in Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
 };
 
 void action_PlotFunction(){ // Plots the given function
@@ -106,7 +106,7 @@ void action_PlotFunction(){ // Plots the given function
     parserj->parse(strExpressionj);
     
     if(!parseri->syntaxError && !parserj->syntaxError)
-        Canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY, Canvas::resetHighest);
+        Canvas::list[0]->reinitialiseVectors(fnParserX, fnParserY);
     else{
         if(parseri->syntaxError)
             Textfield::list[0]->error();
@@ -119,7 +119,7 @@ void action_CommonFunctions(){ // Changes to the Common Functions state
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
-    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+    Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
     window.state = 2;
 };
 
@@ -138,13 +138,13 @@ int main(){
     icon.loadFromFile("./assets/icon.png");
     window.setIcon(icon.getSize().x,icon.getSize().y, icon.getPixelsPtr());
 //Initialising Common Functions
-    StdFn std1(std1X, std1Y,"F = (-y, x)","Curl");
-    StdFn std2(std2X, std2Y,"F = (1/r*cos(p), 1/r*sin(p))\np = arctan(y/x)","Positive charge at O");
-    StdFn std3(std3X, std3Y,"F = (-x, -y)","Sink");
-    StdFn std4(std4X, std4Y,"F = (x, y)","Source");
-    StdFn std5(std5X, std5Y,"Dipole","Positive Dipole");
-    StdFn std7(std7X, std7Y,"Equn","Negative Dipole");
-    StdFn std6(std6X, std6Y,"Dipole","Interaction of Charges");
+    StdFn std1(std1X, std1Y,"Fx = -y\nFy = x","Curl");
+    StdFn std2(std2X, std2Y,"Fx = 1/r*cos(p)\nFy = 1/r*sin(p))\n p = arctan(y/x)","Positive charge at O");
+    StdFn std3(std3X, std3Y,"Fx = -x\nFy = -y","Sink");
+    StdFn std4(std4X, std4Y,"Fx = x\nFy = y","Source");
+    StdFn std5(std5X, std5Y,"Fx = (x-5)^2/((x-5)^2 +y^2)\nFy = y^2/((x-5)^2 +y^2)\n\nTwo positive charges","Interaction of Charges");
+    StdFn std7(std7X, std7Y,"Fx = -(x-5)^2/((x-5)^2 -y^2)\nFy = -y^2/((x-5)^2 -y^2)\n\nTwo negative charges","Interaction of Charges");
+    StdFn std6(std6X, std6Y,"Fx = (x-5)^2/((x-5)^2 +y^2)\nFy =-y^2/((x-5)^2-y^2)\n\nPositive and Negative Charges","Interaction of Charges");
 
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);

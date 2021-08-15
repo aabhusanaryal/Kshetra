@@ -8,37 +8,37 @@ if(event.type == sf::Event::KeyPressed){
         // For Charge 1
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)){
             StdFn::c1Y += 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
             StdFn::c1X -= 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
             StdFn::c1Y -= 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
             StdFn::c1X += 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
 
         // For Charge 2
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)){
             StdFn::c2Y += 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)){
             StdFn::c2X -= 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)){
             StdFn::c2Y -= 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)){
             StdFn::c2X += 1;
-            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY, Canvas::resetHighest);
+            Canvas::list[0]->reinitialiseVectors(StdFn::fnList[i].fnX, StdFn::fnList[i].fnY);
         }
     }
 }
