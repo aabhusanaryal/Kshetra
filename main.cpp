@@ -60,6 +60,11 @@ void action_PreviousFn(){ // Switches to previous function in Common Functions s
     else{
         StdFn::fnIndex -= 1;
     }
+    float chargeSeparation = 5;
+    StdFn::c1X = -5;
+    StdFn::c1Y = 0;
+    StdFn::c2X = 5;
+    StdFn::c2Y = 0;
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
@@ -73,6 +78,11 @@ void action_NextFn(){ // Switches to next function in Common Functions state
     else{
         StdFn::fnIndex += 1;
     }
+    float chargeSeparation = 5;
+    StdFn::c1X = -5;
+    StdFn::c1Y = 0;
+    StdFn::c2X = 5;
+    StdFn::c2Y = 0;
     int i = StdFn::fnIndex;
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);
@@ -128,13 +138,13 @@ int main(){
     icon.loadFromFile("./assets/icon.png");
     window.setIcon(icon.getSize().x,icon.getSize().y, icon.getPixelsPtr());
 //Initialising Common Functions
-    StdFn std1(std1X, std1Y,"F = (-y, x)","Models circular motion such\nas that of a air molecules\nin a cyclone.");
-    StdFn std2(std2X, std2Y,"F = (1/r*cos(p), 1/r*sin(p))","Models a positive charge\nat the origin\n\np = arctan(y/x)");
-    StdFn std3(std3X, std3Y,"F = (-x, -y)","Models a sink.");
-    StdFn std4(std4X, std4Y,"F = (x, y)","Models a source.");
-    StdFn std5(std5X, std5Y,"Dipole","Dipole.");
-    StdFn std7(std7X, std7Y,"Dipole","Dipole.");
-    StdFn std6(std6X, std6Y,"Dipole","Dipole.");
+    StdFn std1(std1X, std1Y,"F = (-y, x)","Curl");
+    StdFn std2(std2X, std2Y,"F = (1/r*cos(p), 1/r*sin(p))\np = arctan(y/x)","Positive charge at O");
+    StdFn std3(std3X, std3Y,"F = (-x, -y)","Sink");
+    StdFn std4(std4X, std4Y,"F = (x, y)","Source");
+    StdFn std5(std5X, std5Y,"Dipole","Positive Dipole");
+    StdFn std7(std7X, std7Y,"Equn","Negative Dipole");
+    StdFn std6(std6X, std6Y,"Dipole","Interaction of Charges");
 
     StdFn::currentEqn->setString(StdFn::fnList[StdFn::fnIndex].eqn);
     StdFn::currentDescription->setString(StdFn::fnList[StdFn::fnIndex].description);

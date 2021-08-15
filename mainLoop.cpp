@@ -1,8 +1,10 @@
 #include<window.hpp>
 #include<Canvas.hpp>
 #include<text.hpp>
+#include<commonfunctions.hpp>
 #include "SFML/Graphics.hpp"
 #include <algorithm>
+#include <SFML/Window/Keyboard.hpp>
 
 void Window::mainLoop(){
 
