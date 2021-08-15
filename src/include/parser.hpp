@@ -1,47 +1,60 @@
 #pragma once
 #include <math.h>
 #include <string.h>
-#include<tokenizer.hpp>
+#include <tokenizer.hpp>
+#include <limits>
+#include<cmath>
 
 class Parser
 {
 private:
+//Data members -equation -Tokens -Outputstack -Operatorstack - Available functions
     std::string equation;
     std::vector<Token> tokens;
     std::vector<Token> output;
     std::vector<Token> operatorStack;
-    std::vector<std::string> functions = { "sin", "cos", "tan","-sin", "-cos", "-tan"};
-
-    double Numberify(Token& token);
-    std::string Textify(double num);
-    int Precedence(Token& token);
-    std::string Associavity(Token& token);
-
-    Token evaluate(Token operand1, Token operand2, Token& operation);
-    Token evaluate(Token function, Token operand);
-
-    void AddtoOutput(Token& token);
-    void AddtoStack(Token& token);
-    void RemovefromStack();
-    void MovetoOutput();
-    void raiseSyntaxError();
-    void raiseNumError();
-    bool isNegative(Token& token);
-    int checkSyntaxError();
-    bool findFraction(double input);
-    long gcd(long a, long b);
-    void tokenify(std::string& equation);
-    void RPN();
+    const std::vector<std::string> functions = { "sin", "cos", "tan","-sin", "-cos", "-tan"};
+    
+    // numError is true for any mathematical errors during calculation
+    // example: division by zero or the square root of a negative number
+    bool numError;
 
 public:
+    // syntaxError is true for any error in the equations 
     bool syntaxError;
-    bool numError;
-    double evaluateRPN(double x, double y);
-    void displayRPN();
-    void parse(std::string eq)
-    {
-        equation = eq;
-        tokenify(equation);
-        RPN();
-    }
+
+private:
+//functions for operation of the parser but are not only based for the class
+    friend double Numberify(Token& token);
+    friend std::string Textify(double num);
+    friend bool isNegative(Token& token);
+    bool findFraction(double input);
+    long gcd(long a, long b);
+
+private:
+//essential parsing functions
+    void tokenify(std::string&);
+    void RPN();
+    inline int Precedence(Token&);
+    inline std::string Associavity(Token&);
+    inline void AddtoOutput(Token&);
+    inline void AddtoStack(Token&);
+    inline void RemovefromStack();
+    inline void MovetoOutput();
+
+private:
+//functions to evaluate the notation
+    Token evaluate(Token, Token, Token&);
+    Token evaluate(Token, Token);
+
+private:
+//error handling functions
+    inline void raiseSyntaxError();
+    inline void raiseNumError();
+    int checkSyntaxError();
+    
+
+public:
+    double evaluateRPN(double, double);
+    void parse(std::string);
 };

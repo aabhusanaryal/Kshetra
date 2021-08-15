@@ -1,5 +1,25 @@
-#include<tokenizer.hpp>
+// ===========================================================================
+// Usage: tokenizer tokenizer_name;
+//        tokenizer_name.parse(equation);
+// ===========================================================================
 
+// ===================== How this component works =======================
+// The object is first initialized, then the parse member function of the tokenizer class can be
+// called, the parse function then tokenizes the equation into respective tokens  
+
+// The tokens can hence be made from anywhere by the mentioned method
+// In this project, the tokenizer class has been only used from the Parse class while tokenizing
+// the equation
+
+// The parse member function returns a std::vector of Token objects
+// The token object holds the information of the type of token created like the text in it,
+// the type of token and if the token is negative or not
+
+// ===========================================================================
+
+
+
+#include<tokenizer.hpp>
 
 std::vector<Token> Tokenizer::parse(const std::string& inProgram)
 {
@@ -143,15 +163,4 @@ void Tokenizer::endToken(Token& token, std::vector<Token>& tokens)
     }
     token._Type = WHITESPACE;
     token._Text.erase();
-}
-void Token::print() const { std::cout << "Token(" << tk[_Type] << " , " << _Text << std::endl; }
-
-std::string Token::returnTokenType()
-{
-    return tk[_Type];
-}
-
-std::string Token::returnTokenValue()
-{
-    return _Text;
 }

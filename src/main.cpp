@@ -132,7 +132,7 @@ void action_CustomFunctions(){ // Changes to the Custom Functions state
     window.state = 1;
 };
 
-int main(){
+int main(int argc, char** argv){
 // Setting app icon
     sf::Image icon;
     icon.loadFromFile("./assets/icon.png");
