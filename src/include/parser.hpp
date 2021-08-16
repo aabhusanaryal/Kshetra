@@ -5,7 +5,7 @@
 #include <limits>
 #include<cmath>
 
-class Parser
+class Parser : private Tokenizer
 {
 private:
 //Data members -equation -Tokens -Outputstack -Operatorstack - Available functions
@@ -25,15 +25,14 @@ public:
 
 private:
 //functions for operation of the parser but are not only based for the class
-    friend double Numberify(Token& token);
-    friend std::string Textify(double num);
-    friend bool isNegative(Token& token);
+    double Numberify(Token& token);
+    std::string Textify(double num);
+    bool isNegative(Token& token);
     bool findFraction(double input);
     long gcd(long a, long b);
 
 private:
 //essential parsing functions
-    void tokenify(std::string&);
     void RPN();
     inline int Precedence(Token&);
     inline std::string Associavity(Token&);

@@ -19,7 +19,7 @@
 
 #include <parser.hpp>
 
-double Numberify(Token& token)
+double Parser::Numberify(Token& token)
 {
 	float number = 0;
 	if (token._Type == NUM_LITERAL)
@@ -31,7 +31,7 @@ double Numberify(Token& token)
 	return number;
 }
 
-std::string Textify(double num)
+std::string Parser::Textify(double num)
 {
 	std::string str;
 	str = std::to_string(num);
@@ -41,21 +41,12 @@ std::string Textify(double num)
 //returns true if the given value is negative
 //can be used for unknown, numbers and constant
 
-bool isNegative(Token& token)
+bool Parser::isNegative(Token& token)
 {
 	if (token._Type == UNKNOWN && (token._Text == "-x" || token._Text == "-y"))
 		return true;
 	else
 		return false;
-}
-
-// makes the tokens of the provided equations and stores them in the data member token
-// the tokens are made from the class Tokenizer
-
-void Parser::tokenify(std::string& equation)
-{
-	Tokenizer tokenizer;
-	tokens = tokenizer.parse(equation);
 }
 
 // funciton to raise the respective types of errors
@@ -209,7 +200,7 @@ std::string Parser::Associavity(Token& token)
 void Parser::parse(std::string eq)
 {
     equation = eq;
-    tokenify(equation);
+    tokens = Tokenizer::parse(eq);
     RPN();
 }
 
