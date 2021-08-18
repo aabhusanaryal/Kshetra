@@ -48,6 +48,9 @@ This should build the application and place it on the `build_gcc` folder. You ca
 **4. Plotting Custom Functions**
 ![](https://i.imgur.com/GxRYnRm.png)
 
+## Attributions
+Icon By [Luc Chaffard](https://iconscout.com/contributors/luc-chaffard) on [Iconscout](https://iconscout.com/)
+
 ## External libraries used
 
 [SFML](https://www.sfml-dev.org/) is distributed under the [zlib/png license](https://opensource.org/licenses/Zlib)
