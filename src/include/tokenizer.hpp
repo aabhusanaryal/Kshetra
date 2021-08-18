@@ -27,6 +27,8 @@ public:
     std::string _Text;
     enum TokenType _Type {WHITESPACE};
     bool isNegative = false;
+    std::string associavity = "Left";
+    int precedence = 0;
 };
 
 class Tokenizer

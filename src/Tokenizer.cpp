@@ -79,13 +79,30 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
                 endToken(currentToken, tokens);
                 currentToken._Type = OPERATOR;
                 currentToken._Text.append(1, currentChar);
+                currentToken.precedence = 2;
             }
             break;
 
         case'+':
+            endToken(currentToken, tokens);
+            currentToken._Type = OPERATOR;
+            currentToken._Text.append(1, currentChar);
+            currentToken.precedence = 2;
+            break;
         case'*':
         case'/':
+            endToken(currentToken, tokens);
+            currentToken._Type = OPERATOR;
+            currentToken._Text.append(1, currentChar);
+            currentToken.precedence = 3;
+            break;
         case'^':
+            endToken(currentToken, tokens);
+            currentToken._Type = OPERATOR;
+            currentToken._Text.append(1, currentChar);
+            currentToken.associavity = "Right";
+            currentToken.precedence = 4;
+            break;
         case'(':
         case')':
             endToken(currentToken, tokens);

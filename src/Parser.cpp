@@ -174,27 +174,6 @@ void Parser::MovetoOutput()
 	RemovefromStack();
 }
 
-// returns the precedence of the current operand
-int Parser::Precedence(Token& token)
-{
-	if (token._Type == OPERATOR)
-	{
-		if (token._Text == "+" || token._Text == "-")
-			return 2;
-		if (token._Text == "*" || token._Text == "/")
-			return 3;
-		if (token._Text == "^")
-			return 4;
-	}
-}
-
-//returns the associavity of the current operand
-std::string Parser::Associavity(Token& token)
-{
-	if (token._Type == OPERATOR)
-		return (token._Text == "^" ? "Right" : "Left");
-}
-
 
 //to make the tokens and convert them to RPN
 void Parser::parse(std::string eq)
@@ -226,7 +205,7 @@ void Parser::RPN()
 		//If the operator type is other than a left paranthesis
 		if (current._Type == OPERATOR && current._Text != "(")
 		{
-			if (current._Text != ")" && !operatorStack.empty() && (Precedence(current) < Precedence(operatorStack[0]) || Precedence(current) == Precedence(operatorStack[0]) && Associavity(current) == "Left"))
+			if (current._Text != ")" && !operatorStack.empty() && (current.precedence < operatorStack[0].precedence || current.precedence == operatorStack[0].precedence && current.associavity == "Left"))
 			{
 				MovetoOutput();
 				AddtoStack(current);

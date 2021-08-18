@@ -34,8 +34,6 @@ private:
 private:
 //essential parsing functions
     void RPN();
-    inline int Precedence(Token&);
-    inline std::string Associavity(Token&);
     inline void AddtoOutput(Token&);
     inline void AddtoStack(Token&);
     inline void RemovefromStack();
