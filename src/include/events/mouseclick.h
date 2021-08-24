@@ -40,6 +40,7 @@ if(event.type==sf::Event::MouseButtonReleased){ // <-----------
     // Checking if the button is being clicked and is in correct state
         if(std::find(Button::list[i]->state.begin(), Button::list[i]->state.end(), state) != Button::list[i]->state.end() && Button::list[i]->clicked && Button::list[i]->rect.contains(event.mouseButton.x, event.mouseButton.y)){
             (*(Button::list[i]->action))();
+            Button::list[i]->clicked = false;
             Button::list[i]->unhovered(); // Unhovering the button
         }
     }
