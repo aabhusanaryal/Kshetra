@@ -108,6 +108,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
             endToken(currentToken, tokens);
             currentToken._Type = OPERATOR;
             currentToken._Text.append(1, currentChar);
+            currentToken.precedence = 0;
             break;
 
         case' ':
@@ -164,6 +165,7 @@ std::vector<Token> Tokenizer::parse(const std::string& inProgram)
              {
                  currentToken._Type = CONSTANT;
              }
+            currentToken.precedence = 0;
         }
     }
 

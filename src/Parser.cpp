@@ -96,7 +96,7 @@ int Parser::checkSyntaxError()
             }
             if (tokens[i]._Type == UNKNOWN || tokens[i]._Type == CONSTANT || tokens[i]._Type == NUM_LITERAL)
             {
-                if (tokens[i + 1]._Type != OPERATOR)
+                if (tokens[i + 1]._Type != OPERATOR || tokens[i+1]._Text == "(")
                 {
                     raiseSyntaxError();
                     return 1;
