@@ -19,7 +19,7 @@
 
 #include <parser.hpp>
 
-double Numberify(Token& token)
+double Parser::Numberify(Token& token)
 {
 	float number = 0;
 	if (token._Type == NUM_LITERAL)
@@ -31,7 +31,7 @@ double Numberify(Token& token)
 	return number;
 }
 
-std::string Textify(double num)
+std::string Parser::Textify(double num)
 {
 	std::string str;
 	str = std::to_string(num);
@@ -41,21 +41,12 @@ std::string Textify(double num)
 //returns true if the given value is negative
 //can be used for unknown, numbers and constant
 
-bool isNegative(Token& token)
+bool Parser::isNegative(Token& token)
 {
 	if (token._Type == UNKNOWN && (token._Text == "-x" || token._Text == "-y"))
 		return true;
 	else
 		return false;
-}
-
-// makes the tokens of the provided equations and stores them in the data member token
-// the tokens are made from the class Tokenizer
-
-void Parser::tokenify(std::string& equation)
-{
-	Tokenizer tokenizer;
-	tokens = tokenizer.parse(equation);
 }
 
 // funciton to raise the respective types of errors
@@ -105,7 +96,7 @@ int Parser::checkSyntaxError()
             }
             if (tokens[i]._Type == UNKNOWN || tokens[i]._Type == CONSTANT || tokens[i]._Type == NUM_LITERAL)
             {
-                if (tokens[i + 1]._Type != OPERATOR)
+                if (tokens[i + 1]._Type != OPERATOR || tokens[i+1]._Text == "(")
                 {
                     raiseSyntaxError();
                     return 1;
@@ -183,33 +174,12 @@ void Parser::MovetoOutput()
 	RemovefromStack();
 }
 
-// returns the precedence of the current operand
-int Parser::Precedence(Token& token)
-{
-	if (token._Type == OPERATOR)
-	{
-		if (token._Text == "+" || token._Text == "-")
-			return 2;
-		if (token._Text == "*" || token._Text == "/")
-			return 3;
-		if (token._Text == "^")
-			return 4;
-	}
-}
-
-//returns the associavity of the current operand
-std::string Parser::Associavity(Token& token)
-{
-	if (token._Type == OPERATOR)
-		return (token._Text == "^" ? "Right" : "Left");
-}
-
 
 //to make the tokens and convert them to RPN
 void Parser::parse(std::string eq)
 {
     equation = eq;
-    tokenify(equation);
+    tokens = Tokenizer::parse(eq);
     RPN();
 }
 
@@ -235,7 +205,7 @@ void Parser::RPN()
 		//If the operator type is other than a left paranthesis
 		if (current._Type == OPERATOR && current._Text != "(")
 		{
-			if (current._Text != ")" && !operatorStack.empty() && (Precedence(current) < Precedence(operatorStack[0]) || Precedence(current) == Precedence(operatorStack[0]) && Associavity(current) == "Left"))
+			if (current._Text != ")" && !operatorStack.empty() && (current.precedence < operatorStack[0].precedence || current.precedence == operatorStack[0].precedence && current.associavity == "Left"))
 			{
 				MovetoOutput();
 				AddtoStack(current);

@@ -31,7 +31,7 @@ for(int i=0; i<Textfield::list.size(); i++){
 
 //           ================= FOR Vector Arrows' HOVER ANIMATION =================
 for(int i=0;i<Canvas::list[0]->arrows.size();i++){
-        if((Canvas::list[0]->arrows[i]->sprite.getGlobalBounds().contains(mouseX,mouseY)&& mouseX>525 && mouseX<1174 && mouseY>81 && mouseY<642) && std::find(Canvas::list[0]->state.begin(), Canvas::list[0]->state.end(), state) != Canvas::list[0]->state.end()){
+        if((Canvas::list[0]->arrows[i]->sprite.getGlobalBounds().contains(mouseX,mouseY)&& mouseX>525 && mouseX<1174 && mouseY>81 && mouseY<642) && state == 1){
             Canvas::list[0]->arrows[i]->hovered();
         }
         else   

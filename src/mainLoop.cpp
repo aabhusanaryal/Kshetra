@@ -23,9 +23,9 @@ void Window::mainLoop(){
         sf::Event event;
         while(pollEvent(event)){
             if(event.type==sf::Event::Closed) close();
-            #include "../events/mousemove.h"
-            #include "../events/mouseclick.h"
-            #include "../events/keypress.h"
+            #include "./include/events/mousemove.h"
+            #include "./include/events/mouseclick.h"
+            #include "./include/events/keypress.h"
         }
         
 // Rendering stuff   
